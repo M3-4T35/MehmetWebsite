@@ -1,5 +1,19 @@
+root:
+    path: /
+    controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::urlRedirectAction
+    defaults:
+        path: /fr
+        permanent: true
+
 controllers:
     resource:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+    prefix: /{_locale}
+    requirements:
+        _locale: fr|en
+    defaults:
+        _locale: fr
+
+

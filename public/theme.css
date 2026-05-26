@@ -1,0 +1,69 @@
+html, body {
+    height: 100%;
+}
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+main.container {
+    flex: 1 0 auto;
+}
+footer {
+    flex-shrink: 0;
+}
+body[data-theme="dark"] footer,
+body[data-theme="dark"] footer small,
+body[data-theme="dark"] footer a {
+    color: #f8f9fa !important;
+}
+body[data-theme="dark"] footer a {
+    text-decoration: underline;
+}
+body[data-theme="dark"] {
+    background-color: #181a1b !important;
+    color: #f8f9fa !important;
+}
+body[data-theme="dark"] .navbar,
+body[data-theme="dark"] .card {
+    background-color: #23272b !important;
+    color: #f8f9fa !important;
+}
+body[data-theme="dark"] .navbar-light .navbar-nav .nav-link,
+body[data-theme="dark"] .navbar-brand {
+    color: #f8f9fa !important;
+}
+body[data-theme="dark"] .btn-outline-secondary {
+    border-color: #f8f9fa;
+    color: #f8f9fa;
+}
+body[data-theme="dark"] .btn-outline-secondary:hover {
+    background: #f8f9fa;
+    color: #23272b;
+}
+body[data-theme="dark"] .bg-light {
+    background-color: #23272b !important;
+}
+body[data-theme="dark"] .card-title {
+    color: #f8f9fa !important;
+}
+body[data-theme="dark"] .form-control {
+    background-color: #23272b !important;
+    color: #f8f9fa !important;
+    border-color: #444c56;
+}
+body[data-theme="dark"] .form-control:focus {
+    background-color: #23272b !important;
+    color: #f8f9fa !important;
+}
+body[data-theme="dark"] .dropdown-menu {
+    background-color: #23272b !important;
+    color: #f8f9fa !important;
+}
+body[data-theme="dark"] .dropdown-item {
+    color: #f8f9fa !important;
+}
+body[data-theme="dark"] .dropdown-item:hover {
+    background-color: #181a1b !important;
+    color: #fff !important;
+}

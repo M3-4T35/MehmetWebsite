@@ -1,0 +1,7 @@
+{{ form_start(form, {'attr': {'enctype': 'multipart/form-data'}}) }}
+    {{ form_row(form.imageFile) }}
+    {{ form_row(form.alt) }}
+    {{ form_row(form.position) }}
+    {{ form_row(form.project) }}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

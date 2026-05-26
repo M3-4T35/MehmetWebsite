@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ project.title }}{% endblock %}
+
+{% block javascripts %}
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const markdownContent = {{ project.description|json_encode|raw }};
+            const preview = document.getElementById('markdown-display');
+            if (preview && markdownContent) {
+                preview.innerHTML = marked.parse(markdownContent);
+            }
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+<h1>{{ project.title }}</h1>
+<p class="lead">{{ project.descriptionCourte }}</p>
+
+<h3>Description : </h3>
+<div class="mb-4" id="markdown-display">
+    {# The markdown content will be injected here by marked.js #}
+</div>
+
+<h3>Médias</h3>
+<div class="row">
+    {% for media in medias %}
+        <div class="col-md-4 mb-3">
+            {% set ext = media.filename|split('.')|last|lower %}
+            {% if ext in ['jpg','jpeg','png','gif','webp'] %}
+                <img src="{{ asset('uploads/media/' ~ media.filename) }}" alt="{{ media.alt }}" class="img-fluid rounded shadow">
+            {% elseif ext in ['mp4','webm','ogg'] %}
+                <video controls class="w-100">
+                    <source src="{{ asset('uploads/media/' ~ media.filename) }}" type="video/{{ ext }}">
+                    Votre navigateur ne supporte pas la vidéo.
+                </video>
+            {% endif %}
+        </div>
+    {% else %}
+        <p>Aucun média pour ce projet.</p>
+    {% endfor %}
+</div>
+<a href="{{ path('app_public_projects') }}" class="btn btn-secondary mt-4">Retour à la liste</a>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes CV{% endblock %}
+
+{% block body %}
+<h1>Mes CV</h1>
+<div class="row">
+    {% for cv in cvs %}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">{{ cv.title ? cv.title : 'CV du ' ~ (cv.uploadedAt ? cv.uploadedAt|date('d/m/Y') : 'N/A') }}</h5>
+                                        {% if cv.filename %}
+                                                <a href="{{ asset('uploads/cv/' ~ cv.filename) }}" class="btn btn-outline-primary mb-2" target="_blank">Télécharger le PDF</a>
+                                                <button class="btn btn-outline-success mb-2" data-bs-toggle="modal" data-bs-target="#cvModal{{ cv.id }}" data-turbo="false">Voir en ligne</button>
+
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="cvModal{{ cv.id }}" tabindex="-1" aria-labelledby="cvModalLabel{{ cv.id }}" aria-hidden="true">
+                                                    <div class="modal-dialog modal-xl modal-dialog-centered">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="cvModalLabel{{ cv.id }}">CV du {{ cv.uploadedAt ? cv.uploadedAt|date('d/m/Y') : 'N/A' }}</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body" style="height:80vh;">
+                                                                <iframe src="{{ asset('uploads/cv/' ~ cv.filename) }}" width="100%" height="100%" style="border:none;"></iframe>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        {% else %}
+                                                <span class="text-muted">Aucun fichier</span>
+                                        {% endif %}
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <p>Aucun CV disponible pour le moment.</p>
+    {% endfor %}
+</div>
+{% endblock %}
