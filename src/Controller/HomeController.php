@@ -7,8 +7,25 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Response;
 
+use Symfony\Component\HttpFoundation\Request;
+
 final class HomeController extends AbstractController
 {
+    #[Route('/change-locale/{language}', name: 'app_switch_locale')]
+    public function switchLocale(string $language, Request $request): Response
+    {
+        $request->getSession()->set('_locale', $language);
+        $referer = $request->headers->get('referer');
+        
+        if ($referer) {
+            // Try to replace the locale prefix in the referer URL
+            $referer = preg_replace('/\/(fr|en)(\/|$)/', '/' . $language . '$2', $referer);
+            return $this->redirect($referer);
+        }
+
+        return $this->redirectToRoute('app_home', ['_locale' => $language]);
+    }
+
     #[Route('/', name: 'app_home')]
     public function index(): Response
     {

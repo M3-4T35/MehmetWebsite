@@ -12,10 +12,18 @@ class ProjectType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('title')
-            ->add('descriptionCourte')
+            ->add('title', null, ['label' => 'Titre (FR)'])
+            ->add('titleEn', null, ['label' => 'Title (EN)'])
+            ->add('descriptionCourte', null, ['label' => 'Description Courte (FR)'])
+            ->add('descriptionCourteEn', null, ['label' => 'Short Description (EN)'])
             ->add('description', \Symfony\Component\Form\Extension\Core\Type\TextareaType::class, [
-                'label' => 'Description (Markdown)',
+                'label' => 'Description FR (Markdown)',
+                'attr' => [
+                    'rows' => 10,
+                ],
+            ])
+            ->add('descriptionEn', \Symfony\Component\Form\Extension\Core\Type\TextareaType::class, [
+                'label' => 'Description EN (Markdown)',
                 'attr' => [
                     'rows' => 10,
                 ],

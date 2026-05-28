@@ -5,6 +5,7 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 main.container {
     flex: 1 0 auto;
@@ -12,58 +13,82 @@ main.container {
 footer {
     flex-shrink: 0;
 }
-body[data-theme="dark"] footer,
-body[data-theme="dark"] footer small,
-body[data-theme="dark"] footer a {
-    color: #f8f9fa !important;
+
+/* Theme specific overrides */
+[data-bs-theme="dark"] {
+    --bs-body-bg: #181a1b;
+    --bs-body-color: #f8f9fa;
 }
-body[data-theme="dark"] footer a {
-    text-decoration: underline;
-}
-body[data-theme="dark"] {
-    background-color: #181a1b !important;
-    color: #f8f9fa !important;
-}
-body[data-theme="dark"] .navbar,
-body[data-theme="dark"] .card {
-    background-color: #23272b !important;
-    color: #f8f9fa !important;
-}
-body[data-theme="dark"] .navbar-light .navbar-nav .nav-link,
-body[data-theme="dark"] .navbar-brand {
-    color: #f8f9fa !important;
-}
-body[data-theme="dark"] .btn-outline-secondary {
-    border-color: #f8f9fa;
-    color: #f8f9fa;
-}
-body[data-theme="dark"] .btn-outline-secondary:hover {
-    background: #f8f9fa;
-    color: #23272b;
-}
-body[data-theme="dark"] .bg-light {
+
+[data-bs-theme="dark"] .navbar {
     background-color: #23272b !important;
 }
-body[data-theme="dark"] .card-title {
-    color: #f8f9fa !important;
-}
-body[data-theme="dark"] .form-control {
-    background-color: #23272b !important;
-    color: #f8f9fa !important;
+
+[data-bs-theme="dark"] .card {
+    background-color: #23272b;
     border-color: #444c56;
 }
-body[data-theme="dark"] .form-control:focus {
-    background-color: #23272b !important;
-    color: #f8f9fa !important;
+
+[data-bs-theme="dark"] .form-control {
+    background-color: #23272b;
+    color: #f8f9fa;
+    border-color: #444c56;
 }
-body[data-theme="dark"] .dropdown-menu {
-    background-color: #23272b !important;
-    color: #f8f9fa !important;
+
+[data-bs-theme="dark"] .form-control:focus {
+    background-color: #2b3035;
+    color: #f8f9fa;
 }
-body[data-theme="dark"] .dropdown-item {
-    color: #f8f9fa !important;
+
+/* Smooth transition for theme change */
+body, .navbar, .card, .btn, .form-control, .footer, #markdown-preview, blockquote {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
-body[data-theme="dark"] .dropdown-item:hover {
-    background-color: #181a1b !important;
-    color: #fff !important;
+
+/* Theme Switch Button Styling */
+#theme-switch {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#theme-switch:hover {
+    transform: rotate(15deg) scale(1.1);
+}
+
+#theme-switch i {
+    font-size: 1.2rem;
+}
+
+/* Markdown and Content styling */
+#markdown-display, #markdown-preview {
+    color: var(--bs-body-color);
+}
+
+[data-bs-theme="dark"] #markdown-preview {
+    background-color: #23272b;
+    border-color: #444c56;
+}
+
+[data-bs-theme="light"] #markdown-preview {
+    background-color: #fafafa;
+    border-color: #ccc;
+}
+
+blockquote {
+    border-left: 4px solid #ccc;
+    padding: 0.5em 1em;
+    margin: 0 0 1em 0;
+}
+
+[data-bs-theme="dark"] blockquote {
+    background-color: #23272b;
+    border-left-color: #444c56;
+}
+
+[data-bs-theme="light"] blockquote {
+    background-color: #fdfdfd;
 }

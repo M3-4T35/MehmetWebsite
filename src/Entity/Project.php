@@ -18,13 +18,22 @@ class Project
     #[ORM\Column(type: 'string', length: 255)]
     private ?string $title = null;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $titleEn = null;
+
     #[Gedmo\Translatable]
     #[ORM\Column(type: 'text')]
     private ?string $description = null;
 
+    #[ORM\Column(type: 'text', nullable: true)]
+    private ?string $descriptionEn = null;
+
     #[Gedmo\Translatable]
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $descriptionCourte = null;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $descriptionCourteEn = null;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $githubUrl = null;
@@ -76,6 +85,39 @@ class Project
     public function setDescriptionCourte(?string $descriptionCourte): self
     {
         $this->descriptionCourte = $descriptionCourte;
+        return $this;
+    }
+
+    public function getTitleEn(): ?string
+    {
+        return $this->titleEn;
+    }
+
+    public function setTitleEn(?string $titleEn): self
+    {
+        $this->titleEn = $titleEn;
+        return $this;
+    }
+
+    public function getDescriptionEn(): ?string
+    {
+        return $this->descriptionEn;
+    }
+
+    public function setDescriptionEn(?string $descriptionEn): self
+    {
+        $this->descriptionEn = $descriptionEn;
+        return $this;
+    }
+
+    public function getDescriptionCourteEn(): ?string
+    {
+        return $this->descriptionCourteEn;
+    }
+
+    public function setDescriptionCourteEn(?string $descriptionCourteEn): self
+    {
+        $this->descriptionCourteEn = $descriptionCourteEn;
         return $this;
     }
 

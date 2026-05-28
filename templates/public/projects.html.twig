@@ -9,8 +9,20 @@
         <div class="col-md-6 col-lg-4 mb-4">
             <div class="card h-100">
                 <div class="card-body">
-                    <h5 class="card-title">{{ project.title }}</h5>
-                    <div class="card-text">{{ project.descriptionCourte }}</div>
+                    <h5 class="card-title">
+                        {% if app.request.locale == 'en' and project.titleEn %}
+                            {{ project.titleEn }}
+                        {% else %}
+                            {{ project.title }}
+                        {% endif %}
+                    </h5>
+                    <div class="card-text">
+                        {% if app.request.locale == 'en' and project.descriptionCourteEn %}
+                            {{ project.descriptionCourteEn }}
+                        {% else %}
+                            {{ project.descriptionCourte }}
+                        {% endif %}
+                    </div>
                     <a href="{{ path('app_public_project_detail', {'id': project.id}) }}" class="btn btn-outline-success btn-sm mt-2">Voir plus</a>
                 </div>
             </div>

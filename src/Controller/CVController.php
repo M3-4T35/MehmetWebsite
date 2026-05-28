@@ -62,6 +62,7 @@ final class CVController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/{id}', name: 'app_c_v_show', methods: ['GET'])]
     public function show(CV $cV): Response
     {
@@ -70,6 +71,7 @@ final class CVController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/{id}/edit', name: 'app_c_v_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, CV $cV, EntityManagerInterface $entityManager): Response
     {
@@ -88,6 +90,7 @@ final class CVController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/{id}', name: 'app_c_v_delete', methods: ['POST'])]
     public function delete(Request $request, CV $cV, EntityManagerInterface $entityManager): Response
     {
