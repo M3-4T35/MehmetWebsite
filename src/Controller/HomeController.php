@@ -33,11 +33,21 @@ final class HomeController extends AbstractController
     }
 
     #[Route('/travaux', name: 'app_public_projects')]
-    public function publicProjects(\App\Repository\ProjectRepository $projectRepository): Response
+    public function publicProjects(\App\Repository\ProjectRepository $projectRepository, \App\Repository\MediaRepository $mediaRepository): Response
     {
         $projects = $projectRepository->findAll();
+        $projectPreviews = [];
+        
+        foreach ($projects as $project) {
+            $firstMedia = $mediaRepository->findOneBy(['project' => $project], ['position' => 'ASC']);
+            $projectPreviews[] = [
+                'entity' => $project,
+                'preview' => $firstMedia
+            ];
+        }
+
         return $this->render('public/projects.html.twig', [
-            'projects' => $projects,
+            'projectPreviews' => $projectPreviews,
         ]);
     }
 

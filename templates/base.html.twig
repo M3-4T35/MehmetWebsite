@@ -5,14 +5,35 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{% block title %}MehmetAtes.fr | Portfolio{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>🛠️</text></svg>">
+        
         <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
         <!-- Bootstrap Icons -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
         <link rel="stylesheet" href="/theme.css">
+        
+        <script>
+            /**
+             * Immediate theme initialization to prevent flash of unstyled content
+             */
+            (() => {
+                const getStoredTheme = () => localStorage.getItem('theme');
+                const getPreferredTheme = () => {
+                    const storedTheme = getStoredTheme();
+                    if (storedTheme) return storedTheme;
+                    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                };
+
+                const theme = getPreferredTheme();
+                document.documentElement.setAttribute('data-bs-theme', theme);
+                // Add a temporary class to disable transitions during load
+                document.documentElement.classList.add('no-transition');
+            })();
+        </script>
+
         {% block stylesheets %}{% endblock %}
     </head>
-    <body data-bs-theme="light">
+    <body>
         <nav class="navbar navbar-expand-lg mb-4">
             <div class="container-fluid">
                 <a class="navbar-brand" href="{{ path('app_home') }}">MehmetAtes.fr</a>
@@ -30,7 +51,6 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('app_cv_public') }}">{{ 'menu.cvs'|trans }}</a>
                         </li>
-                        {# Ajout d'autres liens si besoin #}
                         {% if is_granted('ROLE_ADMIN') %}
                             <li class="nav-item">
                                 <a class="btn btn-outline-primary ms-2" href="{{ path('app_admin') }}">Admin</a>
@@ -56,19 +76,22 @@
                 </div>
             </div>
         </nav>
+
         <main class="container">
             {% block body %}{% endblock %}
         </main>
+
+        <footer class="text-center mt-5 mb-3 text-muted">
+            <hr>
+            <small>
+                {{ "now"|date("Y") }} Mehmet Ates — <a href="{{ path('app_legal') }}">Mentions légales</a>
+            </small>
+        </footer>
+
         <!-- Bootstrap JS Bundle -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         
         <script>
-            /*!
-             * Color mode toggler for Bootstrap's docs (https://getbootstrap.com/)
-             * Copyright 2011-2023 The Bootstrap Authors
-             * Licensed under the Creative Commons Attribution 3.0 Unported License.
-             */
-
             (() => {
               'use strict'
 
@@ -77,37 +100,36 @@
 
               const getPreferredTheme = () => {
                 const storedTheme = getStoredTheme()
-                if (storedTheme) {
-                  return storedTheme
-                }
-
+                if (storedTheme) return storedTheme
                 return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
               }
 
               const setTheme = theme => {
-                if (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                  document.documentElement.setAttribute('data-bs-theme', 'dark')
-                  document.body.setAttribute('data-bs-theme', 'dark')
-                } else {
-                  document.documentElement.setAttribute('data-bs-theme', theme)
-                  document.body.setAttribute('data-bs-theme', theme)
-                }
-                
+                document.documentElement.setAttribute('data-bs-theme', theme)
                 updateIcon(theme)
               }
 
               const updateIcon = (theme) => {
                 const icon = document.getElementById('theme-icon')
                 if (!icon) return
-                
-                if (theme === 'dark') {
-                  icon.className = 'bi bi-sun-fill'
-                } else {
-                  icon.className = 'bi bi-moon-stars-fill'
-                }
+                icon.className = theme === 'dark' ? 'bi bi-sun-fill' : 'bi bi-moon-stars-fill'
               }
 
-              setTheme(getPreferredTheme())
+              window.addEventListener('DOMContentLoaded', () => {
+                // Remove the no-transition class after the page has loaded
+                setTimeout(() => {
+                  document.documentElement.classList.remove('no-transition');
+                }, 100);
+
+                updateIcon(getPreferredTheme())
+                
+                document.getElementById('theme-switch').addEventListener('click', () => {
+                  const currentTheme = getPreferredTheme()
+                  const nextTheme = currentTheme === 'dark' ? 'light' : 'dark'
+                  setStoredTheme(nextTheme)
+                  setTheme(nextTheme)
+                })
+              })
 
               window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
                 const storedTheme = getStoredTheme()
@@ -115,26 +137,8 @@
                   setTheme(getPreferredTheme())
                 }
               })
-
-              window.addEventListener('DOMContentLoaded', () => {
-                updateIcon(getPreferredTheme())
-                
-                document.getElementById('theme-switch').addEventListener('click', () => {
-                  const currentTheme = getPreferredTheme()
-                  const nextTheme = currentTheme === 'dark' ? 'light' : 'dark'
-                  
-                  setStoredTheme(nextTheme)
-                  setTheme(nextTheme)
-                })
-              })
             })()
         </script>
         {% block javascripts %}{% endblock %}
-        <footer class="text-center mt-5 mb-3 text-muted">
-            <hr>
-            <small>
-                {{ "now"|date("Y") }} Mehmet Ates — <a href="{{ path('app_legal') }}">Mentions légales</a>
-            </small>
-        </footer>
     </body>
 </html>

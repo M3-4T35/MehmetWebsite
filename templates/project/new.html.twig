@@ -1,11 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Project{% endblock %}
+{% block title %}Nouveau Projet{% endblock %}
 
 {% block body %}
-    <h1>Create new Project</h1>
+    <div class="mb-4">
+        <h1><i class="bi bi-plus-circle me-2"></i>Créer un Nouveau Projet</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ path('app_project_index') }}">Projets</a></li>
+                <li class="breadcrumb-item active">Nouveau</li>
+            </ol>
+        </nav>
+    </div>
 
     {{ include('project/_form.html.twig') }}
-
-    <a href="{{ path('app_project_index') }}">back to list</a>
 {% endblock %}
