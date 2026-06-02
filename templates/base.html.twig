@@ -34,42 +34,46 @@
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg mb-4">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="{{ path('app_home') }}">MehmetAtes.fr</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        {% set route = app.request.attributes.get('_route') %}
+        <nav class="navbar navbar-expand-lg mb-4 py-3">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center" href="{{ path('app_home') }}">
+                    <i class="bi bi-code-square me-2 text-primary"></i>
+                    MehmetAtes.fr
+                </a>
+                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
+                    <ul class="navbar-nav ms-auto align-items-center">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('app_home') }}">{{ 'menu.home'|trans }}</a>
+                            <a class="nav-link {{ route == 'app_home' ? 'active' }}" href="{{ path('app_home') }}">{{ 'menu.home'|trans }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('app_public_projects') }}">{{ 'menu.projects'|trans }}</a>
+                            <a class="nav-link {{ route == 'app_public_projects' or route == 'app_public_project_detail' ? 'active' }}" href="{{ path('app_public_projects') }}">{{ 'menu.projects'|trans }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('app_cv_public') }}">{{ 'menu.cvs'|trans }}</a>
+                            <a class="nav-link {{ route == 'app_cv_public' ? 'active' }}" href="{{ path('app_cv_public') }}">{{ 'menu.cvs'|trans }}</a>
                         </li>
                         {% if is_granted('ROLE_ADMIN') %}
-                            <li class="nav-item">
-                                <a class="btn btn-outline-primary ms-2" href="{{ path('app_admin') }}">Admin</a>
+                            <li class="nav-item ms-lg-2">
+                                <a class="btn btn-sm btn-outline-primary" href="{{ path('app_admin') }}">Admin</a>
                             </li>
                             <li class="nav-item">
                                 <form method="post" action="{{ path('app_logout') }}" style="display:inline">
-                                    <button type="submit" class="btn btn-outline-danger ms-2">Déconnexion</button>
+                                    <button type="submit" class="btn btn-sm btn-link text-danger text-decoration-none ms-2">Déconnexion</button>
                                 </form>
                             </li>
                         {% endif %}
                     </ul>
-                    <div class="nav-item ms-lg-3 d-flex align-items-center">
+                    <div class="nav-item ms-lg-4 d-flex align-items-center justify-content-center mt-3 mt-lg-0 border-lg-start ps-lg-4">
                         {% set current_locale = app.request.locale %}
                         {% set target_locale = current_locale == 'fr' ? 'en' : 'fr' %}
-                        <a href="{{ path('app_switch_locale', { '_locale': current_locale, 'language': target_locale }) }}" class="btn btn-outline-secondary rounded-pill px-3 me-2" title="Changer la langue">
-                            <i class="bi bi-translate me-1"></i>
-                            {{ current_locale|upper }}
+                        <a href="{{ path('app_switch_locale', { '_locale': current_locale, 'language': target_locale }) }}" class="btn btn-sm btn-outline-secondary rounded-pill px-3 me-2 d-flex align-items-center" title="Changer la langue">
+                            <i class="bi bi-translate me-2"></i>
+                            <span class="fw-bold">{{ current_locale|upper }}</span>
                         </a>
-                        <button id="theme-switch" class="btn btn-outline-secondary rounded-circle p-2 lh-1" type="button" aria-label="Toggle theme" title="Basculer le mode">
+                        <button id="theme-switch" class="btn btn-sm btn-outline-secondary rounded-circle" type="button" aria-label="Toggle theme">
                             <i id="theme-icon" class="bi bi-moon-stars-fill"></i>
                         </button>
                     </div>

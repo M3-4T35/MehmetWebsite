@@ -23,7 +23,7 @@ class MediaType extends AbstractType
             ->add('position')
             ->add('project', EntityType::class, [
                 'class' => Project::class,
-                'choice_label' => 'id',
+                'choice_label' => 'title',
             ])
         ;
     }
