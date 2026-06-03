@@ -27,9 +27,21 @@ final class HomeController extends AbstractController
     }
 
     #[Route('/', name: 'app_home')]
-    public function index(): Response
+    public function index(\App\Repository\ProjectRepository $projectRepository, \App\Repository\MediaRepository $mediaRepository): Response
     {
-        return $this->render('home.html.twig');
+        $latestProjects = $projectRepository->findBy([], ['createdAt' => 'DESC'], 3);
+        $featuredProjects = [];
+        
+        foreach ($latestProjects as $project) {
+            $featuredProjects[] = [
+                'entity' => $project,
+                'preview' => $mediaRepository->findOneBy(['project' => $project], ['position' => 'ASC'])
+            ];
+        }
+
+        return $this->render('home.html.twig', [
+            'featuredProjects' => $featuredProjects
+        ]);
     }
 
     #[Route('/travaux', name: 'app_public_projects')]
