@@ -1,13 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mes CV{% endblock %}
+{% block title %}{{ 'menu.cvs'|trans }} | Mehmet ATES{% endblock %}
 
 {% block body %}
 <div class="hero-section text-center px-3">
-    <h1 class="display-4 fw-bold mb-3">Curriculum Vitae</h1>
+    <h1 class="display-4 fw-bold mb-3">{{ 'cvs.list.title'|trans }}</h1>
     <p class="lead text-muted mx-auto" style="max-width: 700px;">
-        Consultez mes différents CV pour en savoir plus sur mon expérience, 
-        mes compétences techniques et mon parcours académique.
+        {{ 'cvs.list.text'|trans }}
     </p>
 </div>
 
@@ -21,25 +20,25 @@
                     </div>
                     
                     <h4 class="card-title fw-bold mb-2">
-                        {{ cv.title ?: 'Curriculum Vitae' }}
+                        {{ cv.title ?: 'cvs.list.label_default'|trans }}
                     </h4>
                     
                     <p class="text-muted small mb-4">
                         <i class="bi bi-calendar-check me-1"></i>
-                        Mis à jour le {{ cv.uploadedAt ? cv.uploadedAt|date('d/m/Y') : 'N/A' }}
+                        {{ 'cvs.list.updated_at'|trans }} {{ cv.uploadedAt ? cv.uploadedAt|date('d/m/Y') : 'N/A' }}
                     </p>
 
                     <div class="d-grid gap-2">
                         {% if cv.filename %}
                             <a href="{{ asset('uploads/cv/' ~ cv.filename) }}" class="btn btn-primary rounded-pill px-4" target="_blank">
-                                <i class="bi bi-download me-2"></i>Télécharger le PDF
+                                <i class="bi bi-download me-2"></i>{{ 'cvs.list.download'|trans }}
                             </a>
                             <button class="btn btn-outline-primary rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#cvModal{{ cv.id }}">
-                                <i class="bi bi-eye me-2"></i>Consulter en ligne
+                                <i class="bi bi-eye me-2"></i>{{ 'cvs.list.view_online'|trans }}
                             </button>
                         {% else %}
                             <div class="alert alert-warning py-2 small mb-0">
-                                <i class="bi bi-exclamation-triangle me-1"></i>Fichier non disponible
+                                <i class="bi bi-exclamation-triangle me-1"></i>{{ 'cvs.list.not_available'|trans }}
                             </div>
                         {% endif %}
                     </div>
@@ -54,22 +53,22 @@
                     <div class="modal-content shadow-lg border-0">
                         <div class="modal-header border-0 bg-light">
                             <h5 class="modal-title fw-bold" id="cvModalLabel{{ cv.id }}">
-                                <i class="bi bi-file-earmark-pdf me-2 text-danger"></i>{{ cv.title ?: 'Curriculum Vitae' }}
+                                <i class="bi bi-file-earmark-pdf me-2 text-danger"></i>{{ 'cvs.list.modal_title'|trans }}
                             </h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body p-0" style="height: 80vh;">
                             <object data="{{ asset('uploads/cv/' ~ cv.filename) }}" type="application/pdf" width="100%" height="100%">
                                 <div class="p-5 text-center">
-                                    <p class="lead">Votre navigateur ne peut pas afficher le PDF directement.</p>
+                                    <p class="lead">{{ 'cvs.list.modal_fallback'|trans }}</p>
                                     <a href="{{ asset('uploads/cv/' ~ cv.filename) }}" class="btn btn-primary rounded-pill" target="_blank">
-                                        Ouvrir le PDF dans un nouvel onglet
+                                        {{ 'cvs.list.modal_open_new'|trans }}
                                     </a>
                                 </div>
                             </object>
                         </div>
                         <div class="modal-footer border-0 bg-light">
-                            <button type="button" class="btn btn-secondary rounded-pill px-4" data-bs-dismiss="modal">Fermer</button>
+                            <button type="button" class="btn btn-secondary rounded-pill px-4" data-bs-dismiss="modal">{{ 'cvs.list.modal_close'|trans }}</button>
                         </div>
                     </div>
                 </div>
@@ -78,7 +77,7 @@
     {% else %}
         <div class="col-12 text-center py-5">
             <i class="bi bi-file-earmark-x text-muted display-1"></i>
-            <p class="mt-3 text-muted">Aucun CV disponible pour le moment.</p>
+            <p class="mt-3 text-muted">{{ 'cvs.list.empty'|trans }}</p>
         </div>
     {% endfor %}
 </div>

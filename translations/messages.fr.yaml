@@ -1,4 +1,91 @@
 menu:
   home: "Accueil"
-  projects: "Mes projets"
-  cvs: "Mes CV"
+  projects: "Mes travaux"
+  cvs: "Mes CVs"
+  legal: "Mentions légales"
+
+home:
+  hero:
+    subtitle: "Étudiant en Master Informatique - Ingénierie Système et Logiciel"
+    view_projects: "Voir mes travaux"
+    view_cvs: "Consulter mes CVs"
+  about:
+    title: "À propos"
+    text: "Récemment validée ma première année de Master en Informatique à l'Université Marie et Louis Pasteur. Mon expertise se concentre sur l'architecture logicielle et l'optimisation des systèmes."
+  languages:
+    title: "Langues"
+    native: "Langue maternelle"
+    intermediate: "Intermédiaire"
+    notions: "Notion"
+    french: "Français"
+    english: "Anglais"
+    turkish: "Turc"
+    german: "Allemand"
+  skills:
+    title: "Compétences Techniques"
+    software: "Développement Logiciel"
+    data: "Data Science & Python"
+    web: "Développement Web & Backend"
+    db: "Bases de Données"
+  featured:
+    title: "À la une"
+    subtitle: "Mes 3 derniers projets"
+    view_all: "Tout voir"
+    details: "Détails"
+  passions:
+    title: "Mes Passions"
+    cs: "Informatique"
+    games: "Jeux Vidéo"
+    vr: "Réalité Virtuelle"
+    cooking: "Cuisine"
+  contact_cta:
+    title: "Intéressé par mon profil ?"
+    text: "N'hésitez pas à consulter mes projets ou à me contacter pour toute collaboration."
+
+projects:
+  list:
+    title: "Mes réalisations"
+    text: "Découvrez mes réalisations, des projets web aux expérimentations techniques. Chaque projet est une opportunité d'apprendre et de relever de nouveaux défis."
+    more: "En savoir plus"
+    empty: "Aucun projet publié pour le moment."
+  detail:
+    description: "Description"
+    media: "Médias"
+    no_media: "Aucun média disponible."
+    back: "Retour à la liste"
+    no_en_desc: "Aucune description en anglais."
+
+cvs:
+  list:
+    title: "Mon Parcours Professionnel"
+    text: "Consultez mes différents CV pour en savoir plus sur mon expérience, mes compétences techniques et mon parcours académique."
+    label_default: "Curriculum Vitae"
+    updated_at: "Mis à jour le"
+    download: "Télécharger le PDF"
+    view_online: "Consulter en ligne"
+    modal_title: "Aperçu du CV"
+    modal_fallback: "Votre navigateur ne peut pas afficher le PDF directement."
+    modal_open_new: "Ouvrir le PDF dans un nouvel onglet"
+    modal_close: "Fermer"
+    empty: "Aucun CV disponible pour le moment."
+    not_available: "Fichier non disponible"
+
+navbar:
+  switch_theme: "Basculer le mode"
+  switch_lang: "Changer la langue"
+  logout: "Déconnexion"
+
+footer:
+  legal: "Mentions légales"
+
+legal:
+  title: "Mentions légales"
+  intro: "Ce site est édité à titre personnel par un particulier."
+  host:
+    title: "Hébergeur :"
+    name: "Nom : Mehmet Ates"
+    domain: "Nom de domaine : mehmetates.fr"
+    contact: "Contact :"
+    details: "Hébergé sur un serveur personnel situé à Moirans-en-Montagne, France."
+  data: "Ce site ne collecte pas de données personnelles et n’affiche pas de publicité."
+  contact_info: "Pour toute demande, vous pouvez contacter l’éditeur à l’adresse ci-dessus."

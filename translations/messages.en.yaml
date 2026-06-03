@@ -1,3 +1,91 @@
 menu:
   home: "Home"
-  projects: "Projects"
+  projects: "My Work"
+  cvs: "My CVs"
+  legal: "Legal Mentions"
+
+home:
+  hero:
+    subtitle: "Master student in Computer Science - System and Software Engineering"
+    view_projects: "View my work"
+    view_cvs: "Check my CVs"
+  about:
+    title: "About"
+    text: "Recently completed my first year of a Master's degree in Computer Science at the Marie and Louis Pasteur University. My expertise focuses on software architecture and system optimization."
+  languages:
+    title: "Languages"
+    native: "Native speaker"
+    intermediate: "Intermediate"
+    notions: "Notions"
+    french: "French"
+    english: "English"
+    turkish: "Turkish"
+    german: "German"
+  skills:
+    title: "Technical Skills"
+    software: "Software Development"
+    data: "Data Science & Python"
+    web: "Web & Backend Development"
+    db: "Databases"
+  featured:
+    title: "Featured"
+    subtitle: "My last 3 projects"
+    view_all: "View all"
+    details: "Details"
+  passions:
+    title: "My Passions"
+    cs: "Computer Science"
+    games: "Video Games"
+    vr: "Virtual Reality"
+    cooking: "Cooking"
+  contact_cta:
+    title: "Interested in my profile?"
+    text: "Feel free to check out my projects or contact me for any collaboration."
+
+projects:
+  list:
+    title: "My Projects"
+    text: "Discover my achievements, from web projects to technical experiments. Every project is an opportunity to learn and take on new challenges."
+    more: "Learn more"
+    empty: "No projects published yet."
+  detail:
+    description: "Description"
+    media: "Media"
+    no_media: "No media available."
+    back: "Back to list"
+    no_en_desc: "No English description available."
+
+cvs:
+  list:
+    title: "My Professional Journey"
+    text: "Check out my various CVs to learn more about my experience, technical skills, and academic background."
+    label_default: "Curriculum Vitae"
+    updated_at: "Updated on"
+    download: "Download PDF"
+    view_online: "View Online"
+    modal_title: "CV Preview"
+    modal_fallback: "Your browser cannot display the PDF directly."
+    modal_open_new: "Open PDF in new tab"
+    modal_close: "Close"
+    empty: "No CVs available yet."
+    not_available: "File not available"
+
+navbar:
+  switch_theme: "Toggle theme"
+  switch_lang: "Switch language"
+  logout: "Logout"
+
+footer:
+  legal: "Legal Mentions"
+
+legal:
+  title: "Legal Mentions"
+  intro: "This site is personally published by an individual."
+  host:
+    title: "Host:"
+    name: "Name: Mehmet Ates"
+    domain: "Domain name: mehmetates.fr"
+    contact: "Contact:"
+    details: "Hosted on a personal server located in Moirans-en-Montagne, France."
+  data: "This site does not collect personal data and does not display advertisements."
+  contact_info: "For any inquiries, you can contact the publisher at the address above."

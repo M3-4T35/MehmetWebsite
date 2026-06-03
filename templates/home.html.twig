@@ -6,7 +6,7 @@
 <section class="home-hero p-5 shadow-sm">
     <div class="container">
         <h1 class="display-1 fw-bold text-primary mb-3">Mehmet ATES</h1>
-        <h2 class="display-6 mb-4">Étudiant en Master Ingénierie Système et Logiciel à l'Université Marie et Louis Pasteur</h2>
+        <h2 class="display-6 mb-4">{{ 'home.hero.subtitle'|trans }}</h2>
         
         <div class="mb-5 d-flex justify-content-center gap-4">
             <a href="https://github.com/M3-4T35" target="_blank" class="social-link" title="GitHub"><i class="bi bi-github"></i></a>
@@ -15,10 +15,10 @@
 
         <div class="d-flex flex-column flex-sm-row justify-content-center gap-3 px-3">
             <a href="{{ path('app_public_projects') }}" class="btn btn-primary btn-lg rounded-pill px-sm-5">
-                Voir mes travaux
+                {{ 'home.hero.view_projects'|trans }}
             </a>
             <a href="{{ path('app_cv_public') }}" class="btn btn-outline-primary btn-lg rounded-pill px-sm-5">
-                Consulter mes CV
+                {{ 'home.hero.view_cvs'|trans }}
             </a>
         </div>
     </div>
@@ -28,37 +28,37 @@
     <div class="row g-5">
         <!-- À propos & Langues -->
         <div class="col-lg-4">
-            <h3 class="fw-bold mb-4 border-bottom pb-2">À propos</h3>
+            <h3 class="fw-bold mb-4 border-bottom pb-2">{{ 'home.about.title'|trans }}</h3>
             <p class="small">
-                Récemment diplômé de ma première année de Master en Informatique. Mon expertise se concentre sur l'architecture logicielle et l'optimisation des systèmes.
+                {{ 'home.about.text'|trans }}
             </p>
             
-            <h4 class="fw-bold mt-5 mb-3 h5">Langues</h4>
+            <h4 class="fw-bold mt-5 mb-3 h5">{{ 'home.languages.title'|trans }}</h4>
             <div class="mb-3">
                 <div class="d-flex justify-content-between small mb-1">
-                    <span>Français</span>
-                    <span class="text-muted">Langue maternelle</span>
+                    <span>{{ 'home.languages.french'|trans }}</span>
+                    <span class="text-muted">{{ 'home.languages.native'|trans }}</span>
                 </div>
                 <div class="lang-level"><div class="lang-progress" style="width: 100%"></div></div>
             </div>
             <div class="mb-3">
                 <div class="d-flex justify-content-between small mb-1">
-                    <span>Anglais</span>
+                    <span>{{ 'home.languages.english'|trans }}</span>
                     <span class="text-muted">C1+</span>
                 </div>
                 <div class="lang-level"><div class="lang-progress" style="width: 90%"></div></div>
             </div>
             <div class="mb-3">
                 <div class="d-flex justify-content-between small mb-1">
-                    <span>Turc</span>
-                    <span class="text-muted">Intermédiaire</span>
+                    <span>{{ 'home.languages.turkish'|trans }}</span>
+                    <span class="text-muted">{{ 'home.languages.intermediate'|trans }}</span>
                 </div>
                 <div class="lang-level"><div class="lang-progress" style="width: 60%"></div></div>
             </div>
             <div class="mb-3">
                 <div class="d-flex justify-content-between small mb-1">
-                    <span>Allemand</span>
-                    <span class="text-muted">Notion</span>
+                    <span>{{ 'home.languages.german'|trans }}</span>
+                    <span class="text-muted">{{ 'home.languages.notions'|trans }}</span>
                 </div>
                 <div class="lang-level"><div class="lang-progress" style="width: 25%"></div></div>
             </div>
@@ -66,11 +66,11 @@
 
         <!-- Compétences -->
         <div class="col-lg-8">
-            <h3 class="fw-bold mb-4 border-bottom pb-2">Compétences Techniques</h3>
+            <h3 class="fw-bold mb-4 border-bottom pb-2">{{ 'home.skills.title'|trans }}</h3>
             
             <div class="row g-4">
                 <div class="col-md-6">
-                    <h5 class="fw-bold h6 text-primary mb-3">Développement Logiciel</h5>
+                    <h5 class="fw-bold h6 text-primary mb-3">{{ 'home.skills.software'|trans }}</h5>
                     <div class="d-flex flex-wrap">
                         <span class="skill-badge">Java</span>
                         <span class="skill-badge">C++</span>
@@ -80,7 +80,7 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <h5 class="fw-bold h6 text-primary mb-3">Data Science & Python</h5>
+                    <h5 class="fw-bold h6 text-primary mb-3">{{ 'home.skills.data'|trans }}</h5>
                     <div class="d-flex flex-wrap">
                         <span class="skill-badge">Python</span>
                         <span class="skill-badge">Jupyter Notebook</span>
@@ -89,7 +89,7 @@
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <h5 class="fw-bold h6 text-primary mb-3">Développement Web Frontend & Backend</h5>
+                    <h5 class="fw-bold h6 text-primary mb-3">{{ 'home.skills.web'|trans }}</h5>
                     <div class="d-flex flex-wrap">
                         <span class="skill-badge">HTML5</span>
                         <span class="skill-badge">CSS3</span>
@@ -101,10 +101,9 @@
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <h5 class="fw-bold h6 text-primary mb-3">Bases de Données</h5>
+                    <h5 class="fw-bold h6 text-primary mb-3">{{ 'home.skills.db'|trans }}</h5>
                     <div class="d-flex flex-wrap">
                         <span class="skill-badge">Requêtes SQL</span>
-                        <span class="skill-badge">Mongodb</span>
                         <span class="skill-badge">MySQL</span>
                         <span class="skill-badge">MariaDB</span>
                         <span class="skill-badge">PostgreSQL</span>
@@ -120,10 +119,10 @@
     <div class="container">
         <div class="d-flex justify-content-between align-items-end mb-4">
             <div>
-                <h3 class="fw-bold mb-0">À la une</h3>
-                <p class="text-muted mb-0">Mes 3 derniers projets réalisés</p>
+                <h3 class="fw-bold mb-0">{{ 'home.featured.title'|trans }}</h3>
+                <p class="text-muted mb-0">{{ 'home.featured.subtitle'|trans }}</p>
             </div>
-            <a href="{{ path('app_public_projects') }}" class="btn btn-sm btn-outline-primary rounded-pill px-3">Tout voir</a>
+            <a href="{{ path('app_public_projects') }}" class="btn btn-sm btn-outline-primary rounded-pill px-3">{{ 'home.featured.view_all'|trans }}</a>
         </div>
         
         <div class="row g-4">
@@ -159,7 +158,7 @@
                                     {{ project.descriptionCourte|length > 80 ? project.descriptionCourte|slice(0, 80) ~ '...' : project.descriptionCourte }}
                                 {% endif %}
                             </p>
-                            <a href="{{ path('app_public_project_detail', {'id': project.id}) }}" class="btn btn-sm btn-primary w-100 rounded-pill">Détails</a>
+                            <a href="{{ path('app_public_project_detail', {'id': project.id}) }}" class="btn btn-sm btn-primary w-100 rounded-pill">{{ 'home.featured.details'|trans }}</a>
                         </div>
                     </div>
                 </div>
@@ -174,32 +173,39 @@
 
 <!-- Mes Passions -->
 <div class="container mb-5">
-    <h3 class="fw-bold mb-4 text-center">Mes Passions</h3>
+    <h3 class="fw-bold mb-4 text-center">{{ 'home.passions.title'|trans }}</h3>
     <div class="row g-3">
         <div class="col-sm-6 col-md-3">
             <div class="passion-card p-4 h-100 text-center shadow-sm">
                 <i class="bi bi-cpu passion-icon"></i>
-                <h6 class="fw-bold">Informatique</h6>
+                <h6 class="fw-bold">{{ 'home.passions.cs'|trans }}</h6>
             </div>
         </div>
         <div class="col-sm-6 col-md-3">
             <div class="passion-card p-4 h-100 text-center shadow-sm">
                 <i class="bi bi-controller passion-icon"></i>
-                <h6 class="fw-bold">Jeux Vidéo</h6>
+                <h6 class="fw-bold">{{ 'home.passions.games'|trans }}</h6>
             </div>
         </div>
         <div class="col-sm-6 col-md-3">
             <div class="passion-card p-4 h-100 text-center shadow-sm">
                 <i class="bi bi-vr passion-icon"></i>
-                <h6 class="fw-bold">Réalité Virtuelle</h6>
+                <h6 class="fw-bold">{{ 'home.passions.vr'|trans }}</h6>
             </div>
         </div>
         <div class="col-sm-6 col-md-3">
             <div class="passion-card p-4 h-100 text-center shadow-sm">
                 <i class="bi bi-egg-fried passion-icon"></i>
-                <h6 class="fw-bold">Cuisine</h6>
+                <h6 class="fw-bold">{{ 'home.passions.cooking'|trans }}</h6>
             </div>
         </div>
     </div>
 </div>
+
+<section class="bg-primary-subtle py-5 rounded-4 mb-5 text-center">
+    <div class="container">
+        <h3 class="fw-bold mb-3">{{ 'home.contact_cta.title'|trans }}</h3>
+        <p class="mb-4">{{ 'home.contact_cta.text'|trans }}</p>
+    </div>
+</section>
 {% endblock %}

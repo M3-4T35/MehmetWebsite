@@ -61,7 +61,7 @@
                             </li>
                             <li class="nav-item">
                                 <form method="post" action="{{ path('app_logout') }}" style="display:inline">
-                                    <button type="submit" class="btn btn-sm btn-link text-danger text-decoration-none ms-2">Déconnexion</button>
+                                    <button type="submit" class="btn btn-sm btn-link text-danger text-decoration-none ms-2">{{ 'navbar.logout'|trans }}</button>
                                 </form>
                             </li>
                         {% endif %}
@@ -69,11 +69,11 @@
                     <div class="nav-item ms-lg-4 d-flex align-items-center justify-content-center mt-3 mt-lg-0 border-lg-start ps-lg-4">
                         {% set current_locale = app.request.locale %}
                         {% set target_locale = current_locale == 'fr' ? 'en' : 'fr' %}
-                        <a href="{{ path('app_switch_locale', { '_locale': current_locale, 'language': target_locale }) }}" class="btn btn-sm btn-outline-secondary rounded-pill px-3 me-2 d-flex align-items-center" title="Changer la langue">
+                        <a href="{{ path('app_switch_locale', { '_locale': current_locale, 'language': target_locale }) }}" class="btn btn-sm btn-outline-secondary rounded-pill px-3 me-2 d-flex align-items-center" title="{{ 'navbar.switch_lang'|trans }}">
                             <i class="bi bi-translate me-2"></i>
                             <span class="fw-bold">{{ current_locale|upper }}</span>
                         </a>
-                        <button id="theme-switch" class="btn btn-sm btn-outline-secondary rounded-circle" type="button" aria-label="Toggle theme">
+                        <button id="theme-switch" class="btn btn-sm btn-outline-secondary rounded-circle" type="button" aria-label="{{ 'navbar.switch_theme'|trans }}" title="{{ 'navbar.switch_theme'|trans }}">
                             <i id="theme-icon" class="bi bi-moon-stars-fill"></i>
                         </button>
                     </div>
@@ -88,7 +88,7 @@
         <footer class="text-center mt-5 mb-3 text-muted">
             <hr>
             <small>
-                {{ "now"|date("Y") }} Mehmet Ates — <a href="{{ path('app_legal') }}">Mentions légales</a>
+                {{ "now"|date("Y") }} Mehmet Ates — <a href="{{ path('app_legal') }}">{{ 'footer.legal'|trans }}</a>
             </small>
         </footer>
 
