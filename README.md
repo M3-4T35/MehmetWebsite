@@ -1,111 +1,167 @@
-# MehmetWebSite
+# MehmetAtes.fr | Portfolio Professionnel
 
-TODO README
+Ce projet est un site web dynamique faisant office de **CV numérique et de portfolio professionnel**. Il est conçu pour mettre en valeur mes réalisations, mes compétences et mon parcours académique en tant qu'étudiant en Master Informatique.
 
-## 📝 Description
+## ✨ Fonctionnalités Majeures
 
-Ce projet est un site web dynamique faisant office de **CV numérique et de portfolio**. Son objectif est de centraliser et de mettre en valeur mes différentes réalisations (projets académiques réalisés au cours de ma formation, projets personnels et expériences professionnelles).
+### 🌐 Partie Publique (Showcase)
 
-### 🌐 Fonctionnalités Publiques
-* **Page d'accueil :** Présentation personnelle détaillée et mise à disposition du CV pour consultation et téléchargement.
-* **Page "Travaux" :** Galerie et liste de l'ensemble des projets. Chaque projet possède sa propre page dédiée comprenant :
-    * Un titre et une description bilingues (**Français / Anglais**).
-    * Des liens externes vers les dépôts de code (GitHub/GitLab) ou les versions de production.
-    * Une galerie d'images d'illustration.
+* **Bilingue Complet (FR/EN) :** Support intégral des deux langues avec bascule instantanée via la barre de navigation.
+* **Portfolio Dynamique :** Galerie de projets avec miniatures, descriptions détaillées en Markdown et galerie média interactive.
+* **Parcours Professionnel :** Section dédiée aux CVs avec prévisualisation PDF intégrée ("Consulter en ligne") et téléchargement.
+* **Design Moderne :** Interface épurée avec effet "Glassmorphism" sur la barre de navigation, animations fluides et compatibilité mobile (Responsive Design).
+* **Mode Sombre / Clair :** Bascule intelligente respectant les préférences système de l'utilisateur.
 
-### 🔐 Interface Administration (Back-Office)
-Un espace sécurisé (authentification par e-mail et mot de passe) permet de gérer l'intégralité du site :
-* **CRUD Projets :** Ajout, modification et suppression des fiches projets.
-* **Éditeur Markdown :** Rédaction des descriptions de projets via un éditeur de texte au format Markdown pour une mise en page riche.
-* **Gestion du CV :** Possibilité de téléverser et de remplacer directement le fichier PDF du CV depuis l'interface.
-* **Réinitialisation de mot de passe :** Système de récupération par e-mail. *Note : Cette fonctionnalité dépend des variables SMTP du fichier `.env` ; elle se désactive automatiquement si ces dernières ne sont pas configurées.*
+### 🔐 Espace Administration (Back-Office)
 
-### ✨ Fonctionnalités Bonus
-* **Traduction :** Support complet des langues Française et Anglaise.
-* **Accessibilité :** Bascule d'affichage entre Mode Sombre (Dark Mode) et Mode Clair (Light Mode).
+Un espace sécurisé réservé à l'administrateur permet de gérer l'intégralité du contenu :
+
+* **Gestion des Projets :** CRUD complet avec saisie bilingue (titre, description courte et longue) sur la même interface.
+* **Éditeur Markdown :** Prévisualisation en temps réel du rendu des descriptions de projets.
+* **Gestion des Médias :** Téléchargement d'images et vidéos, association aux projets et gestion de l'ordre d'affichage.
+* **Gestion des CV :** Upload et mise à jour simplifiée des fichiers PDF.
+* **Sécurité Avancée :** Authentification robuste, protection CSRF sur toutes les actions sensibles (suppression) et système de réinitialisation de mot de passe par email.
 
 ## 🛠 Prérequis
 
-TODO
+* **PHP :** 8.2 ou supérieur
+* **Serveur Web :** Apache (avec `mod_rewrite` activé) ou Nginx
+* **Base de données :** PostgreSQL (recommandé) ou MySQL/MariaDB
+* **Gestionnaire de paquets :** Composer
+* **Outils :** Symfony CLI (optionnel mais recommandé)
 
-##  🚀 Installation
+## 🚀 Installation
 
-TODO
+1. **Clonage du projet :**
 
-## ⚙️ Configuration Environnement (.env)
+   ```bash
+   git clone https://github.com/M3-4T35/MehmetWebsite.git
+   cd MehmetWebsite
+   ```
 
-TODO
+2. **Installation des dépendances :**
 
-## ⚙️ Commandes utiles
+   ```bash
+   composer install
+   ```
 
-### 🎻 Composer
+3. **Configuration de l'environnement :**
+   Copiez le fichier `.env` en `.env.local` et configurez vos accès à la base de données et votre serveur de mail :
 
-```bash
-#Composer
-composer install            # Installer les dépendances
-composer update             # Mettre à jour les dépendances
-composer require package    # Ajouter une dépendance
-composer remove package     # Supprimer une dépendance
-sudo composer self-update   # Mettre à jour Composer
-composer validate           # Vérifier le fichier composer.json
+   ```bash
+   cp .env .env.local
+   ```
+
+4. **Création de la base de données et migrations :**
+
+   ```bash
+   php bin/console doctrine:database:create
+   php bin/console doctrine:migrations:migrate
+   ```
+
+5. **Création du compte Administrateur :**
+   Comme il n'y a pas de page d'inscription publique, vous devez créer le premier utilisateur manuellement :
+
+   a. Générez un mot de passe sécurisé :
+
+   ```bash
+   php bin/console security:hash-password
+   ```
+
+   (Saisissez votre mot de passe, copiez le hash généré).
+
+   b. Insérez l'utilisateur en base de données (exemple SQL) :
+
+   ```sql
+   INSERT INTO "user" (email, roles, password) 
+   VALUES ('votre@email.fr', '["ROLE_ADMIN"]', 'LE_HASH_GENERE_A_L_ETAPE_PRECEDENTE');
+   ```
+
+6. **Initialisation des assets :**
+
+   ```bash
+   php bin/console assets:install public
+   ```
+
+7. **Lancement du serveur :**
+
+   ```bash
+   symfony server:start
+   # OU via un hôte virtuel Apache
+   ```
+
+## 🌐 Configuration Serveur Web (Apache)
+
+Pour déployer le projet sur un serveur Apache, créez un fichier de configuration VirtualHost (ex: `/etc/apache2/sites-available/mehmet.conf`) :
+
+```apache
+<VirtualHost *:80>
+    ServerName mehmetates.fr
+    ServerAlias www.mehmetates.fr
+
+    # Chemin vers le dossier public du projet
+    DocumentRoot /var/www/MehmetWebsite/public
+    <Directory /var/www/MehmetWebsite/public>
+        AllowOverride None
+        Order Allow,Deny
+        Allow from All
+
+        # Indispensable pour le fonctionnement du routeur Symfony
+        FallbackResource /index.php
+    </Directory>
+
+    # Configuration des logs
+    ErrorLog ${APACHE_LOG_DIR}/mehmet_error.log
+    CustomLog ${APACHE_LOG_DIR}/mehmet_access.log combined
+
+    # Optimisation (optionnel)
+    <IfModule mod_deflate.c>
+        AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript
+    </IfModule>
+</VirtualHost>
 ```
 
-### 🛠️ Symfony
+N'oubliez pas d'activer le site et de recharger Apache :
 
 ```bash
-#Symfonie
-symfony server:start    # Démarrer le serveur de développement
-symfony console about   # Afficher les infos Symfony
-
-# Debug
-symfony console debug:router            #Afficher toute les routes
-php bin/console debug:router
-symfony console debug:router route_name # Détails d'une route spécifique
-symfony console debug:config # Afficher la configuration
-symfony console debug:dotenv # Afficher les variables .env chargées
-symfony console debug:container # Lister tous les services
-php bin/console security:hash-password # Génere un mot de passe utilisable dans la base de donnée (utile pour faire un nouveau utilisateur)
+sudo a2ensite mehmet.conf
+sudo systemctl reload apache2
 ```
 
-### 🐘 PostgreSQL
+## ⚙️ Configuration Environnement (.env.local)
 
-```bash
-#Postgres
-psql -U admin -d postgres -h 127.0.0.1
-sudo -u postgres psql
-```
+Les variables suivantes sont essentielles au bon fonctionnement :
 
-### 🎛️ Apache
+* `DATABASE_URL` : Connexion à votre base de données (ex: `postgresql://db_user:db_password@127.0.0.1:5432/db_name`).
+* `MAILER_DSN` : Configuration pour l'envoi des emails de réinitialisation (ex: `smtp://user:pass@smtp.example.com:587`).
+* `APP_SECRET` : Une clé unique pour la sécurité de votre application.
 
-```bash
-#Apache
-sudo apache2ctl -S            # Affiche les hôtes virtuels actifs 
-ls /etc/apache2/sites-enabled/  # Liste les sites activés
+## ⚙️ Commandes Utiles
 
-#Gestion des sites
-sudo a2dissite site.conf        # Désactiver un site
-sudo systemctl reload apache2   # Activer un site
-sudo a2ensite site.conf         # Recharger la configuration
+### 🎻 Gestion du Projet (Composer)
 
-sudo a2enmod rewrite # nécessaire pour le fonctionnement Symfony
-```
+* `composer install` : Installe les dépendances définies dans le lock.
+* `composer update` : Met à jour les bibliothèques vers les dernières versions compatibles.
 
-### 🧪 Tests
+### 🛠️ Symfony CLI / Console
 
-```bash
-#Lancer les tests unitaires
-./vendor/bin/phpunit
-php bin/phpunit
-```
+* `php bin/console make:migration` : Génère un nouveau fichier de migration après un changement d'entité.
+* `php bin/console doctrine:migrations:migrate` : Applique les changements à la base de données.
+* `php bin/console security:hash-password` : Génère un hash pour créer manuellement un utilisateur en base.
+* `php bin/console cache:clear` : Vide le cache de l'application (utile après des changements de config/traduction).
 
-## 🔗 Ressources utiles
+### 🐘 Base de données
 
-- [Documentation PHP](https://www.php.net/docs.php)
-- [Documentation Symfony](https://symfony.com/doc/current/index.html)
-- [Best Practices Symfony](https://symfony.com/doc/current/best_practices.html)  
-- [Conventions Symfony](https://symfony.com/doc/current/contributing/code/standards.html)
-- [Documentation Twig](https://twig.symfony.com/doc/3.x/)
-- [Documentation Bootstrap](https://getbootstrap.com/docs/4.1/getting-started/introduction/)
-- [Documentation PostgreSQL](https://www.postgresql.org/docs/)
-- [Documentation Composer](https://getcomposer.org/doc/)
-- [Documentation Apache](https://httpd.apache.org/docs/)
+* `psql -U admin -d postgres -h 127.0.0.1` : Accès direct à PostgreSQL.
+
+### 🧪 Validation & Qualité
+
+* `php bin/phpunit` : Lance la suite de tests automatisés.
+
+## 🔗 Stack Technique
+
+* **Framework :** Symfony 7
+* **Moteur de template :** Twig
+* **ORM :** Doctrine (PostgreSQL)
+* **Frontend :** Bootstrap 5.3, Bootstrap Icons
+* **Contenu :** Markdown (rendu via marked.js)
