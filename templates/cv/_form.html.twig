@@ -1,0 +1,19 @@
+<div class="card shadow-sm border-0">
+    <div class="card-body p-4">
+        {{ form_start(form, {'attr': {'enctype': 'multipart/form-data'}}) }}
+            <div class="mb-4">
+                <h5 class="section-title border-bottom pb-2 mb-3 text-primary">
+                    <i class="bi bi-file-earmark-pdf me-2"></i>Fichier du CV
+                </h5>
+                {{ form_row(form.pdfFile, {'label': 'Sélectionner le PDF', 'help': 'Le fichier doit être au format PDF uniquement.'}) }}
+            </div>
+
+            <div class="d-flex justify-content-end gap-2 mt-4">
+                <a href="{{ path('app_c_v_index') }}" class="btn btn-outline-secondary">Annuler</a>
+                <button class="btn btn-primary px-4">
+                    <i class="bi bi-check-circle me-1"></i> {{ button_label|default('Enregistrer') }}
+                </button>
+            </div>
+        {{ form_end(form) }}
+    </div>
+</div>

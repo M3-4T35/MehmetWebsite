@@ -1,25 +1,211 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Home{% endblock %}
+{% block title %}Mehmet ATES | Portfolio{% endblock %}
 
 {% block body %}
-<div class="container">
-    <h1>Bonjour</h1>
-    <p>Je suis Mehmet Ates et je n'ai pas fini mon site web.</p>
-    <p>Merci de votre visite !</p>
+<section class="home-hero p-5 shadow-sm">
+    <div class="container">
+        <h1 class="display-1 fw-bold text-primary mb-3">Mehmet ATES</h1>
+        <h2 class="display-6 mb-4">{{ 'home.hero.subtitle'|trans }}</h2>
+        
+        <div class="mb-5 d-flex justify-content-center gap-4">
+            <a href="https://github.com/M3-4T35" target="_blank" class="social-link" title="GitHub"><i class="bi bi-github"></i></a>
+            <a href="https://www.linkedin.com/in/mehmet-ates-pro/" target="_blank" class="social-link" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
+        </div>
 
-    <h2>Mentions légales</h2>
+        <div class="d-flex flex-column flex-sm-row justify-content-center gap-3 px-3">
+            <a href="{{ path('app_public_projects') }}" class="btn btn-primary btn-lg rounded-pill px-sm-5">
+                {{ 'home.hero.view_projects'|trans }}
+            </a>
+            <a href="{{ path('app_cv_public') }}" class="btn btn-outline-primary btn-lg rounded-pill px-sm-5">
+                {{ 'home.hero.view_cvs'|trans }}
+            </a>
+        </div>
+    </div>
+</section>
 
-    <p>Ce site est édité à titre personnel par un particulier.</p>
+<div class="container mb-5">
+    <div class="row g-5">
+        <!-- À propos & Langues -->
+        <div class="col-lg-4">
+            <h3 class="fw-bold mb-4 border-bottom pb-2">{{ 'home.about.title'|trans }}</h3>
+            <p class="small">
+                {{ 'home.about.text'|trans }}
+            </p>
+            
+            <h4 class="fw-bold mt-5 mb-3 h5">{{ 'home.languages.title'|trans }}</h4>
+            <div class="mb-3">
+                <div class="d-flex justify-content-between small mb-1">
+                    <span>{{ 'home.languages.french'|trans }}</span>
+                    <span class="text-muted">{{ 'home.languages.native'|trans }}</span>
+                </div>
+                <div class="lang-level"><div class="lang-progress" style="width: 100%"></div></div>
+            </div>
+            <div class="mb-3">
+                <div class="d-flex justify-content-between small mb-1">
+                    <span>{{ 'home.languages.english'|trans }}</span>
+                    <span class="text-muted">C1+</span>
+                </div>
+                <div class="lang-level"><div class="lang-progress" style="width: 90%"></div></div>
+            </div>
+            <div class="mb-3">
+                <div class="d-flex justify-content-between small mb-1">
+                    <span>{{ 'home.languages.turkish'|trans }}</span>
+                    <span class="text-muted">{{ 'home.languages.intermediate'|trans }}</span>
+                </div>
+                <div class="lang-level"><div class="lang-progress" style="width: 60%"></div></div>
+            </div>
+            <div class="mb-3">
+                <div class="d-flex justify-content-between small mb-1">
+                    <span>{{ 'home.languages.german'|trans }}</span>
+                    <span class="text-muted">{{ 'home.languages.notions'|trans }}</span>
+                </div>
+                <div class="lang-level"><div class="lang-progress" style="width: 25%"></div></div>
+            </div>
+        </div>
 
-    <h3>Hébergeur :</h3>
-    <p>Nom : Mehmet Ates</p>
-    <p>Nom de domaine : mehmetates.fr</p>
-    <p>Contact : <a href="mailto:mehmet.ates.pro@outlook.fr">mehmet.ates.pro@outlook.fr</a></p>
-    <p>Hébergé sur un serveur personnel situé à Moirans-en-Montagne, France.</p>
-
-    <p>Ce site ne collecte pas de données personnelles et n’affiche pas de publicité.</p>
-
-    <p>Pour toute demande, vous pouvez contacter l’éditeur à l’adresse ci-dessus.</p>
+        <!-- Compétences -->
+        <div class="col-lg-8">
+            <h3 class="fw-bold mb-4 border-bottom pb-2">{{ 'home.skills.title'|trans }}</h3>
+            
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <h5 class="fw-bold h6 text-primary mb-3">{{ 'home.skills.software'|trans }}</h5>
+                    <div class="d-flex flex-wrap">
+                        <span class="skill-badge">Java</span>
+                        <span class="skill-badge">C++</span>
+                        <span class="skill-badge">C</span>
+                        <span class="skill-badge">Dart</span>
+                        <span class="skill-badge">Flutter</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h5 class="fw-bold h6 text-primary mb-3">{{ 'home.skills.data'|trans }}</h5>
+                    <div class="d-flex flex-wrap">
+                        <span class="skill-badge">Python</span>
+                        <span class="skill-badge">Jupyter Notebook</span>
+                        <span class="skill-badge">Pandas</span>
+                        <span class="skill-badge">Anaconda</span>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <h5 class="fw-bold h6 text-primary mb-3">{{ 'home.skills.web'|trans }}</h5>
+                    <div class="d-flex flex-wrap">
+                        <span class="skill-badge">HTML5</span>
+                        <span class="skill-badge">CSS3</span>
+                        <span class="skill-badge">JavaScript</span>
+                        <span class="skill-badge">TypeScript</span>
+                        <span class="skill-badge">PHP</span>
+                        <span class="skill-badge">Symfony</span>
+                        <span class="skill-badge">Apache</span>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <h5 class="fw-bold h6 text-primary mb-3">{{ 'home.skills.db'|trans }}</h5>
+                    <div class="d-flex flex-wrap">
+                        <span class="skill-badge">Requêtes SQL</span>
+                        <span class="skill-badge">MySQL</span>
+                        <span class="skill-badge">MariaDB</span>
+                        <span class="skill-badge">PostgreSQL</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<!-- Projets à la une -->
+<section class="bg-body-tertiary py-5 rounded-4 mb-5 shadow-sm">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-end mb-4">
+            <div>
+                <h3 class="fw-bold mb-0">{{ 'home.featured.title'|trans }}</h3>
+                <p class="text-muted mb-0">{{ 'home.featured.subtitle'|trans }}</p>
+            </div>
+            <a href="{{ path('app_public_projects') }}" class="btn btn-sm btn-outline-primary rounded-pill px-3">{{ 'home.featured.view_all'|trans }}</a>
+        </div>
+        
+        <div class="row g-4">
+            {% for preview in featuredProjects %}
+                {% set project = preview.entity %}
+                {% set media = preview.preview %}
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm project-card">
+                        <div class="card-img-container" style="height: 160px;">
+                            {% if media and media.filename %}
+                                {% set ext = media.filename|split('.')|last|lower %}
+                                {% if ext in ['jpg','jpeg','png','gif','webp'] %}
+                                    <img src="{{ asset('uploads/media/' ~ media.filename) }}" alt="{{ project.title }}">
+                                {% else %}
+                                    <i class="bi bi-code-slash fs-1 text-primary opacity-25"></i>
+                                {% endif %}
+                            {% else %}
+                                <i class="bi bi-code-slash fs-1 text-primary opacity-25"></i>
+                            {% endif %}
+                        </div>
+                        <div class="card-body">
+                            <h6 class="card-title fw-bold mb-1">
+                                {% if app.request.locale == 'en' and project.titleEn %}
+                                    {{ project.titleEn }}
+                                {% else %}
+                                    {{ project.title }}
+                                {% endif %}
+                            </h6>
+                            <p class="card-text text-muted small mb-3">
+                                {% if app.request.locale == 'en' and project.descriptionCourteEn %}
+                                    {{ project.descriptionCourteEn|length > 80 ? project.descriptionCourteEn|slice(0, 80) ~ '...' : project.descriptionCourteEn }}
+                                {% else %}
+                                    {{ project.descriptionCourte|length > 80 ? project.descriptionCourte|slice(0, 80) ~ '...' : project.descriptionCourte }}
+                                {% endif %}
+                            </p>
+                            <a href="{{ path('app_public_project_detail', {'id': project.id}) }}" class="btn btn-sm btn-primary w-100 rounded-pill">{{ 'home.featured.details'|trans }}</a>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="col-12 text-center py-4">
+                    <p class="text-muted">Aucun projet à afficher.</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Mes Passions -->
+<div class="container mb-5">
+    <h3 class="fw-bold mb-4 text-center">{{ 'home.passions.title'|trans }}</h3>
+    <div class="row g-3">
+        <div class="col-sm-6 col-md-3">
+            <div class="passion-card p-4 h-100 text-center shadow-sm">
+                <i class="bi bi-cpu passion-icon"></i>
+                <h6 class="fw-bold">{{ 'home.passions.cs'|trans }}</h6>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3">
+            <div class="passion-card p-4 h-100 text-center shadow-sm">
+                <i class="bi bi-controller passion-icon"></i>
+                <h6 class="fw-bold">{{ 'home.passions.games'|trans }}</h6>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3">
+            <div class="passion-card p-4 h-100 text-center shadow-sm">
+                <i class="bi bi-vr passion-icon"></i>
+                <h6 class="fw-bold">{{ 'home.passions.vr'|trans }}</h6>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3">
+            <div class="passion-card p-4 h-100 text-center shadow-sm">
+                <i class="bi bi-egg-fried passion-icon"></i>
+                <h6 class="fw-bold">{{ 'home.passions.cooking'|trans }}</h6>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="bg-primary-subtle py-5 rounded-4 mb-5 text-center">
+    <div class="container">
+        <h3 class="fw-bold mb-3">{{ 'home.contact_cta.title'|trans }}</h3>
+        <p class="mb-4">{{ 'home.contact_cta.text'|trans }}</p>
+    </div>
+</section>
 {% endblock %}

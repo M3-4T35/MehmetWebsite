@@ -1,0 +1,6 @@
+<form method="post" action="{{ path('app_media_delete', {'id': medium.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce média ?');" style="display:inline-block">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ medium.id) }}">
+    <button class="btn btn-outline-danger">
+        <i class="bi bi-trash me-1"></i> Supprimer
+    </button>
+</form>

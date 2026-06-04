@@ -1,0 +1,149 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {% if app.request.locale == 'en' and project.titleEn %}
+        {{ project.titleEn }}
+    {% else %}
+        {{ project.title }}
+    {% endif %}
+{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .project-header {
+            padding: 5rem 0;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        linear-gradient(135deg, var(--bs-primary) 0%, var(--bs-info) 100%);
+            color: white;
+            border-radius: 0 0 40px 40px;
+            margin-top: -1.5rem;
+            margin-bottom: 3rem;
+        }
+        .markdown-content {
+            font-size: 1.1rem;
+        }
+        .media-gallery img, .media-gallery video {
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .media-gallery img:hover {
+            transform: scale(1.02);
+        }
+        .max-vh-85 {
+            max-height: 85vh;
+            object-fit: contain;
+        }
+    </style>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const markdownContent = {% if app.request.locale == 'en' and project.descriptionEn %}{{ project.descriptionEn|json_encode|raw }}{% else %}{{ project.description|json_encode|raw }}{% endif %};
+            const preview = document.getElementById('markdown-display');
+            if (preview && markdownContent) {
+                preview.innerHTML = marked.parse(markdownContent);
+            }
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+</div> {# Close container temporarily for full width header #}
+
+<header class="project-header text-center">
+    <div class="container">
+        <h1 class="display-3 fw-bold mb-3">
+            {% if app.request.locale == 'en' and project.titleEn %}
+                {{ project.titleEn }}
+            {% else %}
+                {{ project.title }}
+            {% endif %}
+        </h1>
+        <p class="lead opacity-75 mx-auto" style="max-width: 800px;">
+            {% if app.request.locale == 'en' and project.descriptionCourteEn %}
+                {{ project.descriptionCourteEn }}
+            {% else %}
+                {{ project.descriptionCourte }}
+            {% endif %}
+        </p>
+        <div class="mt-4 d-flex justify-content-center gap-3">
+            {% if project.githubUrl %}
+                <a href="{{ project.githubUrl }}" target="_blank" class="btn btn-light rounded-pill px-4">
+                    <i class="bi bi-github me-2"></i>GitHub
+                </a>
+            {% endif %}
+            {% if project.productionUrl %}
+                <a href="{{ project.productionUrl }}" target="_blank" class="btn btn-primary rounded-pill px-4">
+                    <i class="bi bi-globe me-2"></i>Live Demo
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</header>
+
+<div class="container"> {# Reopen container #}
+
+<div class="row g-5">
+    <div class="col-lg-8">
+        <div class="mb-5">
+            <h3 class="fw-bold mb-4 border-bottom pb-2">{{ 'projects.detail.description'|trans }}</h3>
+            <div id="markdown-display" class="markdown-content">
+                {% if app.request.locale == 'en' and not project.descriptionEn %}
+                    <p class="text-muted italic">{{ 'projects.detail.no_en_desc'|trans }}</p>
+                {% endif %}
+                {# The markdown content will be injected here #}
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-4">
+        <div class="sticky-top" style="top: 7rem;">
+            <h3 class="fw-bold mb-4 border-bottom pb-2">{{ 'projects.detail.media'|trans }}</h3>
+            <div class="row g-3 media-gallery">
+                {% for media in medias %}
+                    <div class="col-6 col-lg-12">
+                        {% set ext = media.filename|split('.')|last|lower %}
+                        {% if ext in ['jpg','jpeg','png','gif','webp'] %}
+                            <img src="{{ asset('uploads/media/' ~ media.filename) }}" alt="{{ media.alt }}" class="img-fluid rounded shadow-sm w-100" data-bs-toggle="modal" data-bs-target="#mediaModal{{ media.id }}">
+                        {% elseif ext in ['mp4','webm','ogg'] %}
+                            <video class="w-100 rounded shadow-sm" controls>
+                                <source src="{{ asset('uploads/media/' ~ media.filename) }}" type="video/{{ ext }}">
+                            </video>
+                        {% endif %}
+                    </div>
+                {% else %}
+                    <p class="text-muted small">{{ 'projects.detail.no_media'|trans }}</p>
+                {% endfor %}
+            </div>
+            
+            <div class="mt-5">
+                <a href="{{ path('app_public_projects') }}" class="btn btn-outline-secondary w-100 rounded-pill">
+                    <i class="bi bi-arrow-left me-2"></i>{{ 'projects.detail.back'|trans }}
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{# Modals moved outside the main layout flow to prevent stacking context issues with sticky-top #}
+{% for media in medias %}
+    {% set ext = media.filename|split('.')|last|lower %}
+    {% if ext in ['jpg','jpeg','png','gif','webp'] %}
+        <div class="modal fade" id="mediaModal{{ media.id }}" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered">
+                <div class="modal-content bg-transparent border-0">
+                    <div class="modal-header border-0 p-0 justify-content-end">
+                        <button type="button" class="btn-close btn-close-white p-3" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body p-0 text-center" data-bs-dismiss="modal" style="cursor: zoom-out;">
+                        <img src="{{ asset('uploads/media/' ~ media.filename) }}" class="img-fluid rounded shadow max-vh-85">
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endfor %}
+
+{% endblock %}

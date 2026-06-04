@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails du Média{% endblock %}
+
+{% block body %}
+    <div class="mb-4 d-flex justify-content-between align-items-start">
+        <div>
+            <h1><i class="bi bi-info-circle me-2"></i>Détails du Média</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ path('app_media_index') }}">Médias</a></li>
+                    <li class="breadcrumb-item active">{{ medium.filename }}</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="d-flex gap-2">
+            <a href="{{ path('app_media_edit', {'id': medium.id}) }}" class="btn btn-outline-primary">
+                <i class="bi bi-pencil me-1"></i> Modifier
+            </a>
+            {{ include('media/_delete_form.html.twig') }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card shadow-sm h-100">
+                <div class="card-header bg-light fw-bold">Aperçu</div>
+                <div class="card-body text-center d-flex align-items-center justify-content-center bg-dark rounded-bottom" style="min-height: 300px;">
+                    {% set ext = medium.filename|split('.')|last|lower %}
+                    {% if ext in ['jpg','jpeg','png','gif','webp'] %}
+                        <img src="{{ asset('uploads/media/' ~ medium.filename) }}" alt="{{ medium.alt }}" class="img-fluid rounded shadow" style="max-height: 400px;">
+                    {% elseif ext in ['mp4','webm','ogg'] %}
+                        <video controls class="img-fluid rounded shadow" style="max-height: 400px;">
+                            <source src="{{ asset('uploads/media/' ~ medium.filename) }}" type="video/{{ ext }}">
+                            Votre navigateur ne supporte pas la vidéo.
+                        </video>
+                    {% else %}
+                        <div class="text-white">
+                            <i class="bi bi-file-earmark-play display-1 d-block mb-3"></i>
+                            <span>Fichier : {{ medium.filename }}</span>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card shadow-sm h-100">
+                <div class="card-header bg-light fw-bold">Informations</div>
+                <div class="card-body">
+                    <table class="table table-borderless">
+                        <tbody>
+                            <tr>
+                                <th class="text-muted px-0" style="width: 150px;">Nom du fichier</th>
+                                <td class="px-0 fw-bold">{{ medium.filename }}</td>
+                            </tr>
+                            <tr>
+                                <th class="text-muted px-0">Texte alternatif</th>
+                                <td class="px-0">{{ medium.alt ?: '<span class="text-muted italic">Aucun</span>'|raw }}</td>
+                            </tr>
+                            <tr>
+                                <th class="text-muted px-0">Ordre</th>
+                                <td class="px-0"><span class="badge bg-secondary">{{ medium.position }}</span></td>
+                            </tr>
+                            <tr>
+                                <th class="text-muted px-0">Projet associé</th>
+                                <td class="px-0">
+                                    {% if medium.project %}
+                                        <a href="{{ path('app_project_show', {'id': medium.project.id}) }}" class="text-decoration-none">
+                                            <i class="bi bi-folder me-1"></i>{{ medium.project.title }}
+                                        </a>
+                                    {% else %}
+                                        <span class="text-muted">Aucun</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="text-muted px-0">Date d'ajout</th>
+                                <td class="px-0">{{ medium.createdAt ? medium.createdAt|date('d/m/Y H:i') : 'N/A' }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <a href="{{ path('app_media_index') }}" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left me-1"></i> Retour à la liste
+        </a>
+    </div>
+{% endblock %}

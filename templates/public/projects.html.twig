@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'projects.list.title'|trans }}{% endblock %}
+
+{% block body %}
+<div class="hero-section text-center px-3">
+    <h1 class="display-4 fw-bold mb-3">{{ 'projects.list.title'|trans }}</h1>
+    <p class="lead text-muted mx-auto" style="max-width: 700px;">
+        {{ 'projects.list.text'|trans }}
+    </p>
+</div>
+
+<div class="row g-4">
+    {% for preview in projectPreviews %}
+        {% set project = preview.entity %}
+        {% set media = preview.preview %}
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm project-card">
+                <div class="card-img-container">
+                    {% if media and media.filename %}
+                        {% set ext = media.filename|split('.')|last|lower %}
+                        {% if ext in ['jpg','jpeg','png','gif','webp'] %}
+                            <img src="{{ asset('uploads/media/' ~ media.filename) }}" alt="{{ project.title }}">
+                        {% else %}
+                            <i class="bi bi-code-slash display-1 text-primary-emphasis opacity-25"></i>
+                        {% endif %}
+                    {% else %}
+                        <i class="bi bi-code-slash display-1 text-primary-emphasis opacity-25"></i>
+                    {% endif %}
+                </div>
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title fw-bold">
+                        {% if app.request.locale == 'en' and project.titleEn %}
+                            {{ project.titleEn }}
+                        {% else %}
+                            {{ project.title }}
+                        {% endif %}
+                    </h5>
+                    <p class="card-text text-muted flex-grow-1">
+                        {% if app.request.locale == 'en' and project.descriptionCourteEn %}
+                            {{ project.descriptionCourteEn }}
+                        {% else %}
+                            {{ project.descriptionCourte }}
+                        {% endif %}
+                    </p>
+                    <div class="mt-3 d-flex justify-content-between align-items-center">
+                        <a href="{{ path('app_public_project_detail', {'id': project.id}) }}" class="btn btn-primary px-4">
+                            {{ 'projects.list.more'|trans }}
+                        </a>
+                        <div class="small">
+                            {% if project.githubUrl %}
+                                <span class="text-muted" title="GitHub"><i class="bi bi-github"></i></span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="col-12 text-center py-5">
+            <i class="bi bi-search text-muted display-1"></i>
+            <p class="mt-3 text-muted">{{ 'projects.list.empty'|trans }}</p>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

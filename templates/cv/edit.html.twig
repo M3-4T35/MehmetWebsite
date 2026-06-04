@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier CV{% endblock %}
+
+{% block body %}
+    <div class="mb-4 d-flex justify-content-between align-items-center">
+        <div>
+            <h1><i class="bi bi-pencil-square me-2"></i>Modifier le CV</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="{{ path('app_c_v_index') }}">CV</a></li>
+                    <li class="breadcrumb-item active">Edition</li>
+                </ol>
+            </nav>
+        </div>
+        {{ include('cv/_delete_form.html.twig') }}
+    </div>
+
+    {{ include('cv/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+{% endblock %}

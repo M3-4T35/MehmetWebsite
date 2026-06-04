@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Email envoyé | Mehmet ATES{% endblock %}
+
+{% block body %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-5 col-lg-4">
+        <div class="card shadow-sm border-0 rounded-4">
+            <div class="card-body p-4 p-md-5 text-center">
+                <div class="bg-info bg-opacity-10 rounded-circle d-inline-flex p-3 mb-3">
+                    <i class="bi bi-envelope-check fs-1 text-info"></i>
+                </div>
+                <h2 class="fw-bold h4 mb-3">Vérifiez vos e-mails</h2>
+                
+                <p class="text-muted small mb-4">
+                    Si un compte correspond à votre adresse, un e-mail vient d'être envoyé avec un lien de réinitialisation.
+                </p>
+
+                <div class="alert alert-warning border-0 small mb-4 text-start">
+                    <i class="bi bi-clock-history me-2"></i>Ce lien expirera dans 
+                    <strong>{{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}</strong>.
+                </div>
+
+                <p class="small text-muted">
+                    Vous n'avez rien reçu ? Vérifiez vos spams ou 
+                    <a href="{{ path('app_forgot_password_request') }}" class="text-decoration-none">réessayez</a>.
+                </p>
+
+                <div class="d-grid mt-4">
+                    <a href="{{ path('app_login') }}" class="btn btn-outline-secondary rounded-pill fw-bold shadow-sm">
+                        Retour à la connexion
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
