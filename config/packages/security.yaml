@@ -21,6 +21,7 @@ security:
             lazy: true
             provider: app_user_provider
             custom_authenticator: App\Security\AppCustomAuthenticator
+            entry_point: App\Security\AppCustomAuthenticator
             logout:
                 path: app_logout
                 target: app_home
@@ -33,11 +34,11 @@ security:
 
     # Note: Only the *first* matching rule is applied
     access_control:
-        - { path: '^/(en|fr)?/?admin', roles: ROLE_ADMIN }
-        - { path: '^/cv/public', roles: PUBLIC_ACCESS }
-        - { path: '^/cv', roles: ROLE_ADMIN }
-        - { path: '^/media', roles: ROLE_ADMIN }
-        - { path: '^/project', roles: ROLE_ADMIN }
+        - { path: '^/(en|fr)/admin', roles: ROLE_ADMIN }
+        - { path: '^/(en|fr)/cv/public', roles: PUBLIC_ACCESS }
+        - { path: '^/(en|fr)/cv', roles: ROLE_ADMIN }
+        - { path: '^/(en|fr)/media', roles: ROLE_ADMIN }
+        - { path: '^/(en|fr)/project', roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
 
 when@test:
