@@ -24,12 +24,12 @@
                 {% for c_v in c_vs %}
                     <tr>
                         <td class="ps-4">
-                            <a href="{{ asset('uploads/cv/' ~ c_v.filename) }}" target="_blank" class="text-decoration-none fw-bold">
+                            <a href="{{ asset('uploads/cv/' ~ c_v.filename) }}" target="_blank" rel="noopener noreferrer" class="text-decoration-none fw-bold">
                                 <i class="bi bi-file-pdf text-danger me-2"></i>{{ c_v.filename }}
                             </a>
                         </td>
                         <td>
-                            <span class="badge bg-light text-dark border">
+                            <span class="badge bg-body-tertiary text-body border">
                                 <i class="bi bi-calendar-event me-1"></i>
                                 {{ c_v.uploadedAt ? c_v.uploadedAt|date('d/m/Y H:i') : 'N/A' }}
                             </span>

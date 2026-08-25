@@ -14,21 +14,18 @@ class Project
     #[ORM\Column]
     private ?int $id = null;
 
-    #[Gedmo\Translatable]
     #[ORM\Column(type: 'string', length: 255)]
     private ?string $title = null;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $titleEn = null;
 
-    #[Gedmo\Translatable]
     #[ORM\Column(type: 'text')]
     private ?string $description = null;
 
     #[ORM\Column(type: 'text', nullable: true)]
     private ?string $descriptionEn = null;
 
-    #[Gedmo\Translatable]
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $descriptionCourte = null;
 
@@ -41,14 +38,13 @@ class Project
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $productionUrl = null;
 
+    #[Gedmo\Timestampable(on: 'create')]
     #[ORM\Column(type: 'datetime_immutable')]
     private ?\DateTimeImmutable $createdAt = null;
 
+    #[Gedmo\Timestampable(on: 'update')]
     #[ORM\Column(type: 'datetime_immutable', nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
-
-    #[Gedmo\Locale]
-    private ?string $locale = null;
 
     public function getId(): ?int
     {
@@ -163,10 +159,5 @@ class Project
     {
         $this->updatedAt = $updatedAt;
         return $this;
-    }
-
-    public function setTranslatableLocale(string $locale): void
-    {
-        $this->locale = $locale;
     }
 }

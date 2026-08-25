@@ -3,24 +3,23 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Response;
-
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Request;
 
 final class HomeController extends AbstractController
 {
-    #[Route('/change-locale/{language}', name: 'app_switch_locale')]
+    #[Route('/change-locale/{language}', name: 'app_switch_locale', requirements: ['language' => 'fr|en'])]
     public function switchLocale(string $language, Request $request): Response
     {
         $request->getSession()->set('_locale', $language);
+
         $referer = $request->headers->get('referer');
-        
-        if ($referer) {
-            // Try to replace the locale prefix in the referer URL
-            $referer = preg_replace('/\/(fr|en)(\/|$)/', '/' . $language . '$2', $referer);
-            return $this->redirect($referer);
+        $refererHost = $referer ? parse_url($referer, PHP_URL_HOST) : null;
+
+        // Only follow the referer when it points back to this site (open-redirect guard)
+        if ($refererHost !== null && strcasecmp($refererHost, $request->getHost()) === 0) {
+            return $this->redirect(preg_replace('/\/(fr|en)(\/|$)/', '/'.$language.'$2', $referer));
         }
 
         return $this->redirectToRoute('app_home', ['_locale' => $language]);
@@ -30,12 +29,13 @@ final class HomeController extends AbstractController
     public function index(\App\Repository\ProjectRepository $projectRepository, \App\Repository\MediaRepository $mediaRepository): Response
     {
         $latestProjects = $projectRepository->findBy([], ['createdAt' => 'DESC'], 3);
+        $previews = $mediaRepository->findFirstPerProject();
+
         $featuredProjects = [];
-        
         foreach ($latestProjects as $project) {
             $featuredProjects[] = [
                 'entity' => $project,
-                'preview' => $mediaRepository->findOneBy(['project' => $project], ['position' => 'ASC'])
+                'preview' => $previews[$project->getId()] ?? null,
             ];
         }
 
@@ -47,14 +47,14 @@ final class HomeController extends AbstractController
     #[Route('/travaux', name: 'app_public_projects')]
     public function publicProjects(\App\Repository\ProjectRepository $projectRepository, \App\Repository\MediaRepository $mediaRepository): Response
     {
-        $projects = $projectRepository->findAll();
+        $projects = $projectRepository->findBy([], ['createdAt' => 'DESC']);
+        $previews = $mediaRepository->findFirstPerProject();
+
         $projectPreviews = [];
-        
         foreach ($projects as $project) {
-            $firstMedia = $mediaRepository->findOneBy(['project' => $project], ['position' => 'ASC']);
             $projectPreviews[] = [
                 'entity' => $project,
-                'preview' => $firstMedia
+                'preview' => $previews[$project->getId()] ?? null,
             ];
         }
 
@@ -76,7 +76,7 @@ final class HomeController extends AbstractController
         if (!$project) {
             throw $this->createNotFoundException('Projet non trouvé');
         }
-        $medias = $mediaRepository->findBy(['project' => $project]);
+        $medias = $mediaRepository->findBy(['project' => $project], ['position' => 'ASC']);
         return $this->render('public/project_detail.html.twig', [
             'project' => $project,
             'medias' => $medias,

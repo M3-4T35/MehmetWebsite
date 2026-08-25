@@ -10,16 +10,17 @@
         "doctrine/doctrine-bundle": "^3.2.2",
         "doctrine/doctrine-migrations-bundle": "^4.0",
         "doctrine/orm": "^3.6.6",
-        "friendsofsymfony/ckeditor-bundle": "*",
         "stof/doctrine-extensions-bundle": ">=1.15.3",
+        "symfony/asset": "^7.4",
         "symfony/console": "^7.4.11",
         "symfony/dotenv": "^7.4.11",
+        "symfony/expression-language": "^7.4",
         "symfony/filesystem": "^7.4",
         "symfony/flex": "^2.10",
         "symfony/form": "^7.4",
         "symfony/framework-bundle": "^7.4.11",
         "symfony/http-client": "^7.4",
-        "symfony/http-foundation": "^7.4",
+        "symfony/http-foundation": "^7.4.17",
         "symfony/mailer": "^7.4",
         "symfony/rate-limiter": "^7.4",
         "symfony/runtime": "^7.4.12",
@@ -69,8 +70,7 @@
     "scripts": {
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
-            "assets:install %PUBLIC_DIR%": "symfony-cmd",
-            "ckeditor:install": "symfony-cmd"
+            "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
         "post-install-cmd": [
             "@auto-scripts"

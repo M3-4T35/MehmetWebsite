@@ -110,6 +110,15 @@ Pour déployer le projet sur un serveur Apache, créez un fichier de configurati
         FallbackResource /index.php
     </Directory>
 
+    # Sécurité : ne jamais exécuter ni lister les fichiers téléversés
+    <Directory /var/www/MehmetWebsite/public/uploads>
+        Options -Indexes -ExecCGI
+        SetHandler none
+        <FilesMatch "\.(?i:php|phtml|phar|php3|php4|php5|php7|phps|cgi|pl|py|sh)$">
+            Require all denied
+        </FilesMatch>
+    </Directory>
+
     # Configuration des logs
     ErrorLog ${APACHE_LOG_DIR}/mehmet_error.log
     CustomLog ${APACHE_LOG_DIR}/mehmet_access.log combined
@@ -127,6 +136,23 @@ N'oubliez pas d'activer le site et de recharger Apache :
 sudo a2ensite mehmet.conf
 sudo systemctl reload apache2
 ```
+
+## 📤 Téléversement de fichiers
+
+* **Médias (images/vidéos) :** 250 Mo maximum — formats acceptés : jpg, png, gif, webp, mp4, webm, ogg.
+* **CV :** PDF uniquement — 10 Mo maximum.
+
+Pour autoriser les fichiers volumineux, PHP doit accepter des requêtes d'au moins 260 Mo :
+
+```ini
+; php.ini (ou public/.user.ini inclus avec le projet, effectif sous PHP-FPM/CGI)
+upload_max_filesize = 260M
+post_max_size = 260M
+```
+
+> Sous Apache avec `mod_php`, `.user.ini` est ignoré : modifiez directement le `php.ini` puis redémarrez Apache.
+
+Le dossier `public/uploads/` contient un `.htaccess` qui désactive l'exécution de tout script dans les fichiers téléversés — ne le supprimez pas.
 
 ## ⚙️ Configuration Environnement (.env.local)
 

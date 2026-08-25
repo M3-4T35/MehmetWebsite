@@ -32,12 +32,12 @@
                         </td>
                         <td>
                             {% if project.githubUrl %}
-                                <a href="{{ project.githubUrl }}" target="_blank" class="btn btn-sm btn-outline-dark mb-1" title="GitHub">
+                                <a href="{{ project.githubUrl }}" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-dark mb-1" title="GitHub">
                                     <i class="bi bi-github"></i>
                                 </a>
                             {% endif %}
                             {% if project.productionUrl %}
-                                <a href="{{ project.productionUrl }}" target="_blank" class="btn btn-sm btn-outline-info mb-1" title="Production">
+                                <a href="{{ project.productionUrl }}" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-info mb-1" title="Production">
                                     <i class="bi bi-globe"></i>
                                 </a>
                             {% endif %}

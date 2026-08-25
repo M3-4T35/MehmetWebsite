@@ -24,7 +24,7 @@
     <div class="row">
         <div class="col-lg-8">
             <div class="card shadow-sm mb-4">
-                <div class="card-header bg-light fw-bold">
+                <div class="card-header bg-body-tertiary fw-bold">
                     <i class="bi bi-justify-left me-2"></i>Contenu (FR)
                 </div>
                 <div class="card-body">
@@ -36,7 +36,7 @@
             </div>
 
             <div class="card shadow-sm mb-4">
-                <div class="card-header bg-light fw-bold">
+                <div class="card-header bg-body-tertiary fw-bold">
                     <i class="bi bi-translate me-2"></i>Content (EN)
                 </div>
                 <div class="card-body">
@@ -54,14 +54,14 @@
 
         <div class="col-lg-4">
             <div class="card shadow-sm mb-4">
-                <div class="card-header bg-light fw-bold">
+                <div class="card-header bg-body-tertiary fw-bold">
                     <i class="bi bi-link-45deg me-2"></i>Informations & Liens
                 </div>
                 <div class="card-body">
                     <div class="mb-3">
                         <label class="small text-muted d-block">GitHub</label>
                         {% if project.githubUrl %}
-                            <a href="{{ project.githubUrl }}" target="_blank" class="text-decoration-none">
+                            <a href="{{ project.githubUrl }}" target="_blank" rel="noopener noreferrer" class="text-decoration-none">
                                 <i class="bi bi-github me-1"></i> {{ project.githubUrl }}
                             </a>
                         {% else %}
@@ -71,7 +71,7 @@
                     <div class="mb-3">
                         <label class="small text-muted d-block">Production</label>
                         {% if project.productionUrl %}
-                            <a href="{{ project.productionUrl }}" target="_blank" class="text-decoration-none text-info">
+                            <a href="{{ project.productionUrl }}" target="_blank" rel="noopener noreferrer" class="text-decoration-none text-info">
                                 <i class="bi bi-globe me-1"></i> {{ project.productionUrl }}
                             </a>
                         {% else %}

@@ -1,0 +1,10 @@
+# Uploaded content must never be executed or listed.
+Options -Indexes -ExecCGI
+
+# Strip any handler (including PHP) from everything in this directory.
+SetHandler none
+
+# Belt and suspenders: refuse to serve anything that looks like code.
+<FilesMatch "\.(?i:php|phtml|phar|php3|php4|php5|php7|phps|cgi|pl|py|sh)$">
+    Require all denied
+</FilesMatch>

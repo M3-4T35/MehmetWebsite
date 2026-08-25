@@ -24,7 +24,7 @@
     <div class="row">
         <div class="col-md-6">
             <div class="card shadow-sm h-100">
-                <div class="card-header bg-light fw-bold">Aperçu</div>
+                <div class="card-header bg-body-tertiary fw-bold">Aperçu</div>
                 <div class="card-body text-center d-flex align-items-center justify-content-center bg-dark rounded-bottom" style="min-height: 300px;">
                     {% set ext = medium.filename|split('.')|last|lower %}
                     {% if ext in ['jpg','jpeg','png','gif','webp'] %}
@@ -45,7 +45,7 @@
         </div>
         <div class="col-md-6">
             <div class="card shadow-sm h-100">
-                <div class="card-header bg-light fw-bold">Informations</div>
+                <div class="card-header bg-body-tertiary fw-bold">Informations</div>
                 <div class="card-body">
                     <table class="table table-borderless">
                         <tbody>

@@ -13,6 +13,16 @@ services:
     # this creates a service per class whose id is the fully-qualified class name
     App\:
         resource: '../src/'
+        exclude:
+            '../src/Service/FileUploader.php'
+
+    app.media_file_uploader:
+        class: App\Service\FileUploader
+        arguments: ['%media_directory%']
+
+    app.cv_file_uploader:
+        class: App\Service\FileUploader
+        arguments: ['%cv_directory%']
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

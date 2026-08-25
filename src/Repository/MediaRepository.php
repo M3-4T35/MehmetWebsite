@@ -16,28 +16,30 @@ class MediaRepository extends ServiceEntityRepository
         parent::__construct($registry, Media::class);
     }
 
-    //    /**
-    //     * @return Media[] Returns an array of Media objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('m')
-    //            ->andWhere('m.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('m.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    /**
+     * Returns the lowest-position media of every project, indexed by project id.
+     *
+     * Executes a single query (avoids N+1 lookups when listing projects).
+     *
+     * @return array<int, Media>
+     */
+    public function findFirstPerProject(): array
+    {
+        $medias = $this->createQueryBuilder('m')
+            ->addSelect('p')
+            ->innerJoin('m.project', 'p')
+            ->orderBy('m.position', 'ASC')
+            ->getQuery()
+            ->getResult();
 
-    //    public function findOneBySomeField($value): ?Media
-    //    {
-    //        return $this->createQueryBuilder('m')
-    //            ->andWhere('m.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+        $previews = [];
+        foreach ($medias as $media) {
+            $projectId = $media->getProject()->getId();
+            if (!isset($previews[$projectId])) {
+                $previews[$projectId] = $media;
+            }
+        }
+
+        return $previews;
+    }
 }

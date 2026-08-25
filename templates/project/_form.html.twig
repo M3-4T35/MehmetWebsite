@@ -41,7 +41,7 @@
                                 {{ form_widget(form.description, {'attr': {'class': 'form-control border-0 rounded-0', 'style': 'height: 300px;'}}) }}
                             </div>
                             <div class="markdown-preview-area flex-grow-1">
-                                <div class="p-2 border-bottom small text-muted bg-light"><i class="bi bi-eye me-1"></i>Aperçu FR</div>
+                                <div class="p-2 border-bottom small text-muted bg-body-tertiary"><i class="bi bi-eye me-1"></i>Aperçu FR</div>
                                 <div id="markdown-preview"></div>
                             </div>
                         </div>
@@ -60,7 +60,7 @@
                                 {{ form_widget(form.descriptionEn, {'attr': {'class': 'form-control border-0 rounded-0', 'style': 'height: 300px;'}}) }}
                             </div>
                             <div class="markdown-preview-area flex-grow-1">
-                                <div class="p-2 border-bottom small text-muted bg-light"><i class="bi bi-eye me-1"></i>EN Preview</div>
+                                <div class="p-2 border-bottom small text-muted bg-body-tertiary"><i class="bi bi-eye me-1"></i>EN Preview</div>
                                 <div id="markdown-preview-en"></div>
                             </div>
                         </div>
@@ -79,15 +79,6 @@
                 </div>
             </div>
 
-            <div class="row mb-4">
-                <div class="col-md-6">
-                    {{ form_row(form.createdAt) }}
-                </div>
-                <div class="col-md-6">
-                    {{ form_row(form.updatedAt) }}
-                </div>
-            </div>
-            
             <div class="d-flex justify-content-end gap-2 mt-4">
                 <a href="{{ path('app_project_index') }}" class="btn btn-outline-secondary">Annuler</a>
                 <button class="btn btn-primary px-4">{{ button_label|default('Enregistrer') }}</button>

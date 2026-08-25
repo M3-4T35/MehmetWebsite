@@ -72,11 +72,26 @@ final class ProjectController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_project_delete', methods: ['POST'])]
-    public function delete(Request $request, Project $project, EntityManagerInterface $entityManager): Response
-    {
+    public function delete(
+        Request $request,
+        Project $project,
+        EntityManagerInterface $entityManager,
+        \App\Repository\MediaRepository $mediaRepository,
+        #[\Symfony\Component\DependencyInjection\Attribute\Autowire(service: 'app.media_file_uploader')] \App\Service\FileUploader $mediaUploader
+    ): Response {
         if ($this->isCsrfTokenValid('delete'.$project->getId(), $request->getPayload()->getString('_token'))) {
+            // Media rows are removed by the DB-level ON DELETE CASCADE, so collect the files first.
+            $mediaFilenames = array_map(
+                static fn (\App\Entity\Media $medium): string => (string) $medium->getFilename(),
+                $mediaRepository->findBy(['project' => $project])
+            );
+
             $entityManager->remove($project);
             $entityManager->flush();
+
+            foreach ($mediaFilenames as $filename) {
+                $mediaUploader->remove($filename);
+            }
         }
 
         return $this->redirectToRoute('app_project_index', [], Response::HTTP_SEE_OTHER);
