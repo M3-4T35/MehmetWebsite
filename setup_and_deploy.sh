@@ -68,11 +68,13 @@ if [ ! -f .env.local ]; then
   sed -i "s|^APP_ENV=.*|APP_ENV=prod|" .env.local
   sed -i "s|^APP_DEBUG=.*|APP_DEBUG=0|" .env.local
   sed -i "s|^APP_SECRET=.*|APP_SECRET=$APP_SECRET|" .env.local
-  sed -i "s|^DATABASE_URL=.*|DATABASE_URL=\"postgresql://$DB_USER:$DB_PASS@127.0.0.1:5432/$DB_NAME?serverVersion=16&charset=utf8\"|" .env.local
+  sed -i "s|^DATABASE_URL=.*|DATABASE_URL=\"postgresql://$DB_USER:$DB_PASS@127.0.0.1:5432/$DB_NAME?serverVersion=16\&charset=utf8\"|" .env.local
+  chown "$OWNER:$OWNER" .env.local
   echo "[+] Created .env.local with production configuration."
 else
   echo "[!] .env.local already exists. Updating DATABASE_URL..."
-  sed -i "s|^DATABASE_URL=.*|DATABASE_URL=\"postgresql://$DB_USER:$DB_PASS@127.0.0.1:5432/$DB_NAME?serverVersion=16&charset=utf8\"|" .env.local
+  sed -i "s|^DATABASE_URL=.*|DATABASE_URL=\"postgresql://$DB_USER:$DB_PASS@127.0.0.1:5432/$DB_NAME?serverVersion=16\&charset=utf8\"|" .env.local
+  chown "$OWNER:$OWNER" .env.local
 fi
 
 echo "[4/7] Installing Composer PHP dependencies..."
