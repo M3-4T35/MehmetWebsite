@@ -39,6 +39,11 @@ echo "[2/7] Configuring PostgreSQL Database..."
 DB_NAME="mehmet_db"
 DB_USER="mehmet_user"
 
+# Check if DB_PASS is already in .env.local
+if [ -z "$DB_PASS" ] && [ -f .env.local ]; then
+  DB_PASS=$(grep -oP 'DATABASE_URL="postgresql://[^:]+:\K[^@]+' .env.local 2>/dev/null || true)
+fi
+
 # Prompt for DB password or generate one
 if [ -z "$DB_PASS" ]; then
   DB_PASS=$(openssl rand -hex 16)
@@ -91,6 +96,15 @@ sudo -u "$OWNER" php bin/console app:create-user --admin
 
 echo "[7/7] Configuring Apache, Permissions, and Cache..."
 mkdir -p public/uploads/media public/uploads/cv var/cache var/log
+
+# Add owner to www-data group if not already
+usermod -aG www-data "$OWNER" || true
+
+# Warm up cache as the owner before setting webserver ownership
+rm -rf var/cache/*
+sudo -u "$OWNER" php bin/console cache:warmup --env=prod
+
+# Ensure www-data can read/write uploads, cache, and logs
 chown -R www-data:www-data public/uploads var/cache var/log
 chmod -R 775 public/uploads var
 
@@ -131,9 +145,6 @@ APACHE_EOF
 a2enmod rewrite headers || true
 a2ensite mehmetates.conf
 systemctl reload apache2
-
-# Cache warmup
-sudo -u "$OWNER" php bin/console cache:warmup --env=prod
 
 echo ""
 echo "============================================================"
