@@ -46,8 +46,14 @@ MAILER_DSN="smtp://user:pass@ssl0.ovh.net:465?encryption=ssl&auth_mode=login"
 ```bash
 php bin/console doctrine:database:create --if-not-exists
 php bin/console doctrine:migrations:migrate --no-interaction
+
+# Méthode 1 (recommandée) : Commande interactive Symfony
+php bin/console app:create-user
+# Ou directement : php bin/console app:create-user votre@email.fr mon_mot_de_passe --admin
+
+# Méthode 2 : Hachage manuel + insertion SQL directe
 php bin/console security:hash-password    # copier le hash généré
-psql -h 127.0.0.1 -U <user> -d app -c "INSERT INTO \"user\" (email, roles, password) VALUES ('votre@email.fr', '[\"ROLE_ADMIN\"]', 'LE_HASH');"
+psql -h 127.0.0.1 -U <user> -d <nom_base> -c "INSERT INTO \"user\" (email, roles, password) VALUES ('votre@email.fr', '[\"ROLE_ADMIN\"]', 'LE_HASH');"
 ```
 
 **Cache, assets et permissions :**
