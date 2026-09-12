@@ -21,6 +21,8 @@
                         {% set ext = media.filename|split('.')|last|lower %}
                         {% if ext in ['jpg','jpeg','png','gif','webp'] %}
                             <img src="{{ asset('uploads/media/' ~ media.filename) }}" alt="{{ project.title }}">
+                        {% elseif ext == 'pdf' %}
+                            <i class="bi bi-file-earmark-pdf display-1 text-danger opacity-50"></i>
                         {% else %}
                             <i class="bi bi-code-slash display-1 text-primary-emphasis opacity-25"></i>
                         {% endif %}

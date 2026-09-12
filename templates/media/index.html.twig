@@ -29,6 +29,10 @@
                             {% set ext = medium.filename|split('.')|last|lower %}
                             {% if ext in ['jpg','jpeg','png','gif','webp'] %}
                                 <img src="{{ asset('uploads/media/' ~ medium.filename) }}" alt="{{ medium.alt }}" class="rounded shadow-sm" style="width: 60px; height: 60px; object-fit: cover;">
+                            {% elseif ext == 'pdf' %}
+                                <div class="bg-danger-subtle text-danger rounded d-flex align-items-center justify-content-center shadow-sm" style="width: 60px; height: 60px;">
+                                    <i class="bi bi-file-earmark-pdf fs-3"></i>
+                                </div>
                             {% else %}
                                 <div class="bg-body-tertiary rounded d-flex align-items-center justify-content-center shadow-sm" style="width: 60px; height: 60px;">
                                     <i class="bi bi-file-earmark-play fs-3 text-secondary"></i>

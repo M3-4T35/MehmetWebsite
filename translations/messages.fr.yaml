@@ -54,6 +54,9 @@ projects:
     no_media: "Aucun média disponible."
     back: "Retour à la liste"
     no_en_desc: "Aucune description en anglais."
+    view_pdf: "Consulter en ligne"
+    download_pdf: "Télécharger le PDF"
+    pdf_document: "Document PDF"
 
 cvs:
   list:

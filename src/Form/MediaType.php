@@ -20,7 +20,7 @@ class MediaType extends AbstractType
                 'label' => 'Fichier média',
                 'mapped' => false,
                 'required' => !$options['is_edit'],
-                'help' => 'Images (jpg, png, gif, webp) ou vidéos (mp4, webm, ogg) — 250 Mo maximum.',
+                'help' => 'Images (jpg, png, gif, webp), vidéos (mp4, webm, ogg) ou documents PDF — 250 Mo maximum.',
                 'constraints' => [
                     new File([
                         'maxSize' => '250M',
@@ -32,8 +32,9 @@ class MediaType extends AbstractType
                             'video/mp4',
                             'video/webm',
                             'video/ogg',
+                            'application/pdf',
                         ],
-                        'mimeTypesMessage' => 'Formats acceptés : jpg, png, gif, webp, mp4, webm, ogg.',
+                        'mimeTypesMessage' => 'Formats acceptés : jpg, png, gif, webp, mp4, webm, ogg, pdf.',
                     ]),
                 ],
             ])

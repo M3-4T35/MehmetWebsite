@@ -111,6 +111,25 @@
                             <video class="w-100 rounded shadow-sm" controls>
                                 <source src="{{ asset('uploads/media/' ~ media.filename) }}" type="video/{{ ext }}">
                             </video>
+                        {% elseif ext == 'pdf' %}
+                            <div class="card border shadow-sm p-3 text-center bg-body-tertiary rounded-3 h-100 d-flex flex-column justify-content-between">
+                                <div>
+                                    <div class="mb-2">
+                                        <i class="bi bi-file-earmark-pdf text-danger display-5"></i>
+                                    </div>
+                                    <div class="fw-bold small text-truncate mb-2" title="{{ media.alt ?: ('projects.detail.pdf_document'|trans) }}">
+                                        {{ media.alt ?: ('projects.detail.pdf_document'|trans) }}
+                                    </div>
+                                </div>
+                                <div class="d-grid gap-2 mt-2">
+                                    <button type="button" class="btn btn-sm btn-outline-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#pdfModal{{ media.id }}">
+                                        <i class="bi bi-eye me-1"></i>{{ 'projects.detail.view_pdf'|trans }}
+                                    </button>
+                                    <a href="{{ asset('uploads/media/' ~ media.filename) }}" class="btn btn-sm btn-primary rounded-pill" target="_blank" rel="noopener noreferrer" download>
+                                        <i class="bi bi-download me-1"></i>{{ 'projects.detail.download_pdf'|trans }}
+                                    </a>
+                                </div>
+                            </div>
                         {% endif %}
                     </div>
                 {% else %}
@@ -139,6 +158,35 @@
                     </div>
                     <div class="modal-body p-0 text-center" data-bs-dismiss="modal" style="cursor: zoom-out;">
                         <img src="{{ asset('uploads/media/' ~ media.filename) }}" class="img-fluid rounded shadow max-vh-85">
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% elseif ext == 'pdf' %}
+        <div class="modal fade" id="pdfModal{{ media.id }}" tabindex="-1" aria-labelledby="pdfModalLabel{{ media.id }}" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content shadow-lg border-0">
+                    <div class="modal-header border-0 bg-body-tertiary">
+                        <h5 class="modal-title fw-bold" id="pdfModalLabel{{ media.id }}">
+                            <i class="bi bi-file-earmark-pdf me-2 text-danger"></i>{{ media.alt ?: ('projects.detail.pdf_document'|trans) }}
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body p-0" style="height: 80vh;">
+                        <object data="{{ asset('uploads/media/' ~ media.filename) }}" type="application/pdf" width="100%" height="100%">
+                            <div class="p-5 text-center">
+                                <p class="lead">{{ 'cvs.list.modal_fallback'|trans }}</p>
+                                <a href="{{ asset('uploads/media/' ~ media.filename) }}" class="btn btn-primary rounded-pill" target="_blank" rel="noopener noreferrer">
+                                    {{ 'cvs.list.modal_open_new'|trans }}
+                                </a>
+                            </div>
+                        </object>
+                    </div>
+                    <div class="modal-footer border-0 bg-body-tertiary">
+                        <a href="{{ asset('uploads/media/' ~ media.filename) }}" class="btn btn-primary rounded-pill px-4" target="_blank" rel="noopener noreferrer" download>
+                            <i class="bi bi-download me-1"></i>{{ 'projects.detail.download_pdf'|trans }}
+                        </a>
+                        <button type="button" class="btn btn-secondary rounded-pill px-4" data-bs-dismiss="modal">{{ 'cvs.list.modal_close'|trans }}</button>
                     </div>
                 </div>
             </div>

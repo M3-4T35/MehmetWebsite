@@ -34,6 +34,19 @@
                             <source src="{{ asset('uploads/media/' ~ medium.filename) }}" type="video/{{ ext }}">
                             Votre navigateur ne supporte pas la vidéo.
                         </video>
+                    {% elseif ext == 'pdf' %}
+                        <div class="text-white text-center p-4">
+                            <i class="bi bi-file-earmark-pdf display-1 text-danger d-block mb-3"></i>
+                            <p class="mb-3">{{ medium.alt ?: medium.filename }}</p>
+                            <div class="d-flex justify-content-center gap-2">
+                                <a href="{{ asset('uploads/media/' ~ medium.filename) }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-light rounded-pill px-3">
+                                    <i class="bi bi-eye me-1"></i> Ouvrir dans un onglet
+                                </a>
+                                <a href="{{ asset('uploads/media/' ~ medium.filename) }}" download class="btn btn-primary rounded-pill px-3">
+                                    <i class="bi bi-download me-1"></i> Télécharger
+                                </a>
+                            </div>
+                        </div>
                     {% else %}
                         <div class="text-white">
                             <i class="bi bi-file-earmark-play display-1 d-block mb-3"></i>
