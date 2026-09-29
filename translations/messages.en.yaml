@@ -6,15 +6,17 @@ menu:
 
 home:
   hero:
-    subtitle: "Master student in Computer Science - System and Software Engineering"
+    badge: "Looking for an end-of-studies internship"
+    subtitle: "2nd-year Master student in Computer Science - System and Software Engineering"
     view_projects: "View my work"
     view_cvs: "Check my CVs"
   about:
     title: "About"
-    text: "Recently completed my first year of a Master's degree in Computer Science at the Marie and Louis Pasteur University. My expertise focuses on software architecture and system optimization."
+    text: "Second-year Master's student in Computer Science at the Marie and Louis Pasteur University, with a background combining full-stack development (web and mobile), systems / networks, and experimentation with artificial intelligence. Comfortable both on supervised team projects and on personal projects carried out end to end, from design to deployment."
   languages:
     title: "Languages"
     native: "Native speaker"
+    fluent: "Fluent"
     intermediate: "Intermediate"
     notions: "Notions"
     french: "French"
@@ -23,10 +25,12 @@ home:
     german: "German"
   skills:
     title: "Technical Skills"
-    software: "Software Development"
-    data: "Data Science & Python"
-    web: "Web & Backend Development"
+    languages: "Programming Languages"
+    frontend: "Frontend & Mobile"
+    backend: "Backend"
     db: "Databases"
+    tools: "Tools & Software Engineering"
+    ai: "Artificial Intelligence"
   featured:
     title: "Featured"
     subtitle: "My last 3 projects"
@@ -40,7 +44,7 @@ home:
     cooking: "Cooking"
   contact_cta:
     title: "Interested in my profile?"
-    text: "Feel free to check out my projects or contact me for any collaboration."
+    text: "I am looking for an end-of-studies Master's internship. Feel free to check out my projects or get in touch."
 
 projects:
   list:

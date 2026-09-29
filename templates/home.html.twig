@@ -5,12 +5,14 @@
 {% block body %}
 <section class="home-hero p-5 shadow-sm">
     <div class="container">
+        <span class="badge rounded-pill text-bg-primary px-3 py-2 mb-3">{{ 'home.hero.badge'|trans }}</span>
         <h1 class="display-1 fw-bold text-primary mb-3">Mehmet ATES</h1>
         <h2 class="display-6 mb-4">{{ 'home.hero.subtitle'|trans }}</h2>
         
         <div class="mb-5 d-flex justify-content-center gap-4">
             <a href="https://github.com/M3-4T35" target="_blank" rel="noopener noreferrer" class="social-link" title="GitHub"><i class="bi bi-github"></i></a>
             <a href="https://www.linkedin.com/in/mehmet-ates-pro/" target="_blank" rel="noopener noreferrer" class="social-link" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
+            <a href="mailto:mehmet.ates.pro@outlook.fr" class="social-link" title="Email"><i class="bi bi-envelope"></i></a>
         </div>
 
         <div class="d-flex flex-column flex-sm-row justify-content-center gap-3 px-3">
@@ -44,9 +46,9 @@
             <div class="mb-3">
                 <div class="d-flex justify-content-between small mb-1">
                     <span>{{ 'home.languages.english'|trans }}</span>
-                    <span class="text-muted">C1+</span>
+                    <span class="text-muted">{{ 'home.languages.fluent'|trans }} (C2)</span>
                 </div>
-                <div class="lang-level"><div class="lang-progress" style="width: 90%"></div></div>
+                <div class="lang-level"><div class="lang-progress" style="width: 95%"></div></div>
             </div>
             <div class="mb-3">
                 <div class="d-flex justify-content-between small mb-1">
@@ -70,43 +72,63 @@
             
             <div class="row g-4">
                 <div class="col-md-6">
-                    <h5 class="fw-bold h6 text-primary mb-3">{{ 'home.skills.software'|trans }}</h5>
+                    <h5 class="fw-bold h6 text-primary mb-3">{{ 'home.skills.languages'|trans }}</h5>
                     <div class="d-flex flex-wrap">
                         <span class="skill-badge">Java</span>
-                        <span class="skill-badge">C++</span>
                         <span class="skill-badge">C</span>
-                        <span class="skill-badge">Dart</span>
-                        <span class="skill-badge">Flutter</span>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <h5 class="fw-bold h6 text-primary mb-3">{{ 'home.skills.data'|trans }}</h5>
-                    <div class="d-flex flex-wrap">
-                        <span class="skill-badge">Python</span>
-                        <span class="skill-badge">Jupyter Notebook</span>
-                        <span class="skill-badge">Pandas</span>
-                        <span class="skill-badge">Anaconda</span>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <h5 class="fw-bold h6 text-primary mb-3">{{ 'home.skills.web'|trans }}</h5>
-                    <div class="d-flex flex-wrap">
-                        <span class="skill-badge">HTML5</span>
-                        <span class="skill-badge">CSS3</span>
+                        <span class="skill-badge">C++</span>
                         <span class="skill-badge">JavaScript</span>
                         <span class="skill-badge">TypeScript</span>
                         <span class="skill-badge">PHP</span>
-                        <span class="skill-badge">Symfony</span>
-                        <span class="skill-badge">Apache</span>
+                        <span class="skill-badge">Python</span>
                     </div>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-6">
+                    <h5 class="fw-bold h6 text-primary mb-3">{{ 'home.skills.frontend'|trans }}</h5>
+                    <div class="d-flex flex-wrap">
+                        <span class="skill-badge">Dart</span>
+                        <span class="skill-badge">Flutter</span>
+                        <span class="skill-badge">HTML5</span>
+                        <span class="skill-badge">CSS3</span>
+                        <span class="skill-badge">Twig</span>
+                        <span class="skill-badge">Bootstrap</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h5 class="fw-bold h6 text-primary mb-3">{{ 'home.skills.backend'|trans }}</h5>
+                    <div class="d-flex flex-wrap">
+                        <span class="skill-badge">Node.js</span>
+                        <span class="skill-badge">Express</span>
+                        <span class="skill-badge">Symfony</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
                     <h5 class="fw-bold h6 text-primary mb-3">{{ 'home.skills.db'|trans }}</h5>
                     <div class="d-flex flex-wrap">
-                        <span class="skill-badge">Requêtes SQL</span>
+                        <span class="skill-badge">PostgreSQL</span>
                         <span class="skill-badge">MySQL</span>
                         <span class="skill-badge">MariaDB</span>
-                        <span class="skill-badge">PostgreSQL</span>
+                        <span class="skill-badge">MongoDB</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h5 class="fw-bold h6 text-primary mb-3">{{ 'home.skills.tools'|trans }}</h5>
+                    <div class="d-flex flex-wrap">
+                        <span class="skill-badge">Docker</span>
+                        <span class="skill-badge">Git</span>
+                        <span class="skill-badge">GitLab CI</span>
+                        <span class="skill-badge">Apache</span>
+                        <span class="skill-badge">Nginx</span>
+                        <span class="skill-badge">Linux</span>
+                        <span class="skill-badge">Jira</span>
+                        <span class="skill-badge">Scrum / Agile</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h5 class="fw-bold h6 text-primary mb-3">{{ 'home.skills.ai'|trans }}</h5>
+                    <div class="d-flex flex-wrap">
+                        <span class="skill-badge">LM Studio</span>
+                        <span class="skill-badge">Ollama</span>
                     </div>
                 </div>
             </div>
@@ -208,6 +230,9 @@
     <div class="container">
         <h3 class="fw-bold mb-3">{{ 'home.contact_cta.title'|trans }}</h3>
         <p class="mb-4">{{ 'home.contact_cta.text'|trans }}</p>
+        <a href="mailto:mehmet.ates.pro@outlook.fr" class="btn btn-primary rounded-pill px-4">
+            <i class="bi bi-envelope me-2"></i>mehmet.ates.pro@outlook.fr
+        </a>
     </div>
 </section>
 {% endblock %}

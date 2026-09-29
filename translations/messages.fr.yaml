@@ -6,15 +6,17 @@ menu:
 
 home:
   hero:
-    subtitle: "Étudiant en Master Informatique - Ingénierie Système et Logiciel"
+    badge: "À la recherche d'un stage de fin d'études"
+    subtitle: "Étudiant en Master 2 Informatique - Ingénierie Système et Logiciel"
     view_projects: "Voir mes travaux"
     view_cvs: "Consulter mes CVs"
   about:
     title: "À propos"
-    text: "Récemment validée ma première année de Master en Informatique à l'Université Marie et Louis Pasteur. Mon expertise se concentre sur l'architecture logicielle et l'optimisation des systèmes."
+    text: "Étudiant en Master 2 Informatique à l'Université Marie et Louis Pasteur, avec un parcours qui mêle développement full-stack (web et mobile), systèmes / réseaux, et expérimentation autour de l'intelligence artificielle. À l'aise aussi bien sur des projets encadrés en équipe que sur des projets personnels menés de bout en bout, de la conception au déploiement."
   languages:
     title: "Langues"
     native: "Langue maternelle"
+    fluent: "Maîtrisé"
     intermediate: "Intermédiaire"
     notions: "Notion"
     french: "Français"
@@ -23,10 +25,12 @@ home:
     german: "Allemand"
   skills:
     title: "Compétences Techniques"
-    software: "Développement Logiciel"
-    data: "Data Science & Python"
-    web: "Développement Web & Backend"
+    languages: "Langages"
+    frontend: "Frontend & Mobile"
+    backend: "Backend"
     db: "Bases de Données"
+    tools: "Outils & Génie Logiciel"
+    ai: "Intelligence Artificielle"
   featured:
     title: "À la une"
     subtitle: "Mes 3 derniers projets"
@@ -40,7 +44,7 @@ home:
     cooking: "Cuisine"
   contact_cta:
     title: "Intéressé par mon profil ?"
-    text: "N'hésitez pas à consulter mes projets ou à me contacter pour toute collaboration."
+    text: "Je recherche un stage de fin d'études de Master 2. N'hésitez pas à consulter mes projets ou à me contacter."
 
 projects:
   list:
