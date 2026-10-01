@@ -16,7 +16,6 @@ home:
   languages:
     title: "Langues"
     native: "Langue maternelle"
-    fluent: "Maîtrisé"
     intermediate: "Intermédiaire"
     notions: "Notion"
     french: "Français"
