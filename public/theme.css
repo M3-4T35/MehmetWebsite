@@ -241,6 +241,14 @@ blockquote {
 
 .passion-card-link {
     cursor: pointer;
+    position: relative;
+    border: 1px solid transparent;
+}
+
+.passion-card-link:hover,
+.passion-card-link:focus-visible {
+    border-color: var(--bs-primary);
+    box-shadow: 0 10px 20px rgba(13, 110, 253, 0.15) !important;
 }
 
 .passion-card-link:hover .passion-icon {

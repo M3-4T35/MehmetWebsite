@@ -42,10 +42,8 @@ home:
     title: "Mes Passions"
     cs: "Informatique"
     games: "Jeux Vidéo"
-    see_games: "Mon jeu préféré"
     vr: "Réalité Virtuelle"
     cooking: "Cuisine"
-    see_dishes: "Voir mes plats"
   contact_cta:
     title: "Intéressé par mon profil ?"
     text: "Je recherche un stage de fin d'études de Master 2. N'hésitez pas à consulter mes projets ou à me contacter."
