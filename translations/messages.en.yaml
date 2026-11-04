@@ -44,6 +44,7 @@ home:
     games: "Video Games"
     vr: "Virtual Reality"
     cooking: "Cooking"
+    see_dishes: "See my dishes"
   contact_cta:
     title: "Interested in my profile?"
     text: "I am looking for an end-of-studies Master's internship. Feel free to check out my projects or get in touch."
@@ -64,6 +65,14 @@ projects:
     download_pdf: "Download PDF"
     live_demo: "Live demo"
     pdf_document: "PDF Document"
+
+cooking:
+  title: "My Cooking"
+  text: "A few dishes I have cooked, in photos and videos. Cooking is another way for me to create, experiment and share."
+  empty: "No dishes published yet."
+  back: "Back to home"
+  enlarge: "Enlarge"
+  video: "Video"
 
 cvs:
   list:

@@ -78,7 +78,7 @@ php bin/console cache:warmup --env=prod                        # vide aussi l'an
 sudo systemctl reload apache2
 ```
 
-> 💡 Les fichiers uploadés (médias/CV) vivent dans `public/uploads/` : ignorés par git, ils survivent aux déploiements.
+> 💡 Les fichiers uploadés (médias/CV/cuisine) vivent dans `public/uploads/` : ignorés par git, ils survivent aux déploiements.
 
 ---
 

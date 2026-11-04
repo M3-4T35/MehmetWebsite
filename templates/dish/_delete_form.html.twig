@@ -1,0 +1,6 @@
+<form method="post" action="{{ path('app_dish_delete', {'id': dish.id}) }}" onsubmit="return confirm('Supprimer ce plat et sa photo/vidéo ?');" style="display:inline-block">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ dish.id) }}">
+    <button class="btn btn-outline-danger{{ small|default(false) ? ' btn-sm' }}" title="Supprimer">
+        <i class="bi bi-trash"></i>{% if not small|default(false) %} Supprimer{% endif %}
+    </button>
+</form>

@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un plat{% endblock %}
+
+{% block body %}
+    <div class="mb-4">
+        <h1><i class="bi bi-plus-circle me-2"></i>Ajouter un plat</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ path('app_admin') }}">Admin</a></li>
+                <li class="breadcrumb-item"><a href="{{ path('app_dish_index') }}">Cuisine</a></li>
+                <li class="breadcrumb-item active">Nouveau</li>
+            </ol>
+        </nav>
+    </div>
+
+    {{ include('dish/_form.html.twig') }}
+{% endblock %}

@@ -2,6 +2,7 @@
 parameters:
     media_directory: '%kernel.project_dir%/public/uploads/media'
     cv_directory: '%kernel.project_dir%/public/uploads/cv'
+    dish_directory: '%kernel.project_dir%/public/uploads/cuisine'
 
 services:
     # default configuration for services in *this* file
@@ -23,6 +24,10 @@ services:
     app.cv_file_uploader:
         class: App\Service\FileUploader
         arguments: ['%cv_directory%']
+
+    app.dish_file_uploader:
+        class: App\Service\FileUploader
+        arguments: ['%dish_directory%']
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

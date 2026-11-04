@@ -23,5 +23,7 @@ class AdminSecurityTest extends WebTestCase
         yield ['/fr/project/new'];
         yield ['/fr/media'];
         yield ['/fr/cv'];
+        yield ['/fr/admin/cuisine'];
+        yield ['/fr/admin/cuisine/new'];
     }
 }

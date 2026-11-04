@@ -44,6 +44,7 @@ home:
     games: "Jeux Vidéo"
     vr: "Réalité Virtuelle"
     cooking: "Cuisine"
+    see_dishes: "Voir mes plats"
   contact_cta:
     title: "Intéressé par mon profil ?"
     text: "Je recherche un stage de fin d'études de Master 2. N'hésitez pas à consulter mes projets ou à me contacter."
@@ -64,6 +65,14 @@ projects:
     download_pdf: "Télécharger le PDF"
     live_demo: "Voir en ligne"
     pdf_document: "Document PDF"
+
+cooking:
+  title: "Ma cuisine"
+  text: "Quelques plats que j'ai cuisinés, en photos et en vidéos. La cuisine est pour moi une autre façon de créer, d'expérimenter et de partager."
+  empty: "Aucun plat publié pour le moment."
+  back: "Retour à l'accueil"
+  enlarge: "Agrandir"
+  video: "Vidéo"
 
 cvs:
   list:

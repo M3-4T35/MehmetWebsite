@@ -63,6 +63,14 @@ final class HomeController extends AbstractController
         ]);
     }
 
+    #[Route('/cuisine', name: 'app_public_cooking')]
+    public function cooking(\App\Repository\DishRepository $dishRepository): Response
+    {
+        return $this->render('public/cooking.html.twig', [
+            'dishes' => $dishRepository->findForGallery(),
+        ]);
+    }
+
     #[Route('/mentions-legales', name: 'app_legal')]
     public function legal(): Response
     {

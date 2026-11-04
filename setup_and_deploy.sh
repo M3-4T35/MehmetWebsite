@@ -95,7 +95,7 @@ echo "You can now set your admin email and password for the website login."
 sudo -u "$OWNER" php bin/console app:create-user --admin
 
 echo "[7/7] Configuring Apache, Permissions, and Cache..."
-mkdir -p public/uploads/media public/uploads/cv var/cache var/log
+mkdir -p public/uploads/media public/uploads/cv public/uploads/cuisine var/cache var/log
 
 # Add owner to www-data group if not already
 usermod -aG www-data "$OWNER" || true

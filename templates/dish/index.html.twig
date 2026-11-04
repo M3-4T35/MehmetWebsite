@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion de la cuisine{% endblock %}
+
+{% block body %}
+    <div class="d-flex flex-wrap gap-2 justify-content-between align-items-center mb-4">
+        <div>
+            <h1><i class="bi bi-egg-fried me-2"></i>Mes plats</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="{{ path('app_admin') }}">Admin</a></li>
+                    <li class="breadcrumb-item active">Cuisine</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="d-flex gap-2">
+            <a href="{{ path('app_public_cooking') }}" class="btn btn-outline-secondary" target="_blank" rel="noopener">
+                <i class="bi bi-box-arrow-up-right me-1"></i> Voir la page publique
+            </a>
+            <a href="{{ path('app_dish_new') }}" class="btn btn-primary">
+                <i class="bi bi-plus-circle me-1"></i> Ajouter un plat
+            </a>
+        </div>
+    </div>
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="bi bi-check-circle me-2"></i>{{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
+        </div>
+    {% endfor %}
+
+    <div class="card shadow-sm">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th class="ps-4" style="width: 100px;">Aperçu</th>
+                        <th>Plat</th>
+                        <th>Ordre</th>
+                        <th>Ajouté le</th>
+                        <th class="text-end pe-4">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for dish in dishes %}
+                    <tr>
+                        <td class="ps-4">
+                            {% if dish.video %}
+                                <div class="bg-body-tertiary rounded d-flex align-items-center justify-content-center shadow-sm" style="width: 60px; height: 60px;" title="Vidéo">
+                                    <i class="bi bi-camera-video fs-3 text-secondary"></i>
+                                </div>
+                            {% else %}
+                                <img src="{{ asset('uploads/cuisine/' ~ dish.filename) }}" alt="{{ dish.title }}" class="rounded shadow-sm" style="width: 60px; height: 60px; object-fit: cover;" loading="lazy">
+                            {% endif %}
+                        </td>
+                        <td>
+                            <div class="fw-bold">{{ dish.title }}</div>
+                            <small class="text-muted">{{ dish.titleEn ?: 'Pas de nom anglais' }}</small>
+                        </td>
+                        <td>{{ dish.position }}</td>
+                        <td>
+                            <small class="text-muted"><i class="bi bi-calendar3 me-1"></i>{{ dish.createdAt ? dish.createdAt|date('d/m/Y') : '—' }}</small>
+                        </td>
+                        <td class="text-end pe-4">
+                            <div class="d-inline-flex gap-1">
+                                <a href="{{ path('app_dish_edit', {'id': dish.id}) }}" class="btn btn-sm btn-outline-primary" title="Modifier">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                                {{ include('dish/_delete_form.html.twig', {'small': true}) }}
+                            </div>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5" class="text-center py-5">
+                            <i class="bi bi-egg-fried text-muted display-4 d-block mb-3"></i>
+                            <span class="text-muted">Aucun plat pour le moment.</span>
+                            <div class="mt-3"><a href="{{ path('app_dish_new') }}" class="btn btn-sm btn-primary">Ajouter mon premier plat</a></div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
