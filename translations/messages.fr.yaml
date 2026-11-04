@@ -42,6 +42,7 @@ home:
     title: "Mes Passions"
     cs: "Informatique"
     games: "Jeux Vidéo"
+    see_games: "Mon jeu préféré"
     vr: "Réalité Virtuelle"
     cooking: "Cuisine"
     see_dishes: "Voir mes plats"
@@ -65,6 +66,13 @@ projects:
     download_pdf: "Télécharger le PDF"
     live_demo: "Voir en ligne"
     pdf_document: "Document PDF"
+
+games:
+  title: "Jeux Vidéo"
+  text: "Les jeux vidéo font partie de mes passions depuis toujours. S'il ne fallait en garder qu'un…"
+  cta: "Cliquez ici pour découvrir le meilleur jeu vidéo du monde"
+  note: "Lien externe vers la page Steam du jeu (nouvel onglet)."
+  back: "Retour à l'accueil"
 
 cooking:
   title: "Ma cuisine"

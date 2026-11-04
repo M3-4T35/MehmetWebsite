@@ -42,6 +42,7 @@ home:
     title: "My Passions"
     cs: "Computer Science"
     games: "Video Games"
+    see_games: "My favourite game"
     vr: "Virtual Reality"
     cooking: "Cooking"
     see_dishes: "See my dishes"
@@ -65,6 +66,13 @@ projects:
     download_pdf: "Download PDF"
     live_demo: "Live demo"
     pdf_document: "PDF Document"
+
+games:
+  title: "Video Games"
+  text: "Video games have always been one of my passions. If I had to keep only one…"
+  cta: "Click here to discover the best video game in the world"
+  note: "External link to the game's Steam page (opens in a new tab)."
+  back: "Back to home"
 
 cooking:
   title: "My Cooking"

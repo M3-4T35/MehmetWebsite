@@ -71,6 +71,12 @@ final class HomeController extends AbstractController
         ]);
     }
 
+    #[Route('/jeux-video', name: 'app_public_games')]
+    public function games(): Response
+    {
+        return $this->render('public/games.html.twig');
+    }
+
     #[Route('/mentions-legales', name: 'app_legal')]
     public function legal(): Response
     {
