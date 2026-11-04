@@ -4,6 +4,22 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{% block title %}MehmetAtes.fr | Portfolio{% endblock %}</title>
+        <meta name="description" content="{% block meta_description %}{{ 'meta.description'|trans }}{% endblock %}">
+        <meta name="author" content="Mehmet Ates">
+        <meta name="theme-color" content="#0d6efd">
+        {% set _route = app.request.attributes.get('_route') %}
+        {% set _route_params = app.request.attributes.get('_route_params')|default({}) %}
+        {% if _route %}
+            <link rel="canonical" href="{{ url(_route, _route_params) }}">
+            {% for _alt_locale in ['fr', 'en'] %}
+                <link rel="alternate" hreflang="{{ _alt_locale }}" href="{{ url(_route, _route_params|merge({'_locale': _alt_locale})) }}">
+            {% endfor %}
+        {% endif %}
+        <meta property="og:type" content="website">
+        <meta property="og:site_name" content="MehmetAtes.fr">
+        <meta property="og:title" content="{{ block('title')|striptags|trim }}">
+        <meta property="og:description" content="{{ block('meta_description')|striptags|trim }}">
+        <meta property="og:locale" content="{{ app.request.locale == 'en' ? 'en_US' : 'fr_FR' }}">
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>🛠️</text></svg>">
         
         <!-- Bootstrap CSS -->
@@ -17,7 +33,7 @@
              * Immediate theme initialization to prevent flash of unstyled content
              */
             (() => {
-                const getStoredTheme = () => localStorage.getItem('theme');
+                const getStoredTheme = () => { try { return localStorage.getItem('theme'); } catch (e) { return null; } };
                 const getPreferredTheme = () => {
                     const storedTheme = getStoredTheme();
                     if (storedTheme) return storedTheme;
@@ -34,6 +50,7 @@
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
+        <a class="visually-hidden-focusable position-absolute top-0 start-0 m-2 btn btn-primary" style="z-index: 2000;" href="#main-content">{{ 'navbar.skip_to_content'|trans }}</a>
         {% set route = app.request.attributes.get('_route') %}
         <nav class="navbar navbar-expand-lg mb-4 py-3">
             <div class="container">
@@ -41,7 +58,7 @@
                     <i class="bi bi-code-square me-2 text-primary"></i>
                     MehmetAtes.fr
                 </a>
-                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="{{ 'navbar.toggle_menu'|trans }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
@@ -81,14 +98,16 @@
             </div>
         </nav>
 
-        <main class="container">
+        {% block hero %}{% endblock %}
+
+        <main id="main-content" class="container" tabindex="-1">
             {% block body %}{% endblock %}
         </main>
 
         <footer class="text-center mt-5 mb-3 text-muted">
             <hr>
             <small>
-                {{ "now"|date("Y") }} Mehmet Ates — <a href="{{ path('app_legal') }}">{{ 'footer.legal'|trans }}</a>
+                &copy; {{ "now"|date("Y") }} Mehmet Ates — <a href="{{ path('app_legal') }}">{{ 'footer.legal'|trans }}</a>
             </small>
         </footer>
 
@@ -99,8 +118,8 @@
             (() => {
               'use strict'
 
-              const getStoredTheme = () => localStorage.getItem('theme')
-              const setStoredTheme = theme => localStorage.setItem('theme', theme)
+              const getStoredTheme = () => { try { return localStorage.getItem('theme') } catch (e) { return null } }
+              const setStoredTheme = theme => { try { localStorage.setItem('theme', theme) } catch (e) { /* storage unavailable */ } }
 
               const getPreferredTheme = () => {
                 const storedTheme = getStoredTheme()
@@ -117,6 +136,8 @@
                 const icon = document.getElementById('theme-icon')
                 if (!icon) return
                 icon.className = theme === 'dark' ? 'bi bi-sun-fill' : 'bi bi-moon-stars-fill'
+                const button = document.getElementById('theme-switch')
+                if (button) button.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false')
               }
 
               window.addEventListener('DOMContentLoaded', () => {
@@ -128,7 +149,7 @@
                 updateIcon(getPreferredTheme())
                 
                 document.getElementById('theme-switch').addEventListener('click', () => {
-                  const currentTheme = getPreferredTheme()
+                  const currentTheme = document.documentElement.getAttribute('data-bs-theme') || getPreferredTheme()
                   const nextTheme = currentTheme === 'dark' ? 'light' : 'dark'
                   setStoredTheme(nextTheme)
                   setTheme(nextTheme)

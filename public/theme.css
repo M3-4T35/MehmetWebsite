@@ -77,8 +77,6 @@ footer {
     background-color: var(--nav-bg) !important;
 }
 
-/* Rest of theme.css */
-
 [data-bs-theme="dark"] .card {
     background-color: #23272b;
     border-color: #444c56;
@@ -294,4 +292,50 @@ blockquote {
     color: var(--bs-primary);
 }
 
-/* Rest of theme.css */
+/* Markdown content: keep long code/tables from breaking the layout */
+.markdown-body pre {
+    background-color: var(--bs-tertiary-bg);
+    padding: 1rem;
+    border-radius: 8px;
+    overflow-x: auto;
+}
+
+.markdown-body table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+.markdown-body img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Keyboard focus visibility */
+a:focus-visible,
+button:focus-visible,
+.media-gallery img:focus-visible {
+    outline: 3px solid var(--bs-primary);
+    outline-offset: 3px;
+}
+
+#main-content:focus {
+    outline: none;
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    .project-card:hover,
+    .passion-card:hover,
+    .skill-badge:hover,
+    #theme-switch:hover,
+    .project-card:hover .card-img-container img {
+        transform: none;
+    }
+}

@@ -20,7 +20,7 @@
                     {% if media and media.filename %}
                         {% set ext = media.filename|split('.')|last|lower %}
                         {% if ext in ['jpg','jpeg','png','gif','webp'] %}
-                            <img src="{{ asset('uploads/media/' ~ media.filename) }}" alt="{{ project.title }}">
+                            <img src="{{ asset('uploads/media/' ~ media.filename) }}" alt="{{ media.alt ?: project.title }}" loading="lazy">
                         {% elseif ext == 'pdf' %}
                             <i class="bi bi-file-earmark-pdf display-1 text-danger opacity-50"></i>
                         {% else %}
@@ -49,9 +49,12 @@
                         <a href="{{ path('app_public_project_detail', {'id': project.id}) }}" class="btn btn-primary px-4">
                             {{ 'projects.list.more'|trans }}
                         </a>
-                        <div class="small">
+                        <div class="d-flex gap-3 fs-5">
                             {% if project.githubUrl %}
-                                <span class="text-muted" title="GitHub"><i class="bi bi-github"></i></span>
+                                <a href="{{ project.githubUrl }}" class="text-body-secondary" target="_blank" rel="noopener noreferrer" title="GitHub" aria-label="GitHub"><i class="bi bi-github" aria-hidden="true"></i></a>
+                            {% endif %}
+                            {% if project.productionUrl %}
+                                <a href="{{ project.productionUrl }}" class="text-body-secondary" target="_blank" rel="noopener noreferrer" title="{{ 'projects.detail.live_demo'|trans }}" aria-label="{{ 'projects.detail.live_demo'|trans }}"><i class="bi bi-globe" aria-hidden="true"></i></a>
                             {% endif %}
                         </div>
                     </div>

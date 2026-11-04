@@ -18,6 +18,7 @@
             border-radius: 0 0 40px 40px;
             margin-top: -1.5rem;
             margin-bottom: 3rem;
+            overflow-wrap: anywhere;
         }
         .markdown-content {
             font-size: 1.1rem;
@@ -36,22 +37,39 @@
     </style>
 {% endblock %}
 
+{% block meta_description %}{{ (app.request.locale == 'en' and project.descriptionCourteEn ? project.descriptionCourteEn : project.descriptionCourte)|default('meta.description'|trans) }}{% endblock %}
+
 {% block javascripts %}
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked@15.0.12/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.6/dist/purify.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const markdownContent = {% if app.request.locale == 'en' and project.descriptionEn %}{{ project.descriptionEn|json_encode|raw }}{% else %}{{ project.description|json_encode|raw }}{% endif %};
             const preview = document.getElementById('markdown-display');
-            if (preview && markdownContent) {
-                preview.innerHTML = marked.parse(markdownContent);
+            if (!preview || !markdownContent) {
+                return;
             }
+            // Fall back to plain text if the CDN scripts could not be loaded
+            if (typeof marked === 'undefined' || typeof DOMPurify === 'undefined') {
+                preview.textContent = markdownContent;
+                preview.style.whiteSpace = 'pre-line';
+                return;
+            }
+            preview.innerHTML = DOMPurify.sanitize(marked.parse(markdownContent));
+            // Open external links from the description in a new tab, safely
+            preview.querySelectorAll('a[href^="http"]').forEach(function (link) {
+                link.setAttribute('target', '_blank');
+                link.setAttribute('rel', 'noopener noreferrer');
+            });
+            preview.querySelectorAll('img').forEach(function (img) {
+                img.classList.add('img-fluid', 'rounded');
+                img.setAttribute('loading', 'lazy');
+            });
         });
     </script>
 {% endblock %}
 
-{% block body %}
-</div> {# Close container temporarily for full width header #}
-
+{% block hero %}
 <header class="project-header text-center">
     <div class="container">
         <h1 class="display-3 fw-bold mb-3">
@@ -76,23 +94,24 @@
             {% endif %}
             {% if project.productionUrl %}
                 <a href="{{ project.productionUrl }}" target="_blank" rel="noopener noreferrer" class="btn btn-primary rounded-pill px-4">
-                    <i class="bi bi-globe me-2"></i>Live Demo
+                    <i class="bi bi-globe me-2"></i>{{ 'projects.detail.live_demo'|trans }}
                 </a>
             {% endif %}
         </div>
     </div>
 </header>
+{% endblock %}
 
-<div class="container"> {# Reopen container #}
+{% block body %}
 
 <div class="row g-5">
     <div class="col-lg-8">
         <div class="mb-5">
             <h3 class="fw-bold mb-4 border-bottom pb-2">{{ 'projects.detail.description'|trans }}</h3>
-            <div id="markdown-display" class="markdown-content">
-                {% if app.request.locale == 'en' and not project.descriptionEn %}
-                    <p class="text-muted italic">{{ 'projects.detail.no_en_desc'|trans }}</p>
-                {% endif %}
+            {% if app.request.locale == 'en' and not project.descriptionEn %}
+                <p class="text-muted fst-italic">{{ 'projects.detail.no_en_desc'|trans }}</p>
+            {% endif %}
+            <div id="markdown-display" class="markdown-content markdown-body">
                 {# The markdown content will be injected here #}
             </div>
         </div>
@@ -106,9 +125,9 @@
                     <div class="col-6 col-lg-12">
                         {% set ext = media.filename|split('.')|last|lower %}
                         {% if ext in ['jpg','jpeg','png','gif','webp'] %}
-                            <img src="{{ asset('uploads/media/' ~ media.filename) }}" alt="{{ media.alt }}" class="img-fluid rounded shadow-sm w-100" data-bs-toggle="modal" data-bs-target="#mediaModal{{ media.id }}">
+                            <img src="{{ asset('uploads/media/' ~ media.filename) }}" alt="{{ media.alt ?: project.title }}" class="img-fluid rounded shadow-sm w-100" loading="lazy" role="button" tabindex="0" data-bs-toggle="modal" data-bs-target="#mediaModal{{ media.id }}">
                         {% elseif ext in ['mp4','webm','ogg'] %}
-                            <video class="w-100 rounded shadow-sm" controls>
+                            <video class="w-100 rounded shadow-sm" controls preload="metadata">
                                 <source src="{{ asset('uploads/media/' ~ media.filename) }}" type="video/{{ ext }}">
                             </video>
                         {% elseif ext == 'pdf' %}
@@ -150,14 +169,14 @@
 {% for media in medias %}
     {% set ext = media.filename|split('.')|last|lower %}
     {% if ext in ['jpg','jpeg','png','gif','webp'] %}
-        <div class="modal fade" id="mediaModal{{ media.id }}" tabindex="-1" aria-hidden="true">
+        <div class="modal fade" id="mediaModal{{ media.id }}" tabindex="-1" aria-label="{{ media.alt ?: project.title }}" aria-hidden="true">
             <div class="modal-dialog modal-xl modal-dialog-centered">
                 <div class="modal-content bg-transparent border-0">
                     <div class="modal-header border-0 p-0 justify-content-end">
-                        <button type="button" class="btn-close btn-close-white p-3" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close btn-close-white p-3" data-bs-dismiss="modal" aria-label="{{ 'cvs.list.modal_close'|trans }}"></button>
                     </div>
                     <div class="modal-body p-0 text-center" data-bs-dismiss="modal" style="cursor: zoom-out;">
-                        <img src="{{ asset('uploads/media/' ~ media.filename) }}" class="img-fluid rounded shadow max-vh-85">
+                        <img src="{{ asset('uploads/media/' ~ media.filename) }}" alt="{{ media.alt ?: project.title }}" class="img-fluid rounded shadow max-vh-85" loading="lazy">
                     </div>
                 </div>
             </div>
@@ -170,7 +189,7 @@
                         <h5 class="modal-title fw-bold" id="pdfModalLabel{{ media.id }}">
                             <i class="bi bi-file-earmark-pdf me-2 text-danger"></i>{{ media.alt ?: ('projects.detail.pdf_document'|trans) }}
                         </h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ 'cvs.list.modal_close'|trans }}"></button>
                     </div>
                     <div class="modal-body p-0" style="height: 80vh;">
                         <object data="{{ asset('uploads/media/' ~ media.filename) }}" type="application/pdf" width="100%" height="100%">

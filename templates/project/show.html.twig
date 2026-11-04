@@ -96,17 +96,18 @@
 {% endblock %}
 
 {% block javascripts %}
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked@15.0.12/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.6/dist/purify.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const frContent = {{ project.description|json_encode|raw }};
             const enContent = {{ project.descriptionEn|json_encode|raw }};
             
             if (frContent) {
-                document.getElementById('markdown-display-fr').innerHTML = marked.parse(frContent);
+                document.getElementById('markdown-display-fr').innerHTML = DOMPurify.sanitize(marked.parse(frContent));
             }
             if (enContent) {
-                document.getElementById('markdown-display-en').innerHTML = marked.parse(enContent);
+                document.getElementById('markdown-display-en').innerHTML = DOMPurify.sanitize(marked.parse(enContent));
             }
         });
     </script>

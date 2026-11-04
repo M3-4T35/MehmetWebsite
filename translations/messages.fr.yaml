@@ -1,3 +1,6 @@
+meta:
+  description: "Portfolio de Mehmet Ates, étudiant en Master 2 Informatique (Ingénierie Système et Logiciel) : projets, compétences et CV."
+
 menu:
   home: "Accueil"
   projects: "Mes travaux"
@@ -59,6 +62,7 @@ projects:
     no_en_desc: "Aucune description en anglais."
     view_pdf: "Consulter en ligne"
     download_pdf: "Télécharger le PDF"
+    live_demo: "Voir en ligne"
     pdf_document: "Document PDF"
 
 cvs:
@@ -77,6 +81,8 @@ cvs:
     not_available: "Fichier non disponible"
 
 navbar:
+  skip_to_content: "Aller au contenu"
+  toggle_menu: "Afficher le menu"
   switch_theme: "Basculer le mode"
   switch_lang: "Changer la langue"
   logout: "Déconnexion"

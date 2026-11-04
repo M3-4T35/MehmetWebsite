@@ -25,15 +25,15 @@
                     
                     <p class="text-muted small mb-4">
                         <i class="bi bi-calendar-check me-1"></i>
-                        {{ 'cvs.list.updated_at'|trans }} {{ cv.uploadedAt ? cv.uploadedAt|date('d/m/Y') : 'N/A' }}
+                        {{ 'cvs.list.updated_at'|trans }} {{ cv.uploadedAt ? cv.uploadedAt|date(app.request.locale == 'en' ? 'm/d/Y' : 'd/m/Y') : '—' }}
                     </p>
 
                     <div class="d-grid gap-2">
                         {% if cv.filename %}
-                            <a href="{{ asset('uploads/cv/' ~ cv.filename) }}" class="btn btn-primary rounded-pill px-4" target="_blank" rel="noopener noreferrer">
+                            <a href="{{ asset('uploads/cv/' ~ cv.filename) }}" class="btn btn-primary rounded-pill px-4" target="_blank" rel="noopener noreferrer" download>
                                 <i class="bi bi-download me-2"></i>{{ 'cvs.list.download'|trans }}
                             </a>
-                            <button class="btn btn-outline-primary rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#cvModal{{ cv.id }}">
+                            <button type="button" class="btn btn-outline-primary rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#cvModal{{ cv.id }}">
                                 <i class="bi bi-eye me-2"></i>{{ 'cvs.list.view_online'|trans }}
                             </button>
                         {% else %}
@@ -55,7 +55,7 @@
                             <h5 class="modal-title fw-bold" id="cvModalLabel{{ cv.id }}">
                                 <i class="bi bi-file-earmark-pdf me-2 text-danger"></i>{{ 'cvs.list.modal_title'|trans }}
                             </h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ 'cvs.list.modal_close'|trans }}"></button>
                         </div>
                         <div class="modal-body p-0" style="height: 80vh;">
                             <object data="{{ asset('uploads/cv/' ~ cv.filename) }}" type="application/pdf" width="100%" height="100%">

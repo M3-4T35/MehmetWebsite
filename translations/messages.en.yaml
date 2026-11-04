@@ -1,8 +1,11 @@
+meta:
+  description: "Portfolio of Mehmet Ates, Master's student in Computer Science (System and Software Engineering): projects, skills and CVs."
+
 menu:
   home: "Home"
   projects: "My Work"
   cvs: "My CVs"
-  legal: "Legal Mentions"
+  legal: "Legal Notice"
 
 home:
   hero:
@@ -59,6 +62,7 @@ projects:
     no_en_desc: "No English description available."
     view_pdf: "View Online"
     download_pdf: "Download PDF"
+    live_demo: "Live demo"
     pdf_document: "PDF Document"
 
 cvs:
@@ -77,15 +81,17 @@ cvs:
     not_available: "File not available"
 
 navbar:
+  skip_to_content: "Skip to content"
+  toggle_menu: "Toggle navigation"
   switch_theme: "Toggle theme"
   switch_lang: "Switch language"
   logout: "Logout"
 
 footer:
-  legal: "Legal Mentions"
+  legal: "Legal Notice"
 
 legal:
-  title: "Legal Mentions"
+  title: "Legal Notice"
   intro: "This site is personally published by an individual."
   host:
     title: "Host:"
