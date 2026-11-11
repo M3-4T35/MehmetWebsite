@@ -1,0 +1,358 @@
+/*
+ * Design "Lettre" — the site set like a carefully typed letter.
+ * One reading serif, left-aligned text, black ink on white, a single bordeaux accent.
+ * No boxes: content is separated by space and thin rules.
+ */
+
+@font-face {
+    font-family: "Newsreader";
+    src: url("../fonts/newsreader-latin-wght-normal.woff2") format("woff2");
+    font-weight: 200 800;
+    font-style: normal;
+    font-display: swap;
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+    font-family: "Newsreader";
+    src: url("../fonts/newsreader-latin-ext-wght-normal.woff2") format("woff2");
+    font-weight: 200 800;
+    font-style: normal;
+    font-display: swap;
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+    font-family: "Newsreader";
+    src: url("../fonts/newsreader-latin-wght-italic.woff2") format("woff2");
+    font-weight: 200 800;
+    font-style: italic;
+    font-display: swap;
+}
+
+/* ---------- Tokens ---------- */
+html[data-design="lettre"] {
+    --d-bg-rgb: 255, 255, 255;
+    --d-surface-rgb: 255, 255, 255;
+    --d-tint-rgb: 246, 242, 242;
+    --d-ink-rgb: 0, 0, 0;
+    --d-muted: #595456;
+    --d-accent-rgb: 122, 30, 44;
+    --d-fill-rgb: 122, 30, 44;
+    --d-fill-hover: #000000;
+    --d-on-fill: #ffffff;
+    --d-rule: #d9d4d5;
+    --d-rule-strong: #000000;
+    --d-radius: 2px;
+    --d-radius-lg: 0px;
+    --d-radius-pill: 2px;
+    --d-font-body: "Newsreader", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+    --d-font-display: "Newsreader", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+}
+
+html[data-design="lettre"][data-bs-theme="dark"] {
+    --d-bg-rgb: 22, 23, 27;
+    --d-surface-rgb: 22, 23, 27;
+    --d-tint-rgb: 32, 33, 39;
+    --d-ink-rgb: 239, 237, 232;
+    --d-muted: #aaa6a0;
+    --d-accent-rgb: 231, 154, 166;
+    --d-fill-rgb: 231, 154, 166;
+    --d-fill-hover: #efede8;
+    --d-on-fill: #16171b;
+    --d-rule: #383a42;
+    --d-rule-strong: #efede8;
+}
+
+html[data-design="lettre"] body {
+    font-size: 1.1875rem;
+    line-height: 1.65;
+}
+
+html[data-design="lettre"] .container {
+    max-width: 62rem;
+}
+
+html[data-design="lettre"] h1,
+html[data-design="lettre"] h2,
+html[data-design="lettre"] h3,
+html[data-design="lettre"] h4,
+html[data-design="lettre"] h5,
+html[data-design="lettre"] h6 {
+    font-weight: 500 !important;
+    letter-spacing: -0.01em;
+}
+
+html[data-design="lettre"] .small,
+html[data-design="lettre"] small {
+    font-size: 0.9em;
+}
+
+/* ---------- Navigation ---------- */
+html[data-design="lettre"] .navbar {
+    border-bottom: 1px solid var(--d-rule);
+}
+
+html[data-design="lettre"] .navbar-brand {
+    font-style: italic;
+    font-weight: 500;
+    letter-spacing: 0;
+}
+
+html[data-design="lettre"] .navbar-brand .bi {
+    display: none;
+}
+
+html[data-design="lettre"] .nav-link {
+    font-weight: 400;
+}
+
+html[data-design="lettre"] .nav-link::after {
+    height: 1px;
+    background-color: rgb(var(--d-ink-rgb));
+}
+
+/* ---------- Buttons, badges ---------- */
+html[data-design="lettre"] .btn {
+    --bs-btn-font-weight: 500;
+    --bs-btn-font-size: 1.0625rem;
+}
+
+html[data-design="lettre"] .btn-lg {
+    --bs-btn-font-size: 1.125rem;
+    --bs-btn-padding-y: 0.55rem;
+}
+
+html[data-design="lettre"] .home-hero .badge.text-bg-primary {
+    padding: 0 !important;
+    background-color: transparent !important;
+    color: rgb(var(--d-accent-rgb)) !important;
+    font-size: 1.125rem;
+    font-style: italic;
+    font-weight: 500;
+}
+
+/* ---------- Home hero: a letterhead ---------- */
+html[data-design="lettre"] .home-hero {
+    display: block;
+    min-height: 0;
+    padding: clamp(1rem, 4vw, 3rem) 0 clamp(2rem, 5vw, 3.5rem) !important;
+    margin-bottom: 3rem;
+    text-align: left;
+    border-bottom: 1px solid var(--d-rule-strong);
+}
+
+html[data-design="lettre"] .home-hero > .container {
+    padding-inline: 0;
+}
+
+html[data-design="lettre"] .home-hero .display-1 {
+    font-size: clamp(3rem, 9vw, 6.25rem);
+    font-weight: 400 !important;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: rgb(var(--d-ink-rgb)) !important;
+}
+
+html[data-design="lettre"] .home-hero .display-6 {
+    max-width: 34ch;
+    font-size: clamp(1.25rem, 2.6vw, 1.75rem);
+    font-style: italic;
+    font-weight: 400 !important;
+    color: var(--d-muted);
+}
+
+html[data-design="lettre"] .home-hero .justify-content-center {
+    justify-content: flex-start !important;
+}
+
+html[data-design="lettre"] .home-hero .d-flex.px-3 {
+    padding-inline: 0 !important;
+}
+
+html[data-design="lettre"] .social-link {
+    color: var(--d-muted);
+}
+
+html[data-design="lettre"] .social-link:hover {
+    color: rgb(var(--d-accent-rgb));
+}
+
+/* ---------- Section headings ---------- */
+html[data-design="lettre"] h3.border-bottom {
+    border-bottom: 1px solid var(--d-rule-strong) !important;
+    font-size: 1.5rem;
+}
+
+html[data-design="lettre"] h5.text-primary {
+    font-size: 1.0625rem;
+    font-style: italic;
+    margin-bottom: 0.25rem !important;
+}
+
+/* ---------- Skills as running text, languages as a thin line ---------- */
+html[data-design="lettre"] .skill-badge,
+html[data-design="lettre"] .skill-badge:hover {
+    margin: 0 0.4em 0 0;
+    padding: 0;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    color: inherit;
+    font-size: 1em;
+}
+
+html[data-design="lettre"] .skill-badge:not(:last-child)::after {
+    content: ",";
+}
+
+html[data-design="lettre"] .skill-badge:last-child::after {
+    content: ".";
+}
+
+html[data-design="lettre"] .lang-level {
+    height: 2px;
+    border-radius: 0;
+    background-color: var(--d-rule);
+}
+
+/* ---------- Cards become entries under a rule ---------- */
+html[data-design="lettre"] .card,
+html[data-design="lettre"] .project-card {
+    border: 0;
+    border-top: 1px solid var(--d-rule-strong);
+}
+
+html[data-design="lettre"] .project-card .card-body {
+    padding-inline: 0;
+}
+
+html[data-design="lettre"] .project-card:hover .card-title {
+    color: rgb(var(--d-accent-rgb));
+}
+
+html[data-design="lettre"] .card-title {
+    font-size: 1.3125rem;
+}
+
+/* Admin and form cards keep an outline so their content stays readable */
+html[data-design="lettre"] .card:not(.project-card) {
+    border: 1px solid var(--d-rule);
+}
+
+/* ---------- Featured block, contact, passions ---------- */
+html[data-design="lettre"] section.bg-body-tertiary {
+    padding-block: 2rem !important;
+    background-color: transparent !important;
+    border-block: 1px solid var(--d-rule);
+}
+
+html[data-design="lettre"] section.bg-body-tertiary > .container,
+html[data-design="lettre"] main > .container {
+    padding-inline: 0;
+}
+
+html[data-design="lettre"] section.bg-primary-subtle {
+    padding: 2.5rem clamp(1.25rem, 4vw, 3rem) !important;
+    text-align: left !important;
+}
+
+html[data-design="lettre"] section.bg-primary-subtle > .container {
+    padding-inline: 0;
+}
+
+html[data-design="lettre"] .passion-card {
+    padding: 1.25rem 0 !important;
+    text-align: left !important;
+    background: none;
+    border: 0;
+    border-top: 1px solid var(--d-rule-strong);
+    border-radius: 0;
+}
+
+html[data-design="lettre"] .passion-icon {
+    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
+}
+
+html[data-design="lettre"] .passion-card h6 {
+    font-size: 1.1875rem;
+    margin-bottom: 0;
+}
+
+html[data-design="lettre"] .passion-card-link h6 {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+}
+
+html[data-design="lettre"] .passion-card-link:hover,
+html[data-design="lettre"] .passion-card-link:focus-visible {
+    background: none;
+    border-color: transparent;
+    border-top-color: rgb(var(--d-accent-rgb));
+    color: rgb(var(--d-accent-rgb)) !important;
+}
+
+html[data-design="lettre"] h3.text-center {
+    text-align: left !important;
+}
+
+/* ---------- Page headers ---------- */
+html[data-design="lettre"] .hero-section {
+    padding: 1rem 0 1.75rem;
+    text-align: left !important;
+    border-bottom: 1px solid var(--d-rule-strong);
+}
+
+html[data-design="lettre"] .hero-section h1 {
+    font-weight: 400 !important;
+    letter-spacing: -0.02em;
+}
+
+html[data-design="lettre"] .hero-section .lead {
+    font-style: italic;
+}
+
+html[data-design="lettre"] .hero-section .mx-auto {
+    margin-left: 0 !important;
+}
+
+html[data-design="lettre"] .project-header {
+    padding: 3rem 0;
+    background: rgb(var(--d-tint-rgb));
+    color: rgb(var(--d-ink-rgb));
+    text-align: left !important;
+    border-bottom: 1px solid var(--d-rule);
+}
+
+html[data-design="lettre"] .project-header h1 {
+    font-weight: 400 !important;
+}
+
+html[data-design="lettre"] .project-header .lead {
+    margin-left: 0 !important;
+    font-style: italic;
+}
+
+html[data-design="lettre"] .project-header .justify-content-center {
+    justify-content: flex-start !important;
+}
+
+html[data-design="lettre"] .project-header .btn-light {
+    --bs-btn-color: rgb(var(--d-ink-rgb));
+    --bs-btn-bg: transparent;
+    --bs-btn-border-color: var(--d-rule-strong);
+    --bs-btn-hover-color: rgb(var(--d-bg-rgb));
+    --bs-btn-hover-bg: rgb(var(--d-ink-rgb));
+    --bs-btn-hover-border-color: rgb(var(--d-ink-rgb));
+}
+
+html[data-design="lettre"] .markdown-content {
+    font-size: 1em;
+    max-width: 68ch;
+}
+
+html[data-design="lettre"] footer {
+    font-style: italic;
+}

@@ -1,0 +1,291 @@
+/*
+ * Design "Iznik" — glazed-tile palette (cobalt, turquoise, tomato red, emerald) on porcelain white.
+ * Crisp shapes, firm outlines, and a tile frieze as the one decorative device.
+ */
+
+@font-face {
+    font-family: "Bricolage Grotesque";
+    src: url("../fonts/bricolage-grotesque-latin-wght-normal.woff2") format("woff2");
+    font-weight: 200 800;
+    font-display: swap;
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+    font-family: "Bricolage Grotesque";
+    src: url("../fonts/bricolage-grotesque-latin-ext-wght-normal.woff2") format("woff2");
+    font-weight: 200 800;
+    font-display: swap;
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* ---------- Tokens ---------- */
+html[data-design="iznik"] {
+    --iz-cobalt: #1b3fa0;
+    --iz-red: #c8372d;
+    --iz-turquoise: #12808c;
+    --iz-emerald: #1e7a4c;
+    --iz-porcelain: #ffffff;
+
+    --d-bg-rgb: 246, 248, 251;
+    --d-surface-rgb: 255, 255, 255;
+    --d-tint-rgb: 229, 235, 247;
+    --d-ink-rgb: 20, 33, 61;
+    --d-muted: #4d5a78;
+    --d-accent-rgb: 27, 63, 160;
+    --d-fill-rgb: 27, 63, 160;
+    --d-fill-hover: #14213d;
+    --d-on-fill: #ffffff;
+    --d-rule: #c9d3e6;
+    --d-rule-strong: #14213d;
+    --d-radius: 4px;
+    --d-radius-lg: 6px;
+    --d-radius-pill: 4px;
+    --d-font-body: "Bricolage Grotesque", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --d-font-display: "Bricolage Grotesque", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+    /* Tile frieze: cobalt and porcelain diamonds, a red dot in each porcelain one */
+    --iz-frieze:
+        radial-gradient(circle at 50% 50%, var(--iz-red) 0 3px, transparent 3.5px),
+        linear-gradient(135deg, var(--iz-cobalt) 25%, transparent 25%),
+        linear-gradient(225deg, var(--iz-cobalt) 25%, transparent 25%),
+        linear-gradient(315deg, var(--iz-cobalt) 25%, transparent 25%),
+        linear-gradient(45deg, var(--iz-cobalt) 25%, transparent 25%);
+}
+
+html[data-design="iznik"][data-bs-theme="dark"] {
+    --d-bg-rgb: 13, 21, 48;
+    --d-surface-rgb: 21, 32, 72;
+    --d-tint-rgb: 27, 40, 86;
+    --d-ink-rgb: 238, 242, 250;
+    --d-muted: #a9b6d6;
+    --d-accent-rgb: 157, 184, 255;
+    --d-fill-rgb: 61, 99, 214;
+    --d-fill-hover: #2f51b8;
+    --d-on-fill: #ffffff;
+    --d-rule: #2c3a6b;
+    --d-rule-strong: #8fa3d9;
+}
+
+html[data-design="iznik"] body {
+    font-size: 1.0625rem;
+    line-height: 1.6;
+}
+
+html[data-design="iznik"] h1,
+html[data-design="iznik"] h2,
+html[data-design="iznik"] h3,
+html[data-design="iznik"] .navbar-brand {
+    letter-spacing: -0.02em;
+}
+
+/* ---------- Frieze placements ---------- */
+html[data-design="iznik"] .home-hero::before,
+html[data-design="iznik"] .project-header::after,
+html[data-design="iznik"] footer::before {
+    content: "";
+    display: block;
+    height: 28px;
+    background: var(--iz-frieze);
+    background-size: 28px 28px;
+    background-color: var(--iz-porcelain);
+}
+
+html[data-design="iznik"] footer hr {
+    display: none;
+}
+
+html[data-design="iznik"] footer::before {
+    margin-bottom: 1.25rem;
+    border-block: 2px solid var(--d-rule-strong);
+}
+
+/* ---------- Navigation ---------- */
+html[data-design="iznik"] .navbar {
+    border-bottom: 2px solid var(--d-rule-strong);
+}
+
+html[data-design="iznik"] .navbar-brand {
+    font-weight: 800;
+}
+
+html[data-design="iznik"] .nav-link::after {
+    height: 3px;
+    background-color: var(--iz-red);
+}
+
+/* ---------- Buttons, badges ---------- */
+html[data-design="iznik"] .btn {
+    --bs-btn-border-width: 2px;
+    --bs-btn-font-weight: 600;
+}
+
+html[data-design="iznik"] .badge {
+    font-weight: 600;
+    letter-spacing: 0;
+}
+
+html[data-design="iznik"] .home-hero .badge.text-bg-primary {
+    background-color: var(--iz-red) !important;
+    color: #ffffff !important;
+}
+
+/* ---------- Home hero ---------- */
+html[data-design="iznik"] .home-hero {
+    display: block;
+    min-height: 0;
+    padding: 0 !important;
+    text-align: left;
+    background: rgb(var(--d-surface-rgb));
+    border: 2px solid var(--d-rule-strong);
+    border-radius: var(--d-radius-lg);
+    overflow: hidden;
+}
+
+html[data-design="iznik"] .home-hero::before {
+    border-bottom: 2px solid var(--d-rule-strong);
+}
+
+html[data-design="iznik"] .home-hero > .container {
+    padding: clamp(1.5rem, 5vw, 4rem);
+}
+
+html[data-design="iznik"] .home-hero .display-1 {
+    font-size: clamp(3rem, 10vw, 7.5rem);
+    font-weight: 800 !important;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+}
+
+html[data-design="iznik"] .home-hero .display-6 {
+    max-width: 32ch;
+    font-weight: 500;
+}
+
+html[data-design="iznik"] .home-hero .justify-content-center {
+    justify-content: flex-start !important;
+}
+
+html[data-design="iznik"] .home-hero .d-flex.px-3 {
+    padding-inline: 0 !important;
+}
+
+html[data-design="iznik"] .social-link:hover {
+    color: var(--iz-red);
+}
+
+/* ---------- Section headings ---------- */
+html[data-design="iznik"] h3.border-bottom {
+    border-bottom: 3px solid rgb(var(--d-accent-rgb)) !important;
+}
+
+/* ---------- Skills & languages ---------- */
+html[data-design="iznik"] .skill-badge {
+    background-color: rgb(var(--d-surface-rgb));
+    border: 2px solid var(--d-rule-strong);
+    border-radius: var(--d-radius);
+    padding: 0.3rem 0.75rem;
+    font-weight: 500;
+}
+
+html[data-design="iznik"] .lang-level {
+    height: 10px;
+    border: 2px solid var(--d-rule-strong);
+    border-radius: 0;
+    background-color: rgb(var(--d-surface-rgb));
+}
+
+/* ---------- Cards ---------- */
+html[data-design="iznik"] .project-card {
+    border: 2px solid var(--d-rule-strong);
+    transition: box-shadow 0.15s ease, translate 0.15s ease;
+}
+
+html[data-design="iznik"] .project-card:hover {
+    translate: -3px -3px;
+    box-shadow: 6px 6px 0 var(--iz-turquoise) !important;
+}
+
+html[data-design="iznik"] .card-img-container,
+html[data-design="iznik"] .dish-card .dish-media {
+    border-bottom: 2px solid var(--d-rule-strong);
+}
+
+/* ---------- Featured block & contact ---------- */
+html[data-design="iznik"] section.bg-body-tertiary {
+    border: 2px solid var(--d-rule-strong);
+}
+
+html[data-design="iznik"] section.bg-primary-subtle {
+    background-color: var(--iz-cobalt) !important;
+    color: #ffffff;
+}
+
+html[data-design="iznik"] section.bg-primary-subtle .btn-primary {
+    --bs-btn-color: var(--iz-cobalt);
+    --bs-btn-bg: #ffffff;
+    --bs-btn-border-color: #ffffff;
+    --bs-btn-hover-color: #ffffff;
+    --bs-btn-hover-bg: var(--iz-red);
+    --bs-btn-hover-border-color: var(--iz-red);
+    --bs-btn-active-color: #ffffff;
+    --bs-btn-active-bg: var(--iz-red);
+    --bs-btn-active-border-color: var(--iz-red);
+}
+
+/* ---------- Passions: four glazed tiles ---------- */
+html[data-design="iznik"] .passion-card {
+    background: var(--iz-cobalt);
+    color: #ffffff !important;
+    border: 0;
+    border-radius: var(--d-radius-lg);
+}
+
+html[data-design="iznik"] .row > div:nth-child(2) > .passion-card { background: var(--iz-red); }
+html[data-design="iznik"] .row > div:nth-child(3) > .passion-card { background: var(--iz-turquoise); }
+html[data-design="iznik"] .row > div:nth-child(4) > .passion-card { background: var(--iz-emerald); }
+
+html[data-design="iznik"] .passion-icon,
+html[data-design="iznik"] .passion-card h6,
+html[data-design="iznik"] section.bg-primary-subtle h3 {
+    color: #ffffff;
+}
+
+html[data-design="iznik"] .passion-card-link:hover,
+html[data-design="iznik"] .passion-card-link:focus-visible {
+    border-color: transparent;
+    box-shadow: inset 0 0 0 4px rgba(255, 255, 255, 0.9) !important;
+}
+
+/* ---------- Page headers ---------- */
+html[data-design="iznik"] .hero-section {
+    padding: 1rem 0 1.5rem;
+    text-align: left !important;
+    border-bottom: 3px solid rgb(var(--d-accent-rgb));
+}
+
+html[data-design="iznik"] .hero-section h1 {
+    font-weight: 800 !important;
+    letter-spacing: -0.03em;
+}
+
+html[data-design="iznik"] .hero-section .mx-auto {
+    margin-left: 0 !important;
+}
+
+html[data-design="iznik"] .project-header {
+    padding: 4rem 0 0;
+    background: var(--iz-cobalt);
+}
+
+html[data-design="iznik"] .project-header > .container {
+    padding-bottom: 4rem;
+}
+
+html[data-design="iznik"] .project-header .btn-primary {
+    --bs-btn-bg: var(--iz-red);
+    --bs-btn-border-color: var(--iz-red);
+    --bs-btn-hover-bg: #ffffff;
+    --bs-btn-hover-border-color: #ffffff;
+    --bs-btn-hover-color: var(--iz-cobalt);
+}

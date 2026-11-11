@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /fr/admin
+Disallow: /en/admin
+Disallow: /fr/login
+Disallow: /en/login
+Disallow: /fr/reset-password
+Disallow: /en/reset-password

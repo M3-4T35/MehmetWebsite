@@ -25,6 +25,7 @@ apt-get install -y \
   php-xml \
   php-curl \
   php-zip \
+  ffmpeg \
   unzip \
   composer \
   postgresql \

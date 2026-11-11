@@ -1,0 +1,334 @@
+/*
+ * Design "Épure" — a technical drawing sheet.
+ * Light: gridded drafting paper. Dark: blueprint. Thin ruled outlines, hatching for empty
+ * areas, graduated rulers for the language levels, monospace for titles and controls.
+ */
+
+@font-face {
+    font-family: "IBM Plex Sans";
+    src: url("../fonts/ibm-plex-sans-latin-wght-normal.woff2") format("woff2");
+    font-weight: 100 700;
+    font-display: swap;
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+    font-family: "IBM Plex Sans";
+    src: url("../fonts/ibm-plex-sans-latin-ext-wght-normal.woff2") format("woff2");
+    font-weight: 100 700;
+    font-display: swap;
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+    font-family: "IBM Plex Mono";
+    src: url("../fonts/ibm-plex-mono-latin-400-normal.woff2") format("woff2");
+    font-weight: 400;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "IBM Plex Mono";
+    src: url("../fonts/ibm-plex-mono-latin-500-normal.woff2") format("woff2");
+    font-weight: 500 700;
+    font-display: swap;
+}
+
+/* ---------- Tokens ---------- */
+html[data-design="epure"] {
+    --ep-note: #c2410c;
+    --ep-grid: rgba(18, 38, 63, 0.06);
+    --ep-grid-major: rgba(18, 38, 63, 0.11);
+    --ep-hatch: rgba(18, 38, 63, 0.14);
+
+    --d-bg-rgb: 238, 242, 245;
+    --d-surface-rgb: 248, 250, 251;
+    --d-tint-rgb: 225, 232, 238;
+    --d-ink-rgb: 18, 38, 63;
+    --d-muted: #4a5d75;
+    --d-accent-rgb: 11, 92, 173;
+    --d-fill-rgb: 18, 38, 63;
+    --d-fill-hover: #0b5cad;
+    --d-on-fill: #f8fafb;
+    --d-rule: #b4c0cc;
+    --d-rule-strong: #12263f;
+    --d-radius: 0px;
+    --d-radius-lg: 0px;
+    --d-radius-pill: 0px;
+    --d-font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --d-font-display: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+
+html[data-design="epure"][data-bs-theme="dark"] {
+    --ep-note: #ffb454;
+    --ep-grid: rgba(255, 255, 255, 0.045);
+    --ep-grid-major: rgba(255, 255, 255, 0.09);
+    --ep-hatch: rgba(255, 255, 255, 0.16);
+
+    --d-bg-rgb: 16, 42, 76;
+    --d-surface-rgb: 21, 52, 91;
+    --d-tint-rgb: 27, 62, 105;
+    --d-ink-rgb: 230, 238, 248;
+    --d-muted: #a9bdd6;
+    --d-accent-rgb: 165, 208, 255;
+    --d-fill-rgb: 230, 238, 248;
+    --d-fill-hover: #ffffff;
+    --d-on-fill: #102a4c;
+    --d-rule: #3a5d8a;
+    --d-rule-strong: #c9d9ee;
+}
+
+/* Drafting grid: 24px squares, a heavier line every 5 squares */
+html[data-design="epure"] body {
+    background-image:
+        linear-gradient(var(--ep-grid-major) 1px, transparent 1px),
+        linear-gradient(90deg, var(--ep-grid-major) 1px, transparent 1px),
+        linear-gradient(var(--ep-grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--ep-grid) 1px, transparent 1px);
+    background-size: 120px 120px, 120px 120px, 24px 24px, 24px 24px;
+    background-position: -1px -1px;
+    line-height: 1.6;
+}
+
+html[data-design="epure"] h1,
+html[data-design="epure"] h2,
+html[data-design="epure"] h3,
+html[data-design="epure"] h4,
+html[data-design="epure"] h5,
+html[data-design="epure"] h6 {
+    font-weight: 500 !important;
+    letter-spacing: -0.02em;
+}
+
+/* ---------- Navigation ---------- */
+html[data-design="epure"] .navbar {
+    border-bottom: 1px solid var(--d-rule-strong);
+}
+
+html[data-design="epure"] .navbar-brand,
+html[data-design="epure"] .nav-link {
+    font-family: var(--d-font-display);
+    font-weight: 500;
+}
+
+html[data-design="epure"] .navbar-brand .bi {
+    color: var(--ep-note) !important;
+}
+
+html[data-design="epure"] .nav-link {
+    font-size: 0.9375rem;
+}
+
+html[data-design="epure"] .nav-link::after {
+    height: 1px;
+    background-color: var(--ep-note);
+}
+
+/* ---------- Buttons, badges ---------- */
+html[data-design="epure"] .btn {
+    --bs-btn-font-weight: 500;
+    --bs-btn-font-size: 0.9375rem;
+}
+
+html[data-design="epure"] .btn-lg {
+    --bs-btn-font-size: 1rem;
+    --bs-btn-padding-y: 0.7rem;
+}
+
+html[data-design="epure"] .badge {
+    font-family: var(--d-font-display);
+    font-weight: 500;
+}
+
+html[data-design="epure"] .home-hero .badge.text-bg-primary {
+    background-color: transparent !important;
+    color: var(--ep-note) !important;
+    border: 1px solid var(--ep-note);
+}
+
+/* ---------- Home hero: a sheet with crop marks in its corners ---------- */
+html[data-design="epure"] .home-hero {
+    --ep-mark: var(--d-rule-strong);
+    display: block;
+    min-height: 0;
+    padding: clamp(2rem, 6vw, 4.5rem) clamp(1.25rem, 5vw, 4rem) !important;
+    text-align: left;
+    background:
+        linear-gradient(var(--ep-mark), var(--ep-mark)) left top / 28px 1px,
+        linear-gradient(var(--ep-mark), var(--ep-mark)) left top / 1px 28px,
+        linear-gradient(var(--ep-mark), var(--ep-mark)) right top / 28px 1px,
+        linear-gradient(var(--ep-mark), var(--ep-mark)) right top / 1px 28px,
+        linear-gradient(var(--ep-mark), var(--ep-mark)) left bottom / 28px 1px,
+        linear-gradient(var(--ep-mark), var(--ep-mark)) left bottom / 1px 28px,
+        linear-gradient(var(--ep-mark), var(--ep-mark)) right bottom / 28px 1px,
+        linear-gradient(var(--ep-mark), var(--ep-mark)) right bottom / 1px 28px;
+    background-repeat: no-repeat;
+}
+
+html[data-design="epure"] .home-hero > .container {
+    padding-inline: 0;
+}
+
+html[data-design="epure"] .home-hero .display-1 {
+    font-size: clamp(2.5rem, 8.5vw, 6.5rem);
+    line-height: 1;
+    letter-spacing: -0.05em;
+    color: rgb(var(--d-ink-rgb)) !important;
+}
+
+html[data-design="epure"] .home-hero .display-6 {
+    max-width: 38ch;
+    font-family: var(--d-font-body);
+    font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+    font-weight: 400 !important;
+    letter-spacing: 0;
+    color: var(--d-muted);
+}
+
+html[data-design="epure"] .home-hero .justify-content-center {
+    justify-content: flex-start !important;
+}
+
+html[data-design="epure"] .home-hero .d-flex.px-3 {
+    padding-inline: 0 !important;
+}
+
+html[data-design="epure"] .social-link:hover {
+    color: var(--ep-note);
+}
+
+/* ---------- Section headings: a dimension line with end ticks ---------- */
+html[data-design="epure"] h3.border-bottom {
+    position: relative;
+    border-bottom: 1px solid var(--d-rule-strong) !important;
+    font-size: 1.25rem;
+}
+
+html[data-design="epure"] h3.border-bottom::before,
+html[data-design="epure"] h3.border-bottom::after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    width: 1px;
+    height: 9px;
+    background: var(--d-rule-strong);
+}
+
+html[data-design="epure"] h3.border-bottom::before { left: 0; }
+html[data-design="epure"] h3.border-bottom::after { right: 0; }
+
+html[data-design="epure"] h5.text-primary {
+    color: var(--ep-note) !important;
+    font-size: 0.875rem;
+}
+
+/* ---------- Skills & languages ---------- */
+html[data-design="epure"] .skill-badge {
+    font-family: var(--d-font-display);
+    font-size: 0.8125rem;
+    background-color: rgb(var(--d-surface-rgb));
+    border: 1px solid var(--d-rule-strong);
+    border-radius: 0;
+    padding: 0.3rem 0.65rem;
+}
+
+/* Graduated ruler: a tick every 10% */
+html[data-design="epure"] .lang-level {
+    height: 12px;
+    border-radius: 0;
+    border-bottom: 1px solid var(--d-rule-strong);
+    background-color: transparent;
+    background-image: repeating-linear-gradient(90deg, var(--d-rule-strong) 0 1px, transparent 1px 10%);
+    background-size: calc(100% - 1px) 100%;
+    position: relative;
+}
+
+html[data-design="epure"] .lang-progress {
+    height: 5px;
+    margin-top: 6px;
+}
+
+/* ---------- Cards ---------- */
+html[data-design="epure"] .card,
+html[data-design="epure"] .project-card {
+    border: 1px solid var(--d-rule-strong);
+}
+
+html[data-design="epure"] .project-card:hover {
+    border-color: var(--ep-note);
+}
+
+html[data-design="epure"] .card-img-container,
+html[data-design="epure"] .dish-card .dish-media {
+    border-bottom: 1px solid var(--d-rule-strong);
+    background: repeating-linear-gradient(45deg, var(--ep-hatch) 0 1px, transparent 1px 9px), rgb(var(--d-surface-rgb));
+}
+
+html[data-design="epure"] .card-title {
+    font-size: 1.0625rem;
+}
+
+/* ---------- Featured block, contact, passions ---------- */
+html[data-design="epure"] section.bg-body-tertiary,
+html[data-design="epure"] section.bg-primary-subtle {
+    background-color: rgb(var(--d-surface-rgb)) !important;
+    border: 1px solid var(--d-rule-strong);
+}
+
+html[data-design="epure"] section.bg-body-tertiary {
+    border-style: dashed;
+}
+
+html[data-design="epure"] .passion-card {
+    background: rgb(var(--d-surface-rgb));
+    border: 1px solid var(--d-rule-strong);
+    border-radius: 0;
+}
+
+html[data-design="epure"] .passion-icon {
+    color: var(--ep-note);
+}
+
+html[data-design="epure"] .passion-card-link:hover,
+html[data-design="epure"] .passion-card-link:focus-visible {
+    background: rgb(var(--d-tint-rgb));
+    border-color: var(--ep-note);
+}
+
+/* ---------- Page headers ---------- */
+html[data-design="epure"] .hero-section {
+    padding: 1rem 0 1.5rem;
+    text-align: left !important;
+    border-bottom: 1px solid var(--d-rule-strong);
+}
+
+html[data-design="epure"] .hero-section h1 {
+    font-size: clamp(2rem, 5vw, 3.25rem);
+}
+
+html[data-design="epure"] .hero-section .mx-auto {
+    margin-left: 0 !important;
+}
+
+html[data-design="epure"] .project-header {
+    background:
+        linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+        #12263f;
+    background-size: 24px 24px, 24px 24px, auto;
+    border-bottom: 1px solid var(--d-rule-strong);
+}
+
+html[data-design="epure"] .project-header .btn-primary {
+    --bs-btn-color: #12263f;
+    --bs-btn-bg: #ffb454;
+    --bs-btn-border-color: #ffb454;
+    --bs-btn-hover-color: #12263f;
+    --bs-btn-hover-bg: #ffffff;
+    --bs-btn-hover-border-color: #ffffff;
+}
+
+html[data-design="epure"] footer {
+    font-family: var(--d-font-display);
+    font-size: 0.875rem;
+}

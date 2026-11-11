@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <style>
+    .bg { fill: #14213d; }
+    .ink { stroke: #ffffff; }
+    /* Inverted on dark browser chrome, where a navy square would disappear */
+    @media (prefers-color-scheme: dark) {
+      .bg { fill: #eef2fa; }
+      .ink { stroke: #14213d; }
+    }
+  </style>
+  <rect class="bg" width="32" height="32" rx="6"/>
+  <g class="ink" fill="none" stroke-width="2.8" stroke-linecap="square" stroke-linejoin="miter" stroke-miterlimit="6">
+    <path d="M5.4 21.6V10.4l4.6 7 4.6-7v11.2"/>
+    <path d="M18.4 21.6l4.2-11.2 4.2 11.2"/>
+    <path d="M20.6 18.2h4" stroke-linecap="butt"/>
+  </g>
+</svg>

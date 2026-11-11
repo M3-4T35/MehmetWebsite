@@ -1,0 +1,244 @@
+/*
+ * Shared base for the alternative designs (everything except "classique").
+ *
+ * Each design file (iznik.css, epure.css, lettre.css) only declares tokens (--d-*) for its
+ * light and dark variants plus its own signature styles. This file maps those tokens onto
+ * Bootstrap's variables and removes the decorative effects of the default theme.
+ */
+
+/* ---------- Tokens -> Bootstrap variables ---------- */
+html[data-design] {
+    --bs-body-bg: rgb(var(--d-bg-rgb));
+    --bs-body-bg-rgb: var(--d-bg-rgb);
+    --bs-body-color: rgb(var(--d-ink-rgb));
+    --bs-body-color-rgb: var(--d-ink-rgb);
+    --bs-emphasis-color: rgb(var(--d-ink-rgb));
+    --bs-emphasis-color-rgb: var(--d-ink-rgb);
+    --bs-heading-color: rgb(var(--d-ink-rgb));
+    --bs-secondary-color: var(--d-muted);
+    --bs-secondary-bg: rgb(var(--d-tint-rgb));
+    --bs-secondary-bg-rgb: var(--d-tint-rgb);
+    --bs-tertiary-bg: rgb(var(--d-tint-rgb));
+    --bs-tertiary-bg-rgb: var(--d-tint-rgb);
+    --bs-primary: rgb(var(--d-accent-rgb));
+    --bs-primary-rgb: var(--d-accent-rgb);
+    --bs-primary-text-emphasis: rgb(var(--d-accent-rgb));
+    --bs-primary-bg-subtle: rgb(var(--d-tint-rgb));
+    --bs-primary-border-subtle: var(--d-rule);
+    --bs-info-bg-subtle: rgb(var(--d-tint-rgb));
+    --bs-link-color: rgb(var(--d-accent-rgb));
+    --bs-link-color-rgb: var(--d-accent-rgb);
+    --bs-link-hover-color: rgb(var(--d-ink-rgb));
+    --bs-link-hover-color-rgb: var(--d-ink-rgb);
+    --bs-border-color: var(--d-rule);
+    --bs-border-color-translucent: var(--d-rule);
+    --bs-border-radius: var(--d-radius);
+    --bs-border-radius-sm: var(--d-radius);
+    --bs-border-radius-lg: var(--d-radius-lg);
+    --bs-border-radius-xl: var(--d-radius-lg);
+    --bs-border-radius-xxl: var(--d-radius-lg);
+    --bs-border-radius-pill: var(--d-radius-pill);
+    --bs-body-font-family: var(--d-font-body);
+    --bs-focus-ring-color: rgba(var(--d-accent-rgb), 0.3);
+    --nav-bg: rgb(var(--d-bg-rgb));
+}
+
+html[data-design] h1, html[data-design] h2, html[data-design] h3,
+html[data-design] h4, html[data-design] h5, html[data-design] h6,
+html[data-design] .navbar-brand {
+    font-family: var(--d-font-display);
+}
+
+/* ---------- Components ---------- */
+html[data-design] .navbar {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    --bs-navbar-color: rgb(var(--d-ink-rgb));
+    --bs-navbar-hover-color: rgb(var(--d-accent-rgb));
+    --bs-navbar-active-color: rgb(var(--d-ink-rgb));
+    --bs-navbar-brand-color: rgb(var(--d-ink-rgb));
+    --bs-navbar-brand-hover-color: rgb(var(--d-ink-rgb));
+}
+
+html[data-design] .btn {
+    --bs-btn-border-radius: var(--d-radius);
+    --bs-btn-font-family: var(--d-font-display);
+    --bs-btn-focus-shadow-rgb: var(--d-accent-rgb);
+}
+
+html[data-design] .btn-lg {
+    --bs-btn-border-radius: var(--d-radius);
+}
+
+html[data-design] .btn-primary {
+    --bs-btn-color: var(--d-on-fill);
+    --bs-btn-bg: rgb(var(--d-fill-rgb));
+    --bs-btn-border-color: rgb(var(--d-fill-rgb));
+    --bs-btn-hover-color: var(--d-on-fill);
+    --bs-btn-hover-bg: var(--d-fill-hover);
+    --bs-btn-hover-border-color: var(--d-fill-hover);
+    --bs-btn-active-color: var(--d-on-fill);
+    --bs-btn-active-bg: var(--d-fill-hover);
+    --bs-btn-active-border-color: var(--d-fill-hover);
+    --bs-btn-disabled-color: var(--d-on-fill);
+    --bs-btn-disabled-bg: rgb(var(--d-fill-rgb));
+    --bs-btn-disabled-border-color: rgb(var(--d-fill-rgb));
+}
+
+html[data-design] .btn-outline-primary {
+    --bs-btn-color: rgb(var(--d-accent-rgb));
+    --bs-btn-border-color: rgb(var(--d-accent-rgb));
+    --bs-btn-hover-color: var(--d-on-fill);
+    --bs-btn-hover-bg: rgb(var(--d-fill-rgb));
+    --bs-btn-hover-border-color: rgb(var(--d-fill-rgb));
+    --bs-btn-active-color: var(--d-on-fill);
+    --bs-btn-active-bg: rgb(var(--d-fill-rgb));
+    --bs-btn-active-border-color: rgb(var(--d-fill-rgb));
+}
+
+html[data-design] .btn-secondary,
+html[data-design] .btn-outline-secondary {
+    --bs-btn-color: rgb(var(--d-ink-rgb));
+    --bs-btn-bg: transparent;
+    --bs-btn-border-color: var(--d-rule-strong);
+    --bs-btn-hover-color: rgb(var(--d-bg-rgb));
+    --bs-btn-hover-bg: rgb(var(--d-ink-rgb));
+    --bs-btn-hover-border-color: rgb(var(--d-ink-rgb));
+    --bs-btn-active-color: rgb(var(--d-bg-rgb));
+    --bs-btn-active-bg: rgb(var(--d-ink-rgb));
+    --bs-btn-active-border-color: rgb(var(--d-ink-rgb));
+}
+
+html[data-design] .btn-link {
+    --bs-btn-color: rgb(var(--d-accent-rgb));
+    --bs-btn-hover-color: rgb(var(--d-ink-rgb));
+}
+
+html[data-design] .badge.text-bg-primary {
+    background-color: rgb(var(--d-fill-rgb)) !important;
+    color: var(--d-on-fill) !important;
+}
+
+html[data-design] .card,
+html[data-design] .project-card {
+    --bs-card-bg: rgb(var(--d-surface-rgb));
+    --bs-card-border-color: var(--d-rule);
+    --bs-card-border-radius: var(--d-radius-lg);
+    --bs-card-inner-border-radius: var(--d-radius-lg);
+    background-color: rgb(var(--d-surface-rgb));
+    border-color: var(--d-rule);
+    border-radius: var(--d-radius-lg);
+}
+
+html[data-design] .modal-content {
+    --bs-modal-bg: rgb(var(--d-surface-rgb));
+    --bs-modal-border-radius: var(--d-radius-lg);
+}
+
+html[data-design] .modal-content.shadow-lg {
+    border: 1px solid var(--d-rule-strong) !important;
+}
+
+html[data-design] .form-control,
+html[data-design] .form-select,
+html[data-design] .form-control:focus {
+    background-color: rgb(var(--d-surface-rgb));
+    color: rgb(var(--d-ink-rgb));
+    border-color: var(--d-rule-strong);
+}
+
+html[data-design] .form-control:focus,
+html[data-design] .form-select:focus {
+    border-color: rgb(var(--d-accent-rgb));
+    box-shadow: 0 0 0 0.2rem rgba(var(--d-accent-rgb), 0.25);
+}
+
+html[data-design] .input-group-text {
+    background-color: rgb(var(--d-tint-rgb));
+    border-color: var(--d-rule-strong);
+    color: rgb(var(--d-ink-rgb));
+}
+
+html[data-design] .table {
+    --bs-table-bg: transparent;
+    --bs-table-color: rgb(var(--d-ink-rgb));
+    --bs-table-border-color: var(--d-rule);
+    --bs-table-hover-bg: rgb(var(--d-tint-rgb));
+    --bs-table-hover-color: rgb(var(--d-ink-rgb));
+}
+
+html[data-design] .table-light {
+    --bs-table-bg: rgb(var(--d-tint-rgb));
+    --bs-table-color: rgb(var(--d-ink-rgb));
+    --bs-table-border-color: var(--d-rule);
+}
+
+html[data-design] .card-img-container,
+html[data-design] .dish-card .dish-media {
+    background: rgb(var(--d-tint-rgb));
+}
+
+html[data-design] .markdown-body h1,
+html[data-design] .markdown-body h2,
+html[data-design] .markdown-body h3 {
+    color: rgb(var(--d-ink-rgb));
+}
+
+html[data-design] .skill-badge:hover {
+    background-color: rgb(var(--d-fill-rgb));
+    border-color: rgb(var(--d-fill-rgb));
+    color: var(--d-on-fill);
+}
+
+html[data-design] .lang-progress {
+    background-color: rgb(var(--d-accent-rgb));
+}
+
+html[data-design] a:focus-visible,
+html[data-design] button:focus-visible,
+html[data-design] .media-gallery img:focus-visible,
+html[data-design] .detail-scroll:focus-visible {
+    outline: 3px solid rgb(var(--d-accent-rgb));
+    outline-offset: 3px;
+}
+
+/* ---------- Remove the default theme's decoration ---------- */
+html[data-design] .shadow-sm,
+html[data-design] .shadow,
+html[data-design] .shadow-lg,
+html[data-design] .project-card:hover,
+html[data-design] .passion-card-link:hover,
+html[data-design] .passion-card-link:focus-visible {
+    box-shadow: none !important;
+}
+
+html[data-design] .project-card:hover,
+html[data-design] .project-card:hover .card-img-container img,
+html[data-design] .dish-card:hover .dish-media img,
+html[data-design] .passion-card:hover,
+html[data-design] .passion-card-link:hover .passion-icon,
+html[data-design] .skill-badge:hover,
+html[data-design] .media-gallery img:hover,
+html[data-design] #theme-switch:hover {
+    transform: none;
+}
+
+html[data-design] .home-hero,
+html[data-design] .hero-section {
+    background: none;
+    border-radius: 0;
+}
+
+html[data-design] .project-header {
+    border-radius: 0;
+}
+
+html[data-design] footer hr {
+    border-color: var(--d-rule-strong);
+    opacity: 1;
+}
+
+/* The project header sets its own text colour; headings must follow it, not the page ink */
+html[data-design] .project-header h1 {
+    color: inherit;
+}

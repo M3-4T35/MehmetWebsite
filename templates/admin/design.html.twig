@@ -1,0 +1,99 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Design du site | MehmetAtes.fr{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .design-sample {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: end;
+            gap: 0.5rem;
+            padding: 1rem;
+            min-height: 7rem;
+            border-bottom: 1px solid var(--bs-border-color);
+        }
+        .design-sample-name {
+            font-size: 1.75rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+        .design-sample-dots {
+            display: flex;
+            gap: 0.35rem;
+        }
+        .design-sample-dots span {
+            width: 1.1rem;
+            height: 1.1rem;
+            border-radius: 50%;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="mb-4">
+        <h1 class="h3"><i class="bi bi-palette me-2"></i>Design du site</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="{{ path('app_admin') }}">Admin</a></li>
+                <li class="breadcrumb-item active">Design</li>
+            </ol>
+        </nav>
+    </div>
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="bi bi-check-circle me-2"></i>{{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
+        </div>
+    {% endfor %}
+
+    <p class="text-muted">
+        « Prévisualiser » applique un design à votre session seulement : les visiteurs ne voient rien changer.
+        « Mettre en ligne » le publie pour tout le monde. Chaque design a sa version claire et sombre.
+    </p>
+
+    <div class="row g-4">
+        {% for key, design in designs %}
+            <div class="col-md-6 col-xl-3">
+                <div class="card h-100 {{ key == active ? 'border-primary' }}">
+                    <div class="design-sample" style="background: {{ design.swatches[0] }}; color: {{ design.swatches[1] }};" aria-hidden="true">
+                        <span class="design-sample-name">Aa</span>
+                        <span class="design-sample-dots">
+                            <span style="background: {{ design.swatches[2] }};"></span>
+                            <span style="background: {{ design.swatches[3] }};"></span>
+                        </span>
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <h2 class="h5 fw-bold d-flex align-items-center gap-2">
+                            {{ design.label }}
+                            {% if key == active %}
+                                <span class="badge text-bg-primary fw-normal">En ligne</span>
+                            {% endif %}
+                            {% if key == preview %}
+                                <span class="badge text-bg-secondary fw-normal">Aperçu</span>
+                            {% endif %}
+                        </h2>
+                        <p class="small text-muted flex-grow-1">{{ design.description }}</p>
+                        <p class="small mb-3"><i class="bi bi-fonts me-1" aria-hidden="true"></i>{{ design.fonts }}</p>
+
+                        <div class="d-flex flex-wrap gap-2">
+                            <form method="post" action="{{ path('app_admin_design_preview') }}">
+                                <input type="hidden" name="_token" value="{{ csrf_token('design') }}">
+                                <input type="hidden" name="design" value="{{ key }}">
+                                <button type="submit" class="btn btn-sm btn-outline-primary">Prévisualiser</button>
+                            </form>
+                            {% if key != active %}
+                                <form method="post" action="{{ path('app_admin_design_activate') }}">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('design') }}">
+                                    <input type="hidden" name="design" value="{{ key }}">
+                                    <button type="submit" class="btn btn-sm btn-primary">Mettre en ligne</button>
+                                </form>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

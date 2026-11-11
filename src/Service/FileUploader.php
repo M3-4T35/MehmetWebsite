@@ -7,12 +7,15 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 final class FileUploader
 {
-    public function __construct(private readonly string $targetDirectory)
-    {
+    public function __construct(
+        private readonly string $targetDirectory,
+        private readonly ?MetadataStripper $metadataStripper = null,
+    ) {
     }
 
     /**
      * Moves the uploaded file into the target directory and returns the generated filename.
+     * When a metadata stripper is configured, photos and videos are cleaned of their metadata.
      */
     public function upload(UploadedFile $file): string
     {
@@ -32,6 +35,17 @@ final class FileUploader
             $file->move($this->targetDirectory, $fileName);
         } catch (FileException $e) {
             throw new \RuntimeException(sprintf('Impossible de déplacer le fichier vers "%s".', $this->targetDirectory), 0, $e);
+        }
+
+        if ($this->metadataStripper) {
+            try {
+                $this->metadataStripper->strip($this->targetDirectory.'/'.$fileName);
+            } catch (\Throwable $e) {
+                // Never keep a file whose metadata could not be removed
+                @unlink($this->targetDirectory.'/'.$fileName);
+
+                throw $e;
+            }
         }
 
         return $fileName;

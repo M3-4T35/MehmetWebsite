@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'error.not_found.title'|trans }} | MehmetAtes.fr{% endblock %}
+
+{% block body %}
+<div class="hero-section text-center px-3">
+    <p class="display-1 fw-bold text-primary mb-2">404</p>
+    <h1 class="display-6 fw-bold mb-3">{{ 'error.not_found.title'|trans }}</h1>
+    <p class="lead text-muted mx-auto mb-4" style="max-width: 600px;">{{ 'error.not_found.text'|trans }}</p>
+    <div class="d-flex flex-column flex-sm-row justify-content-center gap-3">
+        <a href="{{ path('app_home') }}" class="btn btn-primary rounded-pill px-4">{{ 'error.home'|trans }}</a>
+        <a href="{{ path('app_public_projects') }}" class="btn btn-outline-primary rounded-pill px-4">{{ 'error.projects'|trans }}</a>
+    </div>
+</div>
+{% endblock %}

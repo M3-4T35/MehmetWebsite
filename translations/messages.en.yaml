@@ -65,13 +65,6 @@ projects:
     live_demo: "Live demo"
     pdf_document: "PDF Document"
 
-games:
-  title: "Video Games"
-  text: "Video games have always been one of my passions. If I had to keep only one…"
-  cta: "Click here to discover the best video game in the world"
-  note: "External link to the game's Steam page (opens in a new tab)."
-  back: "Back to home"
-
 cooking:
   title: "My Cooking"
   text: "A few dishes I have cooked, in photos and videos. Cooking is another way for me to create, experiment and share."
@@ -116,3 +109,13 @@ legal:
     details: "Hosted on a personal server located in Moirans-en-Montagne, France."
   data: "This site does not collect personal data and does not display advertisements."
   contact_info: "For any inquiries, you can contact the publisher at the address above."
+
+error:
+  not_found:
+    title: "Page not found"
+    text: "This page does not exist or has been moved."
+  generic:
+    title: "Something went wrong"
+    text: "The site ran into a problem. Please try again in a moment."
+  home: "Back to home"
+  projects: "View my work"

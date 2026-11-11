@@ -65,13 +65,6 @@ projects:
     live_demo: "Voir en ligne"
     pdf_document: "Document PDF"
 
-games:
-  title: "Jeux Vidéo"
-  text: "Les jeux vidéo font partie de mes passions depuis toujours. S'il ne fallait en garder qu'un…"
-  cta: "Cliquez ici pour découvrir le meilleur jeu vidéo du monde"
-  note: "Lien externe vers la page Steam du jeu (nouvel onglet)."
-  back: "Retour à l'accueil"
-
 cooking:
   title: "Ma cuisine"
   text: "Quelques plats que j'ai cuisinés, en photos et en vidéos. La cuisine est pour moi une autre façon de créer, d'expérimenter et de partager."
@@ -116,3 +109,13 @@ legal:
     details: "Hébergé sur un serveur personnel situé à Moirans-en-Montagne, France."
   data: "Ce site ne collecte pas de données personnelles et n’affiche pas de publicité."
   contact_info: "Pour toute demande, vous pouvez contacter l’éditeur à l’adresse ci-dessus."
+
+error:
+  not_found:
+    title: "Page introuvable"
+    text: "Cette page n'existe pas ou a été déplacée."
+  generic:
+    title: "Une erreur est survenue"
+    text: "Le site a rencontré un problème. Réessayez dans un instant."
+  home: "Revenir à l'accueil"
+  projects: "Voir mes travaux"

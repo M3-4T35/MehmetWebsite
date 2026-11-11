@@ -19,7 +19,7 @@ services:
 
     app.media_file_uploader:
         class: App\Service\FileUploader
-        arguments: ['%media_directory%']
+        arguments: ['%media_directory%', '@App\Service\MetadataStripper']
 
     app.cv_file_uploader:
         class: App\Service\FileUploader
@@ -27,7 +27,7 @@ services:
 
     app.dish_file_uploader:
         class: App\Service\FileUploader
-        arguments: ['%dish_directory%']
+        arguments: ['%dish_directory%', '@App\Service\MetadataStripper']
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

@@ -10,9 +10,10 @@ Check-list complète pour déployer et mettre à jour le site sur le serveur de 
 * Apache 2.4 (`mod_rewrite` actif par défaut via `FallbackResource`)
 * PostgreSQL 14+
 * Composer 2 et Git
+* `ffmpeg` : retire les métadonnées (GPS, appareil, dates) des vidéos téléversées. Sans lui, l'upload de vidéos est refusé ; les photos, elles, sont nettoyées en PHP pur.
 
 ```bash
-sudo apt install php-intl php-fileinfo php-pgsql php-mbstring php-xml php-curl
+sudo apt install php-intl php-fileinfo php-pgsql php-mbstring php-xml php-curl ffmpeg
 ```
 
 ---

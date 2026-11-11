@@ -23,8 +23,6 @@ class PublicRoutesTest extends WebTestCase
         yield ['/en/travaux'];
         yield ['/fr/cv/public'];
         yield ['/en/cv/public'];
-        yield ['/fr/jeux-video'];
-        yield ['/en/jeux-video'];
         yield ['/fr/cuisine'];
         yield ['/en/cuisine'];
         yield ['/fr/mentions-legales'];

@@ -55,8 +55,8 @@
 {% block meta_description %}{{ (app.request.locale == 'en' and project.descriptionCourteEn ? project.descriptionCourteEn : project.descriptionCourte)|default('meta.description'|trans) }}{% endblock %}
 
 {% block javascripts %}
-    <script src="https://cdn.jsdelivr.net/npm/marked@15.0.12/marked.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.6/dist/purify.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked@15.0.12/marked.min.js" integrity="sha384-948ahk4ZmxYVYOc+rxN1H2gM1EJ2Duhp7uHtZ4WSLkV4Vtx5MUqnV+l7u9B+jFv+" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.6/dist/purify.min.js" integrity="sha384-JEyTNhjM6R1ElGoJns4U2Ln4ofPcqzSsynQkmEc/KGy6336qAZl70tDLufbkla+3" crossorigin="anonymous"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const markdownContent = {% if app.request.locale == 'en' and project.descriptionEn %}{{ project.descriptionEn|json_encode|raw }}{% else %}{{ project.description|json_encode|raw }}{% endif %};

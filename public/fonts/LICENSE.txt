@@ -1,0 +1,8 @@
+Self-hosted web fonts used by the site designs (public/designs/*.css).
+All are distributed under the SIL Open Font License 1.1 (https://openfontlicense.org).
+
+- Bricolage Grotesque — Copyright The Bricolage Grotesque Project Authors
+- IBM Plex Sans, IBM Plex Mono — Copyright IBM Corp.
+- Newsreader — Copyright The Newsreader Project Authors
+
+Files come from the Fontsource packages (latin and latin-ext subsets).
