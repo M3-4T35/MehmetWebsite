@@ -1,0 +1,216 @@
+/*
+ * Design "Plaque" — Paris street signage: enamel blue plate with a green frame,
+ * cut-stone background, zinc-grey rules. The name on the home page is the plate.
+ */
+
+@font-face {
+    font-family: "IBM Plex Sans";
+    src: url("../fonts/ibm-plex-sans-latin-wght-normal.woff2") format("woff2");
+    font-weight: 100 700;
+    font-display: swap;
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+    font-family: "IBM Plex Sans";
+    src: url("../fonts/ibm-plex-sans-latin-ext-wght-normal.woff2") format("woff2");
+    font-weight: 100 700;
+    font-display: swap;
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* ---------- Tokens ---------- */
+html[data-design="plaque"] {
+    --pl-blue: #173880;
+    --pl-green: #1f6b4a;
+    --pl-zinc: #7a8794;
+
+    --d-bg-rgb: 244, 240, 232;
+    --d-surface-rgb: 255, 255, 255;
+    --d-tint-rgb: 232, 228, 218;
+    --d-ink-rgb: 28, 34, 48;
+    --d-muted: #5b6472;
+    --d-accent-rgb: 23, 56, 128;
+    --d-fill-rgb: 23, 56, 128;
+    --d-fill-hover: #0f2557;
+    --d-on-fill: #ffffff;
+    --d-rule: #d5cfc2;
+    --d-rule-strong: #7a8794;
+    --d-radius: 3px;
+    --d-radius-lg: 4px;
+    --d-radius-pill: 3px;
+    --d-font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --d-font-display: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+html[data-design="plaque"][data-bs-theme="dark"] {
+    --pl-blue: #1f4aa8;
+    --pl-green: #2f8f66;
+
+    --d-bg-rgb: 17, 21, 30;
+    --d-surface-rgb: 25, 31, 44;
+    --d-tint-rgb: 33, 41, 58;
+    --d-ink-rgb: 236, 238, 243;
+    --d-muted: #a3adbd;
+    --d-accent-rgb: 150, 180, 245;
+    --d-fill-rgb: 38, 80, 170;
+    --d-fill-hover: #1c3f8c;
+    --d-on-fill: #ffffff;
+    --d-rule: #2c3548;
+    --d-rule-strong: #7a8794;
+}
+
+html[data-design="plaque"] body {
+    line-height: 1.65;
+}
+
+html[data-design="plaque"] h1,
+html[data-design="plaque"] h2,
+html[data-design="plaque"] h3,
+html[data-design="plaque"] .navbar-brand {
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+/* ---------- Navigation ---------- */
+html[data-design="plaque"] .navbar {
+    border-bottom: 1px solid var(--d-rule-strong);
+}
+
+html[data-design="plaque"] .nav-link::after {
+    background-color: var(--pl-green);
+}
+
+/* ---------- Home hero: the name as a street plate ---------- */
+html[data-design="plaque"] .home-hero {
+    min-height: 0;
+    padding: clamp(2.5rem, 7vw, 5rem) 1rem !important;
+}
+
+html[data-design="plaque"] .home-hero .display-1 {
+    display: table;
+    margin: 0.5rem auto 1.75rem !important;
+    padding: 0.35em 0.6em 0.3em;
+    font-size: clamp(2rem, 7.5vw, 5rem);
+    font-weight: 600 !important;
+    line-height: 1.05;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #ffffff !important;
+    background: var(--pl-blue);
+    border: 0.12em solid var(--pl-green);
+    border-radius: 0.12em;
+    outline: 1px solid rgba(255, 255, 255, 0.55);
+    outline-offset: -0.2em;
+}
+
+html[data-design="plaque"] .home-hero .badge.text-bg-primary {
+    background-color: var(--pl-green) !important;
+    color: #ffffff !important;
+}
+
+html[data-design="plaque"] .social-link:hover {
+    color: rgb(var(--d-accent-rgb));
+}
+
+/* ---------- Section headings ---------- */
+html[data-design="plaque"] h3.border-bottom {
+    color: rgb(var(--d-accent-rgb));
+    border-bottom: 2px solid var(--pl-green) !important;
+}
+
+/* ---------- Skills & languages ---------- */
+html[data-design="plaque"] .skill-badge {
+    background-color: rgb(var(--d-surface-rgb));
+    border: 1px solid var(--d-rule-strong);
+    border-radius: var(--d-radius);
+    padding: 0.3rem 0.75rem;
+}
+
+html[data-design="plaque"] .lang-level {
+    border-radius: 0;
+    background-color: rgb(var(--d-tint-rgb));
+}
+
+/* ---------- Cards ---------- */
+html[data-design="plaque"] .project-card {
+    border: 1px solid var(--d-rule-strong);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+html[data-design="plaque"] .project-card:hover {
+    border-color: var(--pl-green);
+    box-shadow: 0 0 0 2px var(--pl-green) !important;
+}
+
+/* ---------- Featured block & contact ---------- */
+html[data-design="plaque"] section.bg-body-tertiary {
+    border: 1px solid var(--d-rule);
+}
+
+html[data-design="plaque"] section.bg-primary-subtle {
+    background-color: var(--pl-blue) !important;
+    border: 4px solid var(--pl-green);
+    color: #ffffff;
+}
+
+html[data-design="plaque"] section.bg-primary-subtle h3 {
+    color: #ffffff;
+}
+
+html[data-design="plaque"] section.bg-primary-subtle .btn-primary {
+    --bs-btn-color: var(--pl-blue);
+    --bs-btn-bg: #ffffff;
+    --bs-btn-border-color: #ffffff;
+    --bs-btn-hover-color: #ffffff;
+    --bs-btn-hover-bg: var(--pl-green);
+    --bs-btn-hover-border-color: var(--pl-green);
+    --bs-btn-active-color: #ffffff;
+    --bs-btn-active-bg: var(--pl-green);
+    --bs-btn-active-border-color: var(--pl-green);
+}
+
+/* ---------- Passions ---------- */
+html[data-design="plaque"] .passion-card {
+    background: rgb(var(--d-surface-rgb));
+    border: 2px solid var(--pl-green);
+    border-radius: var(--d-radius-lg);
+}
+
+html[data-design="plaque"] .passion-card-link:hover,
+html[data-design="plaque"] .passion-card-link:focus-visible {
+    background: var(--pl-blue);
+    border-color: var(--pl-green);
+    color: #ffffff !important;
+}
+
+html[data-design="plaque"] .passion-card-link:hover .passion-icon,
+html[data-design="plaque"] .passion-card-link:hover h6,
+html[data-design="plaque"] .passion-card-link:focus-visible .passion-icon,
+html[data-design="plaque"] .passion-card-link:focus-visible h6 {
+    color: #ffffff;
+}
+
+/* ---------- Page headers ---------- */
+html[data-design="plaque"] .hero-section {
+    padding: 1rem 0 1.5rem;
+    border-bottom: 2px solid var(--pl-green);
+}
+
+html[data-design="plaque"] .hero-section h1 {
+    color: rgb(var(--d-accent-rgb));
+}
+
+html[data-design="plaque"] .project-header {
+    background: var(--pl-blue);
+    border-bottom: 6px solid var(--pl-green);
+}
+
+html[data-design="plaque"] .project-header .btn-primary {
+    --bs-btn-color: var(--pl-blue);
+    --bs-btn-bg: #ffffff;
+    --bs-btn-border-color: #ffffff;
+    --bs-btn-hover-bg: var(--pl-green);
+    --bs-btn-hover-border-color: var(--pl-green);
+    --bs-btn-hover-color: #ffffff;
+}

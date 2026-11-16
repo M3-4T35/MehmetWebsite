@@ -1,0 +1,271 @@
+/*
+ * Design "Kilim" — Anatolian flat-weave: madder red, indigo and saffron on undyed wool.
+ * The one decorative device is a band of woven stripes.
+ */
+
+@font-face {
+    font-family: "Bricolage Grotesque";
+    src: url("../fonts/bricolage-grotesque-latin-wght-normal.woff2") format("woff2");
+    font-weight: 200 800;
+    font-display: swap;
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+    font-family: "Bricolage Grotesque";
+    src: url("../fonts/bricolage-grotesque-latin-ext-wght-normal.woff2") format("woff2");
+    font-weight: 200 800;
+    font-display: swap;
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* ---------- Tokens ---------- */
+html[data-design="kilim"] {
+    --ki-red: #9e2a22;
+    --ki-indigo: #27376b;
+    --ki-saffron: #d6951f;
+    --ki-green: #4a6636;
+
+    --d-bg-rgb: 245, 238, 225;
+    --d-surface-rgb: 252, 248, 240;
+    --d-tint-rgb: 236, 224, 203;
+    --d-ink-rgb: 43, 29, 24;
+    --d-muted: #6b554a;
+    --d-accent-rgb: 158, 42, 34;
+    --d-fill-rgb: 158, 42, 34;
+    --d-fill-hover: #2b1d18;
+    --d-on-fill: #fff8ee;
+    --d-rule: #d9c8ab;
+    --d-rule-strong: #2b1d18;
+    --d-radius: 2px;
+    --d-radius-lg: 2px;
+    --d-radius-pill: 2px;
+    --d-font-body: "Bricolage Grotesque", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --d-font-display: "Bricolage Grotesque", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+    /* Woven stripes, 24px tall */
+    --ki-stripes: linear-gradient(to bottom,
+        var(--ki-red) 0 6px,
+        var(--ki-saffron) 6px 9px,
+        var(--ki-indigo) 9px 15px,
+        var(--ki-saffron) 15px 18px,
+        var(--ki-red) 18px 24px);
+}
+
+html[data-design="kilim"][data-bs-theme="dark"] {
+    --ki-red: #b2342a;
+    --ki-indigo: #3a4c8c;
+
+    --d-bg-rgb: 30, 20, 17;
+    --d-surface-rgb: 43, 29, 24;
+    --d-tint-rgb: 56, 38, 31;
+    --d-ink-rgb: 245, 236, 220;
+    --d-muted: #c9b59c;
+    --d-accent-rgb: 240, 150, 120;
+    --d-fill-rgb: 178, 52, 42;
+    --d-fill-hover: #8c241d;
+    --d-on-fill: #fff8ee;
+    --d-rule: #4a342b;
+    --d-rule-strong: #c9b59c;
+}
+
+html[data-design="kilim"] body {
+    font-size: 1.0625rem;
+    line-height: 1.6;
+}
+
+html[data-design="kilim"] h1,
+html[data-design="kilim"] h2,
+html[data-design="kilim"] h3,
+html[data-design="kilim"] .navbar-brand {
+    font-weight: 700;
+    letter-spacing: -0.015em;
+}
+
+/* ---------- Stripe placements ---------- */
+html[data-design="kilim"] .home-hero::before,
+html[data-design="kilim"] .home-hero::after,
+html[data-design="kilim"] .project-header::after,
+html[data-design="kilim"] footer::before {
+    content: "";
+    display: block;
+    height: 24px;
+    background: var(--ki-stripes);
+}
+
+html[data-design="kilim"] footer hr {
+    display: none;
+}
+
+html[data-design="kilim"] footer::before {
+    margin-bottom: 1.25rem;
+}
+
+/* ---------- Navigation ---------- */
+html[data-design="kilim"] .navbar {
+    border-bottom: 4px double var(--d-rule-strong);
+}
+
+html[data-design="kilim"] .nav-link::after {
+    height: 3px;
+    background-color: var(--ki-saffron);
+}
+
+/* ---------- Buttons, badges ---------- */
+html[data-design="kilim"] .btn {
+    --bs-btn-font-weight: 600;
+}
+
+html[data-design="kilim"] .badge {
+    font-weight: 600;
+}
+
+html[data-design="kilim"] .home-hero .badge.text-bg-primary {
+    background-color: var(--ki-indigo) !important;
+    color: #ffffff !important;
+}
+
+/* ---------- Home hero ---------- */
+html[data-design="kilim"] .home-hero {
+    display: block;
+    min-height: 0;
+    padding: 0 !important;
+    background: rgb(var(--d-surface-rgb));
+    border-inline: 1px solid var(--d-rule);
+}
+
+html[data-design="kilim"] .home-hero > .container {
+    padding: clamp(2rem, 6vw, 4.5rem) clamp(1rem, 4vw, 3rem);
+}
+
+html[data-design="kilim"] .home-hero .display-1 {
+    font-size: clamp(2.75rem, 9vw, 6.5rem);
+    font-weight: 800 !important;
+    line-height: 1;
+    letter-spacing: -0.035em;
+    color: var(--ki-red);
+}
+
+html[data-design="kilim"][data-bs-theme="dark"] .home-hero .display-1 {
+    color: rgb(var(--d-accent-rgb));
+}
+
+html[data-design="kilim"] .social-link:hover {
+    color: rgb(var(--d-accent-rgb));
+}
+
+/* ---------- Section headings ---------- */
+html[data-design="kilim"] h3.border-bottom {
+    border-bottom: 4px double rgb(var(--d-accent-rgb)) !important;
+}
+
+/* ---------- Skills & languages ---------- */
+html[data-design="kilim"] .skill-badge {
+    background-color: rgb(var(--d-surface-rgb));
+    border: 1px solid var(--d-rule-strong);
+    border-radius: var(--d-radius);
+    padding: 0.3rem 0.75rem;
+}
+
+html[data-design="kilim"] .lang-level {
+    height: 8px;
+    border-radius: 0;
+    background-color: rgb(var(--d-tint-rgb));
+}
+
+html[data-design="kilim"] .lang-progress {
+    background-color: var(--ki-indigo);
+}
+
+html[data-design="kilim"][data-bs-theme="dark"] .lang-progress {
+    background-color: var(--ki-saffron);
+}
+
+/* ---------- Cards ---------- */
+html[data-design="kilim"] .project-card {
+    border: 1px solid var(--d-rule-strong);
+    transition: box-shadow 0.15s ease;
+}
+
+html[data-design="kilim"] .project-card:hover {
+    box-shadow: 0 6px 0 var(--ki-saffron) !important;
+}
+
+html[data-design="kilim"] .card-img-container,
+html[data-design="kilim"] .dish-card .dish-media {
+    border-bottom: 1px solid var(--d-rule-strong);
+}
+
+/* ---------- Featured block & contact ---------- */
+html[data-design="kilim"] section.bg-body-tertiary {
+    border-block: 4px double var(--d-rule-strong);
+    border-radius: 0 !important;
+}
+
+html[data-design="kilim"] section.bg-primary-subtle {
+    background-color: var(--ki-indigo) !important;
+    color: #ffffff;
+}
+
+html[data-design="kilim"] section.bg-primary-subtle h3 {
+    color: #ffffff;
+}
+
+html[data-design="kilim"] section.bg-primary-subtle .btn-primary {
+    --bs-btn-color: #2b1d18;
+    --bs-btn-bg: var(--ki-saffron);
+    --bs-btn-border-color: var(--ki-saffron);
+    --bs-btn-hover-color: #2b1d18;
+    --bs-btn-hover-bg: #ffffff;
+    --bs-btn-hover-border-color: #ffffff;
+    --bs-btn-active-color: #2b1d18;
+    --bs-btn-active-bg: #ffffff;
+    --bs-btn-active-border-color: #ffffff;
+}
+
+/* ---------- Passions: four dyes ---------- */
+html[data-design="kilim"] .passion-card {
+    background: var(--ki-red);
+    color: #ffffff !important;
+    border: 0;
+    border-radius: var(--d-radius-lg);
+}
+
+html[data-design="kilim"] .row > div:nth-child(2) > .passion-card { background: var(--ki-indigo); }
+html[data-design="kilim"] .row > div:nth-child(3) > .passion-card { background: var(--ki-green); }
+html[data-design="kilim"] .row > div:nth-child(4) > .passion-card { background: var(--ki-saffron); color: #2b1d18 !important; }
+
+html[data-design="kilim"] .passion-icon,
+html[data-design="kilim"] .passion-card h6 {
+    color: inherit;
+}
+
+html[data-design="kilim"] .passion-card-link:hover,
+html[data-design="kilim"] .passion-card-link:focus-visible {
+    border-color: transparent;
+    box-shadow: inset 0 0 0 4px rgba(255, 248, 238, 0.9) !important;
+}
+
+/* ---------- Page headers ---------- */
+html[data-design="kilim"] .hero-section {
+    padding: 1rem 0 1.5rem;
+    border-bottom: 4px double var(--d-rule-strong);
+}
+
+html[data-design="kilim"] .project-header {
+    padding: 4rem 0 0;
+    background: var(--ki-indigo);
+}
+
+html[data-design="kilim"] .project-header > .container {
+    padding-bottom: 4rem;
+}
+
+html[data-design="kilim"] .project-header .btn-primary {
+    --bs-btn-color: #2b1d18;
+    --bs-btn-bg: var(--ki-saffron);
+    --bs-btn-border-color: var(--ki-saffron);
+    --bs-btn-hover-bg: #ffffff;
+    --bs-btn-hover-border-color: #ffffff;
+    --bs-btn-hover-color: #2b1d18;
+}

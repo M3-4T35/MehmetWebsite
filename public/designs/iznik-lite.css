@@ -1,0 +1,15 @@
+/*
+ * Design "Iznik épuré" — the Iznik design without its tile frieze.
+ * Loaded after iznik.css (whose rules match every design key starting with "iznik").
+ */
+
+html[data-design="iznik-lite"] .home-hero::before,
+html[data-design="iznik-lite"] .project-header::after,
+html[data-design="iznik-lite"] footer::before {
+    content: none;
+}
+
+html[data-design="iznik-lite"] footer hr {
+    display: block;
+    border-top: 2px solid var(--d-rule-strong);
+}

@@ -24,7 +24,8 @@ final class SiteDesign
     private const PREVIEW_SESSION_KEY = 'design_preview';
 
     /**
-     * Each design other than the default is public/designs/common.css + public/designs/<key>.css.
+     * Each design other than the default is public/designs/common.css + public/designs/<key>.css,
+     * unless it lists its own "stylesheets" (a variant layered on top of another design).
      * "swatches" are shown in the admin picker: background, text, accent, second accent.
      */
     public const DESIGNS = [
@@ -39,6 +40,31 @@ final class SiteDesign
             'description' => 'Inspiré des faïences d\'Iznik : bleu cobalt, turquoise et rouge tomate sur blanc porcelaine, formes nettes et frise de carreaux.',
             'fonts' => 'Bricolage Grotesque',
             'swatches' => ['#f6f8fb', '#14213d', '#1b3fa0', '#c8372d'],
+        ],
+        'iznik-lite' => [
+            'label' => 'Iznik épuré',
+            'description' => 'Le design Iznik sans la frise de carreaux : mêmes couleurs et mêmes formes, en plus sobre.',
+            'fonts' => 'Bricolage Grotesque',
+            'swatches' => ['#f6f8fb', '#14213d', '#1b3fa0', '#12808c'],
+            'stylesheets' => ['iznik', 'iznik-lite'],
+        ],
+        'kilim' => [
+            'label' => 'Kilim',
+            'description' => 'Inspiration turque : les teintes d\'un kilim anatolien (rouge garance, indigo, safran) sur laine écrue, avec une bande de rayures tissées.',
+            'fonts' => 'Bricolage Grotesque',
+            'swatches' => ['#f5eee1', '#2b1d18', '#9e2a22', '#d6951f'],
+        ],
+        'plaque' => [
+            'label' => 'Plaque',
+            'description' => 'Inspiration française : les plaques de rue parisiennes, bleu émaillé cerclé de vert sur fond pierre de taille.',
+            'fonts' => 'IBM Plex Sans',
+            'swatches' => ['#f4f0e8', '#1c2230', '#173880', '#1f6b4a'],
+        ],
+        'deux-rives' => [
+            'label' => 'Deux rives',
+            'description' => 'Franco-turc, en sobre : encre sur blanc chaud, rouge pour les actions, bleu pour les liens.',
+            'fonts' => 'Newsreader & Bricolage Grotesque',
+            'swatches' => ['#fbf9f5', '#161b2d', '#c9151e', '#1d3f94'],
         ],
         'epure' => [
             'label' => 'Épure',
@@ -142,7 +168,7 @@ final class SiteDesign
     }
 
     /**
-     * @return array<string, array{label: string, description: string, fonts: string, swatches: list<string>}>
+     * @return array<string, array{label: string, description: string, fonts: string, swatches: list<string>, stylesheets?: list<string>}>
      */
     public function getAll(): array
     {
@@ -162,7 +188,7 @@ final class SiteDesign
         }
 
         $urls = [];
-        foreach (['common', $design] as $name) {
+        foreach (['common', ...(self::DESIGNS[$design]['stylesheets'] ?? [$design])] as $name) {
             $urls[] = 'designs/'.$name.'.css?v='.(@filemtime($this->designDirectory.'/'.$name.'.css') ?: 0);
         }
 
